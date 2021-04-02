@@ -1,5 +1,6 @@
 package net.meshkorea.android.network
 
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -14,4 +15,12 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun test() = runBlocking {
+        val network = NetworkProvider.create(HostType.PROD, true)
+        val forumList = network.provideCommunityService().getEveryOneParkForum(0)
+
+    }
+
 }
