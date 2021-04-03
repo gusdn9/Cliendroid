@@ -1,5 +1,6 @@
 package net.meshkorea.android.network.converter
 
+import net.meshkorea.android.network.extension.textOrNull
 import net.meshkorea.android.network.model.EveryOneParkForumDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
@@ -10,9 +11,36 @@ import java.lang.reflect.Type
 class EveryOneParkForumConverter : Converter<ResponseBody, List<EveryOneParkForumDto>> {
 
     override fun convert(value: ResponseBody): List<EveryOneParkForumDto>? {
-        val document = Jsoup.parse(value.toString())
+        val result: ArrayList<EveryOneParkForumDto> = ArrayList()
+        val document = Jsoup.parse(value.string())
+        document.getElementsByClass("list_item").forEach { element ->
+            val nickNameClass = element.getElementsByClass("nickname")
+            val user = EveryOneParkForumDto.User(
+                nickNameClass.textOrNull(),
+                element.selectFirst("img")?.attr("src")
+            )
 
-        return null
+            val subject = element.getElementsByClass("list_subject")
+            val title = element.getElementsByClass("list_subject").text()
+            val link = subject.attr("href")
+            val replyCount = element.getElementsByClass("list_reply").select("span").first()?.text()?.toInt()
+            val hit = element.getElementsByClass("list_hit").textOrNull()?.toInt()
+            val time = element.getElementsByClass("list_time").text()
+            val likes = element.selectFirst(".list_number .list_symph")?.text()?.toInt()
+            result.add(
+                EveryOneParkForumDto(
+                    title,
+                    link,
+                    replyCount,
+                    hit,
+                    time,
+                    likes,
+                    user
+                )
+            )
+        }
+
+        return result
     }
 
     companion object {
