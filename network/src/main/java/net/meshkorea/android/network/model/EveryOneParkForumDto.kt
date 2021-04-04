@@ -1,7 +1,5 @@
 package net.meshkorea.android.network.model
 
-import java.util.Date
-
 data class EveryOneParkForumDto(
     val title: String,
     val link: String,

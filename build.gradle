@@ -16,9 +16,9 @@ buildscript {
 
 allprojects {
     ext {
-        dagger2_version = "2.33"
-        dagger2_assisted_inject = "0.6.0"
-        coroutine = "1.3.7"
+        dagger2 = "2.33"
+        assistedInject = "0.6.0"
+        coroutine = "1.4.1"
         retrofit = "2.9.0"
         okhttp = "4.6.0"
         stetho = "1.6.0"

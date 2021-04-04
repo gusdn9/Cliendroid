@@ -44,15 +44,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Dagger
-    api "com.google.dagger:dagger-android:$dagger2_version"
-    api "com.google.dagger:dagger-android-support:$dagger2_version"
-
-    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:$dagger2_assisted_inject"
-    kapt "com.squareup.inject:assisted-inject-processor-dagger2:$dagger2_assisted_inject"
+    api "com.google.dagger:dagger-android:$dagger2"
+    api "com.google.dagger:dagger-android-support:$dagger2"
 
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutine"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutine"
-
-    api "com.facebook.stetho:stetho:$stetho"
 }
