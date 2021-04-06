@@ -8,5 +8,5 @@ import retrofit2.http.Query
 interface CommunityInfraService {
 
     @GET("service/board/park")
-    suspend fun getEveryOneParkForum(@Query("po") page: Int): Response<List<EveryOneParkForumDto>>
+    suspend fun getEveryOneParkForum(@Query("po") page: Int): List<EveryOneParkForumDto>
 }
