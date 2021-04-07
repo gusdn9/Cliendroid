@@ -4,4 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main">
 
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.EveryOneParkListFragment"
+        android:label="@string/app_name"
+        />
+
 </navigation>
