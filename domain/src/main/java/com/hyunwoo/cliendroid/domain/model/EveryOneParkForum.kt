@@ -1,6 +1,6 @@
 package com.hyunwoo.cliendroid.domain.model
 
-data class EveryOneParkForum(
+data class EveryoneParkForum(
     val title: String,
     val link: String,
     val replyCount: Int?,

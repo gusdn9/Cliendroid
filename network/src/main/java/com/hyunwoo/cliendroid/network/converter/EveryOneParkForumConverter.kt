@@ -1,21 +1,21 @@
 package com.hyunwoo.cliendroid.network.converter
 
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.EveryOneParkForumDto
+import com.hyunwoo.cliendroid.network.model.EveryoneParkForumDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-class EveryOneParkForumConverter : Converter<ResponseBody, List<EveryOneParkForumDto>> {
+class EveryoneParkForumConverter : Converter<ResponseBody, List<EveryoneParkForumDto>> {
 
-    override fun convert(value: ResponseBody): List<EveryOneParkForumDto>? {
-        val result: ArrayList<EveryOneParkForumDto> = ArrayList()
+    override fun convert(value: ResponseBody): List<EveryoneParkForumDto>? {
+        val result: ArrayList<EveryoneParkForumDto> = ArrayList()
         val document = Jsoup.parse(value.string())
         document.getElementsByClass("list_item").forEach { element ->
             val nickNameClass = element.getElementsByClass("nickname")
-            val user = EveryOneParkForumDto.User(
+            val user = EveryoneParkForumDto.User(
                 nickNameClass.textOrNull(),
                 element.selectFirst("img")?.attr("src")
             )
@@ -28,7 +28,7 @@ class EveryOneParkForumConverter : Converter<ResponseBody, List<EveryOneParkForu
             val time = element.getElementsByClass("list_time").text()
             val likes = element.selectFirst(".list_number .list_symph")?.text()?.toInt()
             result.add(
-                EveryOneParkForumDto(
+                EveryoneParkForumDto(
                     title,
                     link,
                     replyCount,
@@ -51,7 +51,7 @@ class EveryOneParkForumConverter : Converter<ResponseBody, List<EveryOneParkForu
                     annotations: Array<Annotation>,
                     retrofit: Retrofit
                 ): Converter<ResponseBody, *> {
-                    return EveryOneParkForumConverter()
+                    return EveryoneParkForumConverter()
                 }
             }
         }

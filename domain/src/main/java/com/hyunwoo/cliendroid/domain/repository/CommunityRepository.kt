@@ -1,8 +1,8 @@
 package com.hyunwoo.cliendroid.domain.repository
 
-import com.hyunwoo.cliendroid.domain.model.EveryOneParkForum
+import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 
 interface CommunityRepository {
 
-    suspend fun getEveryOneParkForum(page: Int): List<EveryOneParkForum>
+    suspend fun getEveryoneParkForum(page: Int): List<EveryoneParkForum>
 }

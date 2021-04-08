@@ -6,14 +6,14 @@ import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
-import com.hyunwoo.cliendroid.domain.usecase.GetEveryOneParkForumListUseCase
+import com.hyunwoo.cliendroid.domain.usecase.GetEveryoneParkForumListUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.launch
 
-class EveryOneParkListViewModel @AssistedInject constructor(
+class EveryoneParkListViewModel @AssistedInject constructor(
     @Assisted initialState: State,
-    private val getEveryOneParkForumListUseCase: GetEveryOneParkForumListUseCase
+    private val getEveryoneParkForumListUseCase: GetEveryoneParkForumListUseCase
 ) : AppMvRxViewModel<State>(initialState) {
 
     init {
@@ -27,7 +27,7 @@ class EveryOneParkListViewModel @AssistedInject constructor(
 
         viewModelScope.launch {
             suspend {
-                getEveryOneParkForumListUseCase(page = 0)
+                getEveryoneParkForumListUseCase(page = 0)
             }.asAsync { async ->
                 var nextState = this
                 if (async is Success) {
@@ -40,14 +40,14 @@ class EveryOneParkListViewModel @AssistedInject constructor(
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(initialState: State): EveryOneParkListViewModel
+        fun create(initialState: State): EveryoneParkListViewModel
     }
 
-    companion object : MavericksViewModelFactory<EveryOneParkListViewModel, State> {
+    companion object : MavericksViewModelFactory<EveryoneParkListViewModel, State> {
 
         @JvmStatic
-        override fun create(viewModelContext: ViewModelContext, state: State): EveryOneParkListViewModel {
-            val fragment: EveryOneParkListFragment = (viewModelContext as FragmentViewModelContext).fragment()
+        override fun create(viewModelContext: ViewModelContext, state: State): EveryoneParkListViewModel {
+            val fragment: EveryoneParkListFragment = (viewModelContext as FragmentViewModelContext).fragment()
             return fragment.viewModelFactory.create(state)
         }
     }

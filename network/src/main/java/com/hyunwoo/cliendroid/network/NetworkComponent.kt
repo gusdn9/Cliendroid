@@ -1,7 +1,7 @@
 package com.hyunwoo.cliendroid.network
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.hyunwoo.cliendroid.network.converter.EveryOneParkForumConverter
+import com.hyunwoo.cliendroid.network.converter.EveryoneParkForumConverter
 import com.squareup.moshi.Moshi
 import dagger.BindsInstance
 import dagger.Component
@@ -84,13 +84,13 @@ internal class NetworkModule {
             .client(okHttpClient)
             .build()
 
-    @Named("EveryOneParkForum")
+    @Named("EveryoneParkForum")
     @Provides
     @Singleton
     fun provideEveryOneParkForumRetrofit(
         hostType: HostType,
         okHttpClient: OkHttpClient,
-        @Named("EveryOneParkForum") converter: Converter.Factory
+        @Named("EveryoneParkForum") converter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
@@ -106,14 +106,14 @@ internal class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCommunityService(@Named("EveryOneParkForum") retrofit: Retrofit): CommunityInfraService =
+    fun provideCommunityService(@Named("EveryoneParkForum") retrofit: Retrofit): CommunityInfraService =
         retrofit.create(CommunityInfraService::class.java)
 
-    @Named("EveryOneParkForum")
+    @Named("EveryoneParkForum")
     @Provides
     @Singleton
     fun provideEveryOneParkForumConverter(): Converter.Factory =
-        EveryOneParkForumConverter.create()
+        EveryoneParkForumConverter.create()
 
     companion object {
 

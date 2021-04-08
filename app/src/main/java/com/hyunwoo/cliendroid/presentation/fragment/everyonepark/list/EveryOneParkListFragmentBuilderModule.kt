@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class EveryOneParkListFragmentBuilderModule {
+abstract class EveryoneParkListFragmentBuilderModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun contributeEveryOneParkListFragment(): EveryOneParkListFragment
+    abstract fun contributeEveryoneParkListFragment(): EveryoneParkListFragment
 }

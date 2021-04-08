@@ -1,11 +1,11 @@
 package com.hyunwoo.cliendroid.presentation.fragment.everyonepark
 
-import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.EveryOneParkListFragmentBuilderModule
+import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.EveryoneParkListFragmentBuilderModule
 import dagger.Module
 
 @Module(
     includes = [
-        EveryOneParkListFragmentBuilderModule::class
+        EveryoneParkListFragmentBuilderModule::class
     ]
 )
-class EveryOneParkFragmentBuilderModule
+class EveryoneParkFragmentBuilderModule

@@ -15,7 +15,7 @@ interface NetworkProvider {
 
     fun provideRetrofit(): Retrofit
 
-    @Named("EveryOneParkForum")
+    @Named("EveryoneParkForum")
     fun provideEveryOneParkForumRetrofit(): Retrofit
 
     fun provideMoshi(): Moshi
@@ -24,8 +24,8 @@ interface NetworkProvider {
 
     fun provideCommunityService(): CommunityInfraService
 
-    @Named("EveryOneParkForum")
-    fun provideEveryOneParkForumConverter(): Converter.Factory
+    @Named("EveryoneParkForum")
+    fun provideEveryoneParkForumConverter(): Converter.Factory
 
     companion object {
         fun create(

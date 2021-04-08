@@ -1,7 +1,7 @@
 package com.hyunwoo.cliendroid.presentation.activity.main
 
 import com.hyunwoo.cliendroid.architecture.ActivityScope
-import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.EveryOneParkFragmentBuilderModule
+import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.EveryoneParkFragmentBuilderModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -12,7 +12,7 @@ abstract class MainActivityBuilderModule {
     @ContributesAndroidInjector(
         modules = [
             MainActivityModule::class,
-            EveryOneParkFragmentBuilderModule::class
+            EveryoneParkFragmentBuilderModule::class
         ]
     )
     abstract fun contributeMainActivity(): MainActivity
