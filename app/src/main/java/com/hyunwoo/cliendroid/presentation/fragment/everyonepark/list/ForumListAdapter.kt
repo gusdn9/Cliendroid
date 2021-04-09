@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 
-class Adapter(
+class ForumListAdapter(
     private val onForumClicked: (EveryoneParkForum) -> Unit
 ) : ListAdapter<EveryoneParkForum, ForumListViewHolder>(forumComparator) {
 

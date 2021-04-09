@@ -13,7 +13,7 @@ class ExampleUnitTest {
     @Test
     fun test() = runBlocking {
         val network = NetworkProvider.create(HostType.PROD, true)
-        val forumList = network.provideCommunityService().getEveryOneParkForum(0)
+        val forumList = network.provideCommunityService().getEveryoneParkForum(0)
         print(forumList.size)
     }
 }

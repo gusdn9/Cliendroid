@@ -24,8 +24,9 @@ allprojects {
         stetho = "1.6.0"
         moshi = "1.11.0"
         jsoup = "1.13.1"
-        navigation = "2.3.4"
+        navigation = "2.3.5"
         mavericks = "2.1.0"
+        coil = "1.1.1"
     }
 
     repositories {

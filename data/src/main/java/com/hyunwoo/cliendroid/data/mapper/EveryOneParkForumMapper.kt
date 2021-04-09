@@ -12,5 +12,5 @@ fun EveryoneParkForumDto.toEveryoneParkForum() =
         hit,
         time,
         likes,
-        User(null, user.nickName, user.nickName)
+        User(null, user.nickName, user.image)
     )

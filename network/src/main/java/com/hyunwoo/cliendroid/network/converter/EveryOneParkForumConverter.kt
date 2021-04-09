@@ -19,9 +19,14 @@ class EveryoneParkForumConverter : Converter<ResponseBody, List<EveryoneParkForu
                 nickNameClass.textOrNull(),
                 element.selectFirst("img")?.attr("src")
             )
+            val isNotice = element.hasClass("notice")
 
             val subject = element.getElementsByClass("list_subject")
-            val title = element.getElementsByClass("list_subject").text()
+            val title = if (isNotice) {
+                element.getElementsByClass("list_subject").text()
+            } else {
+                element.getElementsByAttribute("title").attr("title")
+            }
             val link = subject.attr("href")
             val replyCount = element.getElementsByClass("list_reply").select("span").first()?.text()?.toInt()
             val hit = element.getElementsByClass("list_hit").textOrNull()?.toInt()

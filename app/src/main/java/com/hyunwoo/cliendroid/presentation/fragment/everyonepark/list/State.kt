@@ -7,5 +7,7 @@ import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 
 data class State(
     val listData: List<EveryoneParkForum>? = null,
-    val getListAsync: Async<List<EveryoneParkForum>> = Uninitialized
+    val listDataRefreshAsync: Async<List<EveryoneParkForum>> = Uninitialized,
+    val listDataLoadMoreAsync: Async<List<EveryoneParkForum>> = Uninitialized,
+    val page: Int = 0
 ) : MavericksState
