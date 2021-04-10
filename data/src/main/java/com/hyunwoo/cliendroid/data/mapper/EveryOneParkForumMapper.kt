@@ -2,9 +2,9 @@ package com.hyunwoo.cliendroid.data.mapper
 
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 import com.hyunwoo.cliendroid.domain.model.User
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListDto
+import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
 
-fun EveryoneParkForumListDto.toEveryoneParkForum() =
+fun EveryoneParkForumItemDto.toEveryoneParkForum() =
     EveryoneParkForum(
         title,
         link,

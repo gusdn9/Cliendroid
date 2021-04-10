@@ -10,10 +10,17 @@ import org.junit.Test
  */
 class ExampleUnitTest {
 
+    // @Test
+    // fun requestList() = runBlocking {
+    //     val network = NetworkProvider.create(HostType.PROD, true)
+    //     val forumList = network.provideCommunityService().getEveryoneParkForumList(0)
+    //     print(forumList.size)
+    // }
+
     @Test
-    fun test() = runBlocking {
+    fun requestDetail() = runBlocking {
         val network = NetworkProvider.create(HostType.PROD, true)
-        val forumList = network.provideCommunityService().getEveryoneParkForumList(0)
-        print(forumList.size)
+        val res = network.provideCommunityService().getEveryoneParkForumDetail(16053544)
+        print(res)
     }
 }

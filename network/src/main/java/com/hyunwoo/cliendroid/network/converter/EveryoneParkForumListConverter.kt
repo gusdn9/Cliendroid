@@ -1,7 +1,8 @@
 package com.hyunwoo.cliendroid.network.converter
 
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListDto
+import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListRes
 import com.hyunwoo.cliendroid.network.model.UserDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
@@ -9,10 +10,11 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-class EveryoneParkForumListConverter : Converter<ResponseBody, List<EveryoneParkForumListDto>> {
+class EveryoneParkForumListConverter : Converter<ResponseBody, EveryoneParkForumListRes> {
 
-    override fun convert(value: ResponseBody): List<EveryoneParkForumListDto>? {
-        val result: ArrayList<EveryoneParkForumListDto> = ArrayList()
+    override fun convert(value: ResponseBody): EveryoneParkForumListRes {
+
+        val list: ArrayList<EveryoneParkForumItemDto> = ArrayList()
         val document = Jsoup.parse(value.string())
         document.getElementsByClass("list_item").forEach { element ->
             val nickNameClass = element.getElementsByClass("nickname")
@@ -34,8 +36,8 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, List<EveryonePark
             val hit = element.getElementsByClass("list_hit").textOrNull()?.toInt()
             val time = element.getElementsByClass("list_time").text()
             val likes = element.selectFirst(".list_number .list_symph")?.text()?.toInt()
-            result.add(
-                EveryoneParkForumListDto(
+            list.add(
+                EveryoneParkForumItemDto(
                     title,
                     link,
                     replyCount,
@@ -46,8 +48,7 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, List<EveryonePark
                 )
             )
         }
-
-        return result
+        return EveryoneParkForumListRes(list)
     }
 
     companion object {
@@ -57,7 +58,8 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, List<EveryonePark
                     type: Type,
                     annotations: Array<Annotation>,
                     retrofit: Retrofit
-                ): Converter<ResponseBody, *> {
+                ): Converter<ResponseBody, *>? {
+                    if (type != EveryoneParkForumListRes::class.java) return null
                     return EveryoneParkForumListConverter()
                 }
             }

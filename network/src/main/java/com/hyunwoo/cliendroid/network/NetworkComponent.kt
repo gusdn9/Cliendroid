@@ -1,6 +1,7 @@
 package com.hyunwoo.cliendroid.network
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.hyunwoo.cliendroid.network.converter.EveryoneParkForumDetailConverter
 import com.hyunwoo.cliendroid.network.converter.EveryoneParkForumListConverter
 import com.squareup.moshi.Moshi
 import dagger.BindsInstance
@@ -90,12 +91,14 @@ internal class NetworkModule {
     fun provideEveryOneParkForumRetrofit(
         hostType: HostType,
         okHttpClient: OkHttpClient,
-        @Named("EveryoneParkForum") converter: Converter.Factory
+        @Named("EveryoneParkForum") listConverter: Converter.Factory,
+        @Named("EveryoneParkForumDetail") detailConverter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(converter)
+            .addConverterFactory(listConverter)
+            .addConverterFactory(detailConverter)
             .client(okHttpClient)
             .build()
 
@@ -114,6 +117,12 @@ internal class NetworkModule {
     @Singleton
     fun provideEveryOneParkForumConverter(): Converter.Factory =
         EveryoneParkForumListConverter.create()
+
+    @Named("EveryoneParkForumDetail")
+    @Provides
+    @Singleton
+    fun provideEveryOneParkDetailForumConverter(): Converter.Factory =
+        EveryoneParkForumDetailConverter.create()
 
     companion object {
 
