@@ -9,5 +9,5 @@ class GetEveryoneParkForumListUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(page: Int): List<EveryoneParkForum> =
-        communityRepository.getEveryoneParkForum(page)
+        communityRepository.getEveryoneParkForumList(page)
 }

@@ -1,6 +1,7 @@
 package com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,5 +94,6 @@ class EveryoneParkListFragment : AppFragment() {
 
     private fun onForumClicked(forum: EveryoneParkForum) {
         // TODO click 처리
+        Log.d("###Test", "click")
     }
 }

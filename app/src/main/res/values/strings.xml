@@ -2,4 +2,6 @@
     <string name="app_name">Cliendroid</string>
 
     <string name="everyone_park_list_label">모두의 공원</string>
+
+    <string name="everyone_park_detail_reply_label">댓글</string>
 </resources>

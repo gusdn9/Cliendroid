@@ -1,21 +1,23 @@
 package com.hyunwoo.cliendroid.network.converter
 
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumDto
+import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListDto
+import com.hyunwoo.cliendroid.network.model.UserDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-class EveryoneParkForumConverter : Converter<ResponseBody, List<EveryoneParkForumDto>> {
+class EveryoneParkForumListConverter : Converter<ResponseBody, List<EveryoneParkForumListDto>> {
 
-    override fun convert(value: ResponseBody): List<EveryoneParkForumDto>? {
-        val result: ArrayList<EveryoneParkForumDto> = ArrayList()
+    override fun convert(value: ResponseBody): List<EveryoneParkForumListDto>? {
+        val result: ArrayList<EveryoneParkForumListDto> = ArrayList()
         val document = Jsoup.parse(value.string())
         document.getElementsByClass("list_item").forEach { element ->
             val nickNameClass = element.getElementsByClass("nickname")
-            val user = EveryoneParkForumDto.User(
+            val user = UserDto(
+                null,
                 nickNameClass.textOrNull(),
                 element.selectFirst("img")?.attr("src")
             )
@@ -33,7 +35,7 @@ class EveryoneParkForumConverter : Converter<ResponseBody, List<EveryoneParkForu
             val time = element.getElementsByClass("list_time").text()
             val likes = element.selectFirst(".list_number .list_symph")?.text()?.toInt()
             result.add(
-                EveryoneParkForumDto(
+                EveryoneParkForumListDto(
                     title,
                     link,
                     replyCount,
@@ -56,7 +58,7 @@ class EveryoneParkForumConverter : Converter<ResponseBody, List<EveryoneParkForu
                     annotations: Array<Annotation>,
                     retrofit: Retrofit
                 ): Converter<ResponseBody, *> {
-                    return EveryoneParkForumConverter()
+                    return EveryoneParkForumListConverter()
                 }
             }
         }

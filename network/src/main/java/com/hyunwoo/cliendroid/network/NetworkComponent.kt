@@ -1,7 +1,7 @@
 package com.hyunwoo.cliendroid.network
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.hyunwoo.cliendroid.network.converter.EveryoneParkForumConverter
+import com.hyunwoo.cliendroid.network.converter.EveryoneParkForumListConverter
 import com.squareup.moshi.Moshi
 import dagger.BindsInstance
 import dagger.Component
@@ -113,7 +113,7 @@ internal class NetworkModule {
     @Provides
     @Singleton
     fun provideEveryOneParkForumConverter(): Converter.Factory =
-        EveryoneParkForumConverter.create()
+        EveryoneParkForumListConverter.create()
 
     companion object {
 
