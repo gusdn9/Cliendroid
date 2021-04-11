@@ -2,5 +2,5 @@ package com.hyunwoo.cliendroid.domain.model
 
 data class EveryoneParkForumContent(
     val htmlBody: String,
-    val comments: List<Comment>
+    val comments: List<BaseComment>
 )
