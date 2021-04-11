@@ -18,7 +18,7 @@ class CommunityRepositoryImpl @Inject constructor(
         communityService.getEveryoneParkForumList(page)
             .contents.map { forum -> forum.toEveryoneParkForum() }
 
-    override suspend fun getEveryoneParkForumDetail(forumId: Int): EveryoneParkForumContent =
-        communityService.getEveryoneParkForumDetail(forumId)
+    override suspend fun getEveryoneParkForumDetail(detailUrl: String): EveryoneParkForumContent =
+        communityService.getEveryoneParkForumDetail(detailUrl)
             .toEveryoneParkForumContent()
 }

@@ -15,14 +15,25 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
     override fun convert(value: ResponseBody): EveryoneParkForumDetailRes? {
 
         val document = Jsoup.parse(value.string())
-        val body = document.getElementsByClass("post_article").first().html()
+        val head = "<head>" +
+                "<meta name='viewport' content='width=device-width, user-scalable=no' />" +
+                "<style>img{display: inline;height: auto;max-width: 100%;}" +
+                "video{display: inline;height: auto;max-width: 100%;}</style>" +
+                "</head><body>"
+        val mainText = document.getElementsByClass("post_article").first().html()
+        val end = "</body>"
+        val body = StringBuilder().apply {
+            append(head)
+            append(mainText)
+            append(end)
+        }
 
         val comments: ArrayList<BaseCommentDto> = ArrayList()
 
         document.getElementsByClass("comment_row").forEach { reply ->
             val isReply = reply.select(".comment_row.re").size > 0
             val blocked = reply.select(".comment_row.blocked.re").size > 0
-            if(blocked) {
+            if (blocked) {
                 val contents = reply.text()
                 comments.add(BlockedCommentDto(contents, isReply))
             } else {
@@ -39,7 +50,7 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
             }
         }
 
-        return EveryoneParkForumDetailRes(body, comments)
+        return EveryoneParkForumDetailRes(body.toString(), comments)
     }
 
     companion object {

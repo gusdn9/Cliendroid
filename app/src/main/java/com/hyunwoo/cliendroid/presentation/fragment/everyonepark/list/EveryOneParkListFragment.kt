@@ -1,7 +1,6 @@
 package com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
+import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentEveryoneParkListBinding
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
+import com.hyunwoo.cliendroid.extension.navigateGraph
+import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
+import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.detail.EveryoneParkDetailArgs
 import javax.inject.Inject
 
 class EveryoneParkListFragment : AppFragment() {
@@ -93,7 +96,10 @@ class EveryoneParkListFragment : AppFragment() {
     }
 
     private fun onForumClicked(forum: EveryoneParkForum) {
-        // TODO click 처리
-        Log.d("###Test", "click")
+        val args = EveryoneParkDetailArgs(forum.link)
+        navigateGraph(
+            R.id.action_everyoneParkListFragment_to_everyoneParkDetailFragment,
+            args.toFragmentArgsBundle()
+        )
     }
 }

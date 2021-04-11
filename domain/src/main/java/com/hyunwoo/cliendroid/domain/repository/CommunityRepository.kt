@@ -7,5 +7,5 @@ interface CommunityRepository {
 
     suspend fun getEveryoneParkForumList(page: Int): List<EveryoneParkForum>
 
-    suspend fun getEveryoneParkForumDetail(forumId: Int): EveryoneParkForumContent
+    suspend fun getEveryoneParkForumDetail(detailUrl: String): EveryoneParkForumContent
 }

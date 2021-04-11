@@ -12,8 +12,8 @@ interface CommunityInfraService {
     @GET("service/board/park")
     suspend fun getEveryoneParkForumList(@Query("po") page: Int): EveryoneParkForumListRes
 
-    @GET("service/board/park/{forumId}")
+    @GET("{detailUrl}")
     suspend fun getEveryoneParkForumDetail(
-        @Path("forumId") forumId: Int
+        @Path("detailUrl", encoded = true) detailUrl: String
     ): EveryoneParkForumDetailRes
 }

@@ -31,7 +31,7 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, EveryoneParkForum
             } else {
                 element.getElementsByAttribute("title").attr("title")
             }
-            val link = subject.attr("href")
+            val link = subject.attr("href").substringBefore("?")
             val replyCount = element.getElementsByClass("list_reply").select("span").first()?.text()?.toInt()
             val hit = element.getElementsByClass("list_hit").textOrNull()?.toInt()
             val time = element.getElementsByClass("list_time").text()
