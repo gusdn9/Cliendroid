@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
 import com.hyunwoo.cliendroid.architecture.AppFragment
@@ -23,6 +25,10 @@ class EveryoneParkDetailFragment : AppFragment() {
     @Inject
     lateinit var viewModelFactory: EveryoneParkDetailViewModel.Factory
 
+    private val adapter by lazy {
+        EveryoneParkDetailCommentAdapter()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeStates()
@@ -35,7 +41,7 @@ class EveryoneParkDetailFragment : AppFragment() {
         }
 
         viewModel.onEach(State::comments) { comments ->
-
+            adapter.submitList(comments)
         }
 
         viewModel.onEach(State::refreshAsync) { async ->
@@ -65,6 +71,13 @@ class EveryoneParkDetailFragment : AppFragment() {
             builtInZoomControls = false
             setSupportZoom(false)
         }
+        binding.replyRecyclerView.adapter = adapter
+        binding.replyRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                binding.replyRecyclerView.context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
     }
 
     override fun onDestroyView() {

@@ -7,28 +7,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <WebView
             android:id="@+id/WebView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/everyone_park_detail_bottom_height"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:behavior_peekHeight="100dp"
+        app:behavior_peekHeight="@dimen/everyone_park_detail_bottom_height"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="@dimen/everyone_park_detail_bottom_height"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 

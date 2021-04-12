@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:minHeight="84dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="84dp">
 
     <View
         android:id="@+id/hits"
@@ -44,28 +44,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="5dp"/>
 
-    <LinearLayout
+    <include
         android:id="@+id/user"
+        layout="@layout/partial_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/title"
         app:layout_constraintStart_toStartOf="@id/startGuideline"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/userNickName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="닉네임"/>
-
-        <ImageView
-            android:id="@+id/userImage"
-            android:layout_width="50dp"
-            android:layout_height="24dp"/>
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/likes"
@@ -74,8 +62,8 @@
         android:layout_marginStart="10dp"
         android:drawablePadding="5dp"
         app:drawableLeftCompat="@drawable/ic_heart"
-        app:layout_constraintStart_toEndOf="@id/user"
         app:layout_constraintBottom_toBottomOf="@id/user"
+        app:layout_constraintStart_toEndOf="@id/user"
         app:layout_constraintTop_toTopOf="@id/user"
         tools:text="10"/>
 

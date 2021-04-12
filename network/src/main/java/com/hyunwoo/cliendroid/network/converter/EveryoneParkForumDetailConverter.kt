@@ -17,8 +17,7 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
         val document = Jsoup.parse(value.string())
         val head = "<head>" +
                 "<meta name='viewport' content='width=device-width, user-scalable=no' />" +
-                "<style>img{display: inline;height: auto;max-width: 100%;}" +
-                "video{display: inline;height: auto;max-width: 100%;}</style>" +
+                "<style>img, video, span, iframe{display: inline;height: auto;max-width: 100%;}</style>" +
                 "</head><body>"
         val mainText = document.getElementsByClass("post_article").first().html()
         val end = "</body>"

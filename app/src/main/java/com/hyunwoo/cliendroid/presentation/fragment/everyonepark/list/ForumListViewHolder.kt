@@ -20,11 +20,11 @@ class ForumListViewHolder private constructor(
         binding.title.text = forumItem.title
         binding.time.text = forumItem.time
 
-        binding.userNickName.isVisible = forumItem.user.nickName != null
-        binding.userNickName.text = forumItem.user.nickName
+        binding.user.userNickName.isVisible = forumItem.user.nickName != null
+        binding.user.userNickName.text = forumItem.user.nickName
 
-        binding.userImage.isVisible = forumItem.user.image != null
-        binding.userImage.load(forumItem.user.image)
+        binding.user.userImage.isVisible = forumItem.user.image != null
+        binding.user.userImage.load(forumItem.user.image)
 
         binding.replyCount.isVisible = forumItem.replyCount != null
         binding.replyCount.text = forumItem.replyCount?.toString()
