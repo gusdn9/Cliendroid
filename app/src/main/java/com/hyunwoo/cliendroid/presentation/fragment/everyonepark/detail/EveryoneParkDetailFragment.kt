@@ -1,19 +1,24 @@
 package com.hyunwoo.cliendroid.presentation.fragment.everyonepark.detail
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebSettings
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.ImageLoader
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentEveryoneParkDetailBinding
+import com.hyunwoo.cliendroid.extension.getColorWithAttr
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
 import javax.inject.Inject
 
@@ -34,14 +39,40 @@ class EveryoneParkDetailFragment : AppFragment() {
         EveryoneParkDetailCommentAdapter(imageLoader)
     }
 
+    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+
+    private val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+            onBackPressedCallback.isEnabled = newState == BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeStates()
     }
 
     private fun subscribeStates() {
-        viewModel.onEach(State::htmlBody) { html ->
-            if (html == null) return@onEach
+        viewModel.onEach(State::htmlBody) { body ->
+            if (body == null) return@onEach
+
+            val colorOnSurface = "#%x".format(requireContext().getColorWithAttr(R.attr.colorOnSurface))
+            val html = "<html><head>" +
+                    "<meta name='viewport' content='width=device-width, user-scalable=no' />" +
+                    "<style>" +
+                    "img, video, span, iframe{display: inline;height: auto;max-width: 100%;} " +
+                    "body { color: $colorOnSurface; } " +
+                    "</style>" +
+                    "</head><body>$body</body></html>"
+
             binding.WebView.loadData(html, "text/html", "utf-8")
         }
 
@@ -63,11 +94,15 @@ class EveryoneParkDetailFragment : AppFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        initListeners()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initViews() {
-        // binding.WebView.setBackgroundColor(Color.TRANSPARENT)
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetFrame)
+        bottomSheetBehavior?.addBottomSheetCallback(bottomSheetCallback)
+
+        binding.WebView.setBackgroundColor(Color.TRANSPARENT)
         with(binding.WebView.settings) {
             javaScriptEnabled = true
             useWideViewPort = true
@@ -86,7 +121,12 @@ class EveryoneParkDetailFragment : AppFragment() {
         )
     }
 
+    private fun initListeners() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+    }
+
     override fun onDestroyView() {
+        bottomSheetBehavior?.removeBottomSheetCallback(bottomSheetCallback)
         super.onDestroyView()
         _binding = null
     }
