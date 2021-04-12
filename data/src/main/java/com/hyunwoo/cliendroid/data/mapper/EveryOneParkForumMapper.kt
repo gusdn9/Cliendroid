@@ -6,6 +6,7 @@ import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
 
 fun EveryoneParkForumItemDto.toEveryoneParkForum() =
     EveryoneParkForum(
+        id,
         title,
         link,
         replyCount,

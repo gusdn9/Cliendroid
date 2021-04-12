@@ -21,7 +21,7 @@ class ForumListAdapter(
     companion object {
         private val forumComparator = object : DiffUtil.ItemCallback<EveryoneParkForum>() {
             override fun areItemsTheSame(oldItem: EveryoneParkForum, newItem: EveryoneParkForum): Boolean =
-                oldItem == newItem
+                oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: EveryoneParkForum, newItem: EveryoneParkForum): Boolean =
                 oldItem == newItem

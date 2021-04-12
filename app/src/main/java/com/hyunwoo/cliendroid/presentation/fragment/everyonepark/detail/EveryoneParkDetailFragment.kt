@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebSettings
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.ImageLoader
@@ -71,9 +72,10 @@ class EveryoneParkDetailFragment : AppFragment() {
             javaScriptEnabled = true
             useWideViewPort = true
             loadWithOverviewMode = true
+            layoutAlgorithm = WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING
 
             builtInZoomControls = false
-            setSupportZoom(false)
+            setSupportZoom(true)
         }
         binding.replyRecyclerView.adapter = adapter
         binding.replyRecyclerView.addItemDecoration(

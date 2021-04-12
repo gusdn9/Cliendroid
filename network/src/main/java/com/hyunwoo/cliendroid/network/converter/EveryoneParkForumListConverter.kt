@@ -17,13 +17,21 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, EveryoneParkForum
         val list: ArrayList<EveryoneParkForumItemDto> = ArrayList()
         val document = Jsoup.parse(value.string())
         document.getElementsByClass("list_item").forEach { element ->
+            val isNotice = element.hasClass("notice")
+            val id = if (isNotice) {
+                element.select(".notice")
+                    .attr("onclick")
+                    .replace("'", "")
+                    .substringAfterLast("/")
+            } else {
+                element.selectFirst(".list_item").attr("data-board-sn")
+            }
             val nickNameClass = element.getElementsByClass("nickname")
             val user = UserDto(
                 null,
                 nickNameClass.textOrNull(),
                 element.selectFirst("img")?.attr("src")
             )
-            val isNotice = element.hasClass("notice")
 
             val subject = element.getElementsByClass("list_subject")
             val title = if (isNotice) {
@@ -38,6 +46,7 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, EveryoneParkForum
             val likes = element.selectFirst(".list_number .list_symph")?.text()?.toInt()
             list.add(
                 EveryoneParkForumItemDto(
+                    id.toLong(),
                     title,
                     link,
                     replyCount,
