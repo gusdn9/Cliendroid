@@ -25,7 +25,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/bottomSheet"
+        android:id="@+id/bottomSheetFrame"
+        style="@style/Widget.Cliendroid.CommentBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

@@ -31,7 +31,7 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
 
         document.getElementsByClass("comment_row").forEach { reply ->
             val isReply = reply.select(".comment_row.re").size > 0
-            val blocked = reply.select(".comment_row.blocked.re").size > 0
+            val blocked = reply.select(".comment_row.blocked").size > 0
             if (blocked) {
                 val contents = reply.text()
                 comments.add(BlockedCommentDto(contents, isReply))

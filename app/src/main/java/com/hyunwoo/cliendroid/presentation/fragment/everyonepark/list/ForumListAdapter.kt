@@ -4,14 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import coil.ImageLoader
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 
 class ForumListAdapter(
+    private val imageLoader: ImageLoader,
     private val onForumClicked: (EveryoneParkForum) -> Unit
 ) : ListAdapter<EveryoneParkForum, ForumListViewHolder>(forumComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForumListViewHolder =
-        ForumListViewHolder.create(LayoutInflater.from(parent.context), parent, onForumClicked)
+        ForumListViewHolder.create(LayoutInflater.from(parent.context), parent, imageLoader, onForumClicked)
 
     override fun onBindViewHolder(holder: ForumListViewHolder, position: Int) =
         holder.bind(getItem(position))

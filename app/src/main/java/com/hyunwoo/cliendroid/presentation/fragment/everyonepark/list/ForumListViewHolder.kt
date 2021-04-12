@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import coil.ImageLoader
 import coil.load
 import com.hyunwoo.cliendroid.databinding.ItemEveryoneForumListBinding
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 
 class ForumListViewHolder private constructor(
     private val binding: ItemEveryoneForumListBinding,
+    private val imageLoader: ImageLoader,
     private val onForumItemClicked: (EveryoneParkForum) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -24,7 +26,7 @@ class ForumListViewHolder private constructor(
         binding.user.userNickName.text = forumItem.user.nickName
 
         binding.user.userImage.isVisible = forumItem.user.image != null
-        binding.user.userImage.load(forumItem.user.image)
+        binding.user.userImage.load(forumItem.user.image, imageLoader)
 
         binding.replyCount.isVisible = forumItem.replyCount != null
         binding.replyCount.text = forumItem.replyCount?.toString()
@@ -38,10 +40,12 @@ class ForumListViewHolder private constructor(
         fun create(
             inflater: LayoutInflater,
             parent: ViewGroup,
+            imageLoader: ImageLoader,
             onForumItemClicked: (EveryoneParkForum) -> Unit
         ): ForumListViewHolder =
             ForumListViewHolder(
                 ItemEveryoneForumListBinding.inflate(inflater, parent, false),
+                imageLoader,
                 onForumItemClicked
             )
     }

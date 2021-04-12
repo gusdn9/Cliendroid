@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.ImageLoader
 import com.hyunwoo.cliendroid.domain.model.BaseComment
 import com.hyunwoo.cliendroid.domain.model.BlockedComment
 import com.hyunwoo.cliendroid.domain.model.Comment
 
-class EveryoneParkDetailCommentAdapter : ListAdapter<BaseComment, RecyclerView.ViewHolder>(commentComparator) {
+class EveryoneParkDetailCommentAdapter(
+    private val imageLoader: ImageLoader
+) : ListAdapter<BaseComment, RecyclerView.ViewHolder>(commentComparator) {
 
     override fun getItemViewType(position: Int): Int =
         when (getItem(position)) {
@@ -19,7 +22,11 @@ class EveryoneParkDetailCommentAdapter : ListAdapter<BaseComment, RecyclerView.V
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            VIEW_TYPE_COMMENT -> EveryoneParkDetailCommentViewHolder.create(LayoutInflater.from(parent.context), parent)
+            VIEW_TYPE_COMMENT -> EveryoneParkDetailCommentViewHolder.create(
+                LayoutInflater.from(parent.context),
+                parent,
+                imageLoader
+            )
             VIEW_TYPE_BLOCKED -> EveryoneParkDetailBlockedCommentViewHolder.create(
                 LayoutInflater.from(parent.context),
                 parent
@@ -30,6 +37,7 @@ class EveryoneParkDetailCommentAdapter : ListAdapter<BaseComment, RecyclerView.V
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         when (holder) {
             is EveryoneParkDetailCommentViewHolder -> holder.bind(getItem(position) as Comment)
+            is EveryoneParkDetailBlockedCommentViewHolder -> holder.bind(getItem(position) as BlockedComment)
             else -> throw IllegalArgumentException("unknown view type")
         }
 

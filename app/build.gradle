@@ -54,6 +54,7 @@ dependencies {
     implementation "com.airbnb.android:mavericks:$mavericks"
     // coil
     implementation "io.coil-kt:coil:$coil"
+    implementation "io.coil-kt:coil-gif:$coil"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

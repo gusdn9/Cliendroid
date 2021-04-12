@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.ImageLoader
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
 import com.hyunwoo.cliendroid.R
@@ -30,8 +31,11 @@ class EveryoneParkListFragment : AppFragment() {
     @Inject
     lateinit var viewModelFactory: EveryoneParkListViewModel.Factory
 
+    @Inject
+    lateinit var imageLoader: ImageLoader
+
     private val adapter by lazy {
-        ForumListAdapter(this::onForumClicked)
+        ForumListAdapter(imageLoader, this::onForumClicked)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,5 +1,9 @@
 package com.hyunwoo.cliendroid
 
+import android.os.Build
+import coil.ImageLoader
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import com.hyunwoo.cliendroid.data.DataLayerModule
 import com.hyunwoo.cliendroid.domain.DomainLayerModule
 import com.hyunwoo.cliendroid.presentation.PresentationModule
@@ -26,4 +30,17 @@ class AppModule {
     @Singleton
     fun provideApplicationScope(): CoroutineScope =
         CoroutineScope(Dispatchers.Main + CoroutineName("ApplicationContext") + SupervisorJob())
+
+    @Provides
+    @Singleton
+    fun provideCoilGifLoader(application: ClienApplication): ImageLoader =
+        ImageLoader.Builder(application.applicationContext).apply {
+            componentRegistry {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    add(ImageDecoderDecoder())
+                } else {
+                    add(GifDecoder())
+                }
+            }
+        }.build()
 }
