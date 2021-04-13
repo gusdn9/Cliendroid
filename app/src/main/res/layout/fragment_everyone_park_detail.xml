@@ -84,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        app:behavior_hideable="false"
         app:behavior_peekHeight="@dimen/everyone_park_detail_bottom_height"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -95,9 +96,9 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:text="@string/everyone_park_detail_reply_label"/>
 
             <TextView
