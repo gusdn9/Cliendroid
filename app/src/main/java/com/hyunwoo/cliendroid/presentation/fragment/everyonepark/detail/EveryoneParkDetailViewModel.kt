@@ -31,8 +31,7 @@ class EveryoneParkDetailViewModel @AssistedInject constructor(
             }.asAsync { async ->
                 var nextState = this
                 if (async is Success) {
-                    val result = async()
-                    nextState = nextState.copy(htmlBody = result.htmlBody, comments = result.comments)
+                    nextState = nextState.copy(content = async())
                 }
                 nextState.copy(refreshAsync = async)
             }

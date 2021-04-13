@@ -8,8 +8,7 @@ import com.hyunwoo.cliendroid.domain.model.EveryoneParkForumContent
 
 data class State(
     val url: String,
-    val htmlBody: String? = null,
-    val comments: List<BaseComment>? = null,
+    val content: EveryoneParkForumContent? = null,
     val refreshAsync: Async<EveryoneParkForumContent> = Uninitialized
 ) : MavericksState {
     constructor(args: EveryoneParkDetailArgs) : this(

@@ -17,6 +17,20 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
         val document = Jsoup.parse(value.string())
         val bodyHtml = document.getElementsByClass("post_article").first().html()
 
+        val title = document.selectFirst(".post_subject span").text()
+        val userNickname = document.selectFirst(".post_view .nickname")?.text()
+        val userNickImage = document.selectFirst(".nickimg img")?.attr("src")
+        val author = UserDto(null, userNickname, userNickImage)
+
+        val timeDiv = document.selectFirst(".post_time span")
+        val postTime = if (timeDiv.select(".edit_time").size > 0) {
+            timeDiv.selectFirst(".time").text()
+        } else {
+            timeDiv.text()
+        }
+        val hits = document.getElementsByClass("view_count").text()
+        val authorIpAddress = document.getElementsByClass("author_ip").text()
+
         val comments: ArrayList<BaseCommentDto> = ArrayList()
 
         document.getElementsByClass("comment_row").forEach { reply ->
@@ -39,7 +53,15 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
             }
         }
 
-        return EveryoneParkForumDetailRes(bodyHtml, comments)
+        return EveryoneParkForumDetailRes(
+            title = title,
+            user = author,
+            time = postTime,
+            hits = hits,
+            ipAddress = authorIpAddress,
+            htmlBody = bodyHtml,
+            comments = comments
+        )
     }
 
     companion object {
