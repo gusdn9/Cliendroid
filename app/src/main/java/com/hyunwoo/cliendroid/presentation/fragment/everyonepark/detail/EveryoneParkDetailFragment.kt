@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebSettings
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.ImageLoader
@@ -64,7 +65,7 @@ class EveryoneParkDetailFragment : AppFragment() {
 
     private fun subscribeStates() {
         viewModel.onEach(State::content) { content ->
-            if(content == null) return@onEach
+            if (content == null) return@onEach
             setHeader(content)
             setHtmlBody(content.htmlBody)
             setComments(content.comments)
@@ -77,7 +78,9 @@ class EveryoneParkDetailFragment : AppFragment() {
 
     private fun setHeader(content: EveryoneParkForumContent) {
         binding.title.text = content.title
+        binding.user.userNickName.isVisible = content.user.nickName != null
         binding.user.userNickName.text = content.user.nickName
+        binding.user.userImage.isVisible = content.user.image != null
         binding.user.userImage.load(content.user.image, imageLoader)
         binding.time.text = content.time
         binding.hits.text = content.hits
@@ -152,6 +155,11 @@ class EveryoneParkDetailFragment : AppFragment() {
 
         binding.refreshLayout.setOnRefreshListener {
             viewModel.refresh()
+        }
+        binding.bottomSheetTopFrame.setOnClickListener {
+            if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+            }
         }
     }
 

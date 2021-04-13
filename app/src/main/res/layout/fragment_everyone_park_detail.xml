@@ -88,12 +88,14 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
+            android:id="@+id/bottomSheetTopFrame"
             android:layout_width="match_parent"
             android:layout_height="@dimen/everyone_park_detail_bottom_height"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
+                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/everyone_park_detail_reply_label"/>
