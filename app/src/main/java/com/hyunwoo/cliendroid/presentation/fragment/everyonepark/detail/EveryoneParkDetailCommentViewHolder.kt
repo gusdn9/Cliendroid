@@ -15,6 +15,8 @@ class EveryoneParkDetailCommentViewHolder private constructor(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(comment: Comment) {
+        binding.reCommentSpace.isVisible = comment.isReply
+
         binding.user.userNickName.isVisible = comment.user.nickName != null
         binding.user.userNickName.text = comment.user.nickName
 

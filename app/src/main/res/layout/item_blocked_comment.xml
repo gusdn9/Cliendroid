@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp">
+
+    <Space
+        android:id="@+id/reCommentSpace"
+        android:visibility="gone"
+        android:layout_width="@dimen/re_comment_space"
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/contents"
@@ -13,4 +19,4 @@
         android:layout_marginStart="20dp"
         tools:text="삭제되었습니다."/>
 
-</FrameLayout>
+</LinearLayout>
