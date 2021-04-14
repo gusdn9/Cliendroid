@@ -6,19 +6,30 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.load
+import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.databinding.ItemEveryoneForumListBinding
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
+import com.hyunwoo.cliendroid.extension.getColorWithAttr
 
 class ForumListViewHolder private constructor(
     private val binding: ItemEveryoneForumListBinding,
     private val imageLoader: ImageLoader,
     private val onForumItemClicked: (EveryoneParkForum) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
+    private val color = binding.root.context.getColorWithAttr(R.attr.colorSecondary)
 
     fun bind(forumItem: EveryoneParkForum) {
         binding.root.setOnClickListener {
             onForumItemClicked(forumItem)
         }
+        // max 2000
+        val hit = forumItem.hit ?: 0L
+        var alpha = hit / MAX_HIT
+        alpha = if (alpha > 1f) 1f else alpha
+
+        binding.hits.setBackgroundColor(color)
+        binding.hits.alpha = alpha
+
         binding.title.text = forumItem.title
         binding.time.text = forumItem.time
 
@@ -36,6 +47,8 @@ class ForumListViewHolder private constructor(
     }
 
     companion object {
+
+        private const val MAX_HIT = 2000f
 
         fun create(
             inflater: LayoutInflater,
