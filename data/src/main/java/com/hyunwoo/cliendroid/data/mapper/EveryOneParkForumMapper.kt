@@ -1,7 +1,9 @@
 package com.hyunwoo.cliendroid.data.mapper
 
+import com.hyunwoo.cliendroid.domain.model.BlockedEveryoneParkForum
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 import com.hyunwoo.cliendroid.domain.model.User
+import com.hyunwoo.cliendroid.network.model.BlockedEveryoneParkForumItemDto
 import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
 
 fun EveryoneParkForumItemDto.toEveryoneParkForum() =
@@ -14,4 +16,10 @@ fun EveryoneParkForumItemDto.toEveryoneParkForum() =
         time,
         likes,
         User(null, user.nickName, user.image)
+    )
+
+fun BlockedEveryoneParkForumItemDto.toBlockedEveryoneParkForum() =
+    BlockedEveryoneParkForum(
+        id,
+        title
     )
