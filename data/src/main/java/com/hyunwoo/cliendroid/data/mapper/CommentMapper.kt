@@ -12,6 +12,7 @@ fun CommentDto.toComment(): Comment =
         contents,
         ipAddress,
         time,
+        likes,
         User(user.id, user.nickName, user.image),
         isReply
     )

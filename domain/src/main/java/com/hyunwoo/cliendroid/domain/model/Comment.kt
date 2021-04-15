@@ -7,6 +7,7 @@ data class Comment(
     val contents: String,
     val ipAddress: String,
     val time: String,
+    val likes: Long,
     val user: User,
     override val isReply: Boolean
 ) : BaseComment(isReply)

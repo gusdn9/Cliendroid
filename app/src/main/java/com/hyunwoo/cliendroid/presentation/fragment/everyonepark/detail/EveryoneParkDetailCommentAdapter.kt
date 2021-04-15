@@ -53,7 +53,7 @@ class EveryoneParkDetailCommentAdapter(
                 }
 
             override fun areContentsTheSame(oldItem: BaseComment, newItem: BaseComment): Boolean =
-                oldItem == newItem
+                oldItem.hashCode() == newItem.hashCode()
         }
     }
 }

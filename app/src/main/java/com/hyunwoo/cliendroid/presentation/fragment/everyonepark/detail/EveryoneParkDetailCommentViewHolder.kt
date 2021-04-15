@@ -23,6 +23,9 @@ class EveryoneParkDetailCommentViewHolder private constructor(
         binding.user.userImage.isVisible = comment.user.image != null
         binding.user.userImage.load(comment.user.image, imageLoader)
 
+        binding.likes.isVisible = comment.likes > 0
+        binding.likes.text = comment.likes.toString()
+
         binding.contents.text = comment.contents
 
         binding.time.text = comment.time

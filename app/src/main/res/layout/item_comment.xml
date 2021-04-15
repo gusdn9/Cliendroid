@@ -9,9 +9,9 @@
 
     <Space
         android:id="@+id/reCommentSpace"
-        android:visibility="gone"
         android:layout_width="@dimen/re_comment_space"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <include
@@ -23,6 +23,18 @@
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toEndOf="@id/reCommentSpace"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:drawablePadding="5dp"
+        app:drawableLeftCompat="@drawable/ic_heart"
+        app:layout_constraintBottom_toBottomOf="@id/user"
+        app:layout_constraintStart_toEndOf="@id/user"
+        app:layout_constraintTop_toTopOf="@id/user"
+        tools:text="10"/>
 
     <TextView
         android:id="@+id/time"
