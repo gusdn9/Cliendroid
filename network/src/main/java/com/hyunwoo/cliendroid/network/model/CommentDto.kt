@@ -7,6 +7,7 @@ data class CommentDto(
     val contents: String,
     val ipAddress: String,
     val time: String,
+    val likes: Long,
     val user: UserDto,
     override val isReply: Boolean
 ) : BaseCommentDto(isReply)

@@ -44,12 +44,13 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
                 val contents = reply.selectFirst(".comment_content input").attr("value")
                 val ipAddress = reply.selectFirst("span.ip_address").text()
                 val time = reply.getElementById("time").ownText()
+                val like = reply.getElementsByClass("comment_content_symph").text().toLong()
 
                 val nickname = reply.selectFirst("span.nickname")?.text()
                 val nickImg = reply.selectFirst("span.nickimg img")?.attr("src")
                 val user = UserDto(null, nickname, nickImg)
 
-                comments.add(CommentDto(id, contents, ipAddress, time, user, isReply))
+                comments.add(CommentDto(id, contents, ipAddress, time, like, user, isReply))
             }
         }
 

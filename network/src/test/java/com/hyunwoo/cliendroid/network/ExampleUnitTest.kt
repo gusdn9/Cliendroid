@@ -22,7 +22,7 @@ class ExampleUnitTest {
     @Test
     fun requestDetail() = runBlocking {
         val network = NetworkProvider.create(HostType.PROD, true)
-        val url = "/service/board/park/16061901"
+        val url = "/service/board/park/16066246"
         val res = network.provideCommunityService().getEveryoneParkForumDetail(url)
         println(res.htmlBody)
         res.comments.forEach { comment ->
