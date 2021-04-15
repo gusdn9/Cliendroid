@@ -84,6 +84,8 @@ class EveryoneParkDetailFragment : AppFragment() {
         binding.user.userImage.load(content.user.image, imageLoader)
         binding.time.text = content.time
         binding.hits.text = content.hits
+        binding.likes.isVisible = content.likes > 0
+        binding.likes.text = content.likes.toString()
     }
 
     private fun setHtmlBody(htmlBody: String) {

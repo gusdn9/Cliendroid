@@ -12,6 +12,7 @@ fun EveryoneParkForumDetailRes.toEveryoneParkForumContent(): EveryoneParkForumCo
         user = User(user.id, user.nickName, user.image),
         time = time,
         hits = hits,
+        likes = likes,
         ipAddress = ipAddress,
         htmlBody = htmlBody,
         comments.map { reply ->

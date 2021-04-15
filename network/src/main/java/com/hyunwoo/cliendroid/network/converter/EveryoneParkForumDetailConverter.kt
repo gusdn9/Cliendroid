@@ -29,6 +29,7 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
             timeDiv.text()
         }
         val hits = document.getElementsByClass("view_count").text()
+        val likes = document.select(".symph_count strong").text().toLong()
         val authorIpAddress = document.getElementsByClass("author_ip").text()
 
         val comments: ArrayList<BaseCommentDto> = ArrayList()
@@ -59,6 +60,7 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
             user = author,
             time = postTime,
             hits = hits,
+            likes = likes,
             ipAddress = authorIpAddress,
             htmlBody = bodyHtml,
             comments = comments
