@@ -37,6 +37,7 @@ interface AppComponent : AndroidInjector<ClienApplication> {
         fun create(application: ClienApplication): AppComponent {
 
             val networkProvider = NetworkProvider.create(
+                application,
                 getHostType(),
                 BuildConfig.DEBUG
             )

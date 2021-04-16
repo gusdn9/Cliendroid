@@ -1,7 +1,6 @@
 package com.hyunwoo.cliendroid.network
 
 import com.hyunwoo.cliendroid.network.model.EveryoneParkForumDetailRes
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
 import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListRes
 import retrofit2.http.GET
 import retrofit2.http.Path

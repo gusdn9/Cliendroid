@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.network.converter
+package com.hyunwoo.cliendroid.network.converter.everyonepark
 
 import com.hyunwoo.cliendroid.network.model.BaseCommentDto
 import com.hyunwoo.cliendroid.network.model.BlockedCommentDto

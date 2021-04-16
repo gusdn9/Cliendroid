@@ -1,8 +1,13 @@
 package com.hyunwoo.cliendroid.network
 
+import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.hyunwoo.cliendroid.network.converter.EveryoneParkForumDetailConverter
-import com.hyunwoo.cliendroid.network.converter.EveryoneParkForumListConverter
+import com.hyunwoo.cliendroid.network.converter.auth.LoginConverter
+import com.hyunwoo.cliendroid.network.converter.auth.PreparedStatementConverter
+import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumDetailConverter
+import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumListConverter
+import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
+import com.hyunwoo.cliendroid.network.interceptor.ReceivedCookiesInterceptor
 import com.squareup.moshi.Moshi
 import dagger.BindsInstance
 import dagger.Component
@@ -12,8 +17,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -29,6 +34,9 @@ internal interface NetworkComponent : NetworkProvider {
         fun build(): NetworkComponent
 
         @BindsInstance
+        fun context(context: Context): Builder
+
+        @BindsInstance
         fun hostType(hostType: HostType): Builder
 
         @BindsInstance
@@ -39,16 +47,42 @@ internal interface NetworkComponent : NetworkProvider {
 @Module
 internal class NetworkModule {
 
+    @Named("Prod")
+    @Provides
+    @Singleton
+    fun provideProdHostType(): HostType =
+        HostType.PROD
+
+    @Named("Mobile")
+    @Provides
+    @Singleton
+    fun provideMobileHostType(): HostType =
+        HostType.MOBILE
+
+    @Provides
+    @Singleton
+    fun provideAddCookiesInterceptor(context: Context): AddCookiesInterceptor =
+        AddCookiesInterceptor(context)
+
+    @Provides
+    @Singleton
+    fun provideReceivedCookiesInterceptor(context: Context): ReceivedCookiesInterceptor =
+        ReceivedCookiesInterceptor(context)
+
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        hostType: HostType,
-        @Named("Debug") debug: Boolean
+        @Named("Prod") hostType: HostType,
+        @Named("Debug") debug: Boolean,
+        addCookiesInterceptor: AddCookiesInterceptor,
+        receivedCookiesInterceptor: ReceivedCookiesInterceptor
     ): OkHttpClient {
         val builder = OkHttpClient.Builder().apply {
             connectTimeout(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
             writeTimeout(WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
             readTimeout(READ_TIMEOUT, TimeUnit.MILLISECONDS)
+            interceptors().add(addCookiesInterceptor)
+            interceptors().add(receivedCookiesInterceptor)
             if (debug) {
                 val loggingInterceptor = HttpLoggingInterceptor()
                 loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -74,13 +108,12 @@ internal class NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        hostType: HostType,
+        @Named("Prod") hostType: HostType,
         okHttpClient: OkHttpClient,
         moshi: Moshi
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .build()
@@ -89,16 +122,32 @@ internal class NetworkModule {
     @Provides
     @Singleton
     fun provideEveryOneParkForumRetrofit(
-        hostType: HostType,
+        @Named("Prod") hostType: HostType,
         okHttpClient: OkHttpClient,
         @Named("EveryoneParkForum") listConverter: Converter.Factory,
         @Named("EveryoneParkForumDetail") detailConverter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(listConverter)
             .addConverterFactory(detailConverter)
+            .client(okHttpClient)
+            .build()
+
+    @Named("Auth")
+    @Provides
+    @Singleton
+    fun provideAuthRetrofit(
+        @Named("Mobile") hostType: HostType,
+        okHttpClient: OkHttpClient,
+        @Named("LoginPreparedStatement") loginPreparedStatementConverter: Converter.Factory,
+        @Named("Login") loginConverter: Converter.Factory
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(hostType.url)
+            .addConverterFactory(loginPreparedStatementConverter)
+            .addConverterFactory(loginConverter)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .client(okHttpClient)
             .build()
 
@@ -112,6 +161,11 @@ internal class NetworkModule {
     fun provideCommunityService(@Named("EveryoneParkForum") retrofit: Retrofit): CommunityInfraService =
         retrofit.create(CommunityInfraService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideAuthService(@Named("Auth") retrofit: Retrofit): AuthInfraService =
+        retrofit.create(AuthInfraService::class.java)
+
     @Named("EveryoneParkForum")
     @Provides
     @Singleton
@@ -123,6 +177,18 @@ internal class NetworkModule {
     @Singleton
     fun provideEveryOneParkDetailForumConverter(): Converter.Factory =
         EveryoneParkForumDetailConverter.create()
+
+    @Named("LoginPreparedStatement")
+    @Provides
+    @Singleton
+    fun provideLoginPreparedStatementConverter(): Converter.Factory =
+        PreparedStatementConverter.create()
+
+    @Named("Login")
+    @Provides
+    @Singleton
+    fun provideLoginConverter(): Converter.Factory =
+        LoginConverter.create()
 
     companion object {
 
