@@ -25,6 +25,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
+    dependencies = [CookieStoreProvider::class],
     modules = [NetworkModule::class]
 )
 internal interface NetworkComponent : NetworkProvider {
@@ -34,13 +35,12 @@ internal interface NetworkComponent : NetworkProvider {
         fun build(): NetworkComponent
 
         @BindsInstance
-        fun context(context: Context): Builder
-
-        @BindsInstance
         fun hostType(hostType: HostType): Builder
 
         @BindsInstance
         fun debug(@Named("Debug") debug: Boolean): Builder
+
+        fun cookieStoreProvider(cookieStoreProvider: CookieStoreProvider): Builder
     }
 }
 
@@ -61,13 +61,13 @@ internal class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAddCookiesInterceptor(context: Context): AddCookiesInterceptor =
-        AddCookiesInterceptor(context)
+    fun provideAddCookiesInterceptor(cookieStore: CookieStore): AddCookiesInterceptor =
+        AddCookiesInterceptor(cookieStore)
 
     @Provides
     @Singleton
-    fun provideReceivedCookiesInterceptor(context: Context): ReceivedCookiesInterceptor =
-        ReceivedCookiesInterceptor(context)
+    fun provideReceivedCookiesInterceptor(cookieStore: CookieStore): ReceivedCookiesInterceptor =
+        ReceivedCookiesInterceptor(cookieStore)
 
     @Provides
     @Singleton

@@ -1,5 +1,7 @@
 package com.hyunwoo.cliendroid
 
+import com.hyunwoo.cliendroid.network.CookieStore
+import com.hyunwoo.cliendroid.network.CookieStoreProvider
 import com.hyunwoo.cliendroid.network.HostType
 import com.hyunwoo.cliendroid.network.NetworkProvider
 import dagger.BindsInstance
@@ -19,7 +21,7 @@ import javax.inject.Singleton
         AssistedInjectModule::class
     ]
 )
-interface AppComponent : AndroidInjector<ClienApplication> {
+interface AppComponent : AndroidInjector<ClienApplication>, CookieStoreProvider {
 
     @Component.Builder
     interface Builder {
@@ -35,10 +37,11 @@ interface AppComponent : AndroidInjector<ClienApplication> {
     companion object {
 
         fun create(application: ClienApplication): AppComponent {
+            val bridge = DelegationBridge()
 
             val networkProvider = NetworkProvider.create(
-                application,
                 getHostType(),
+                bridge,
                 BuildConfig.DEBUG
             )
 
@@ -50,5 +53,12 @@ interface AppComponent : AndroidInjector<ClienApplication> {
 
         private fun getHostType(): HostType =
             HostType.PROD
+    }
+
+    private class DelegationBridge: CookieStoreProvider {
+        lateinit var component: AppComponent
+
+        override fun provideCookieStore(): CookieStore =
+            component.provideCookieStore()
     }
 }

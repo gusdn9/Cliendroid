@@ -1,6 +1,5 @@
 package com.hyunwoo.cliendroid.network
 
-import android.content.Context
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import retrofit2.Converter
@@ -45,13 +44,13 @@ interface NetworkProvider {
 
     companion object {
         fun create(
-            context: Context,
             hostType: HostType,
+            cookieStoreProvider: CookieStoreProvider,
             debug: Boolean
         ): NetworkProvider =
             DaggerNetworkComponent.builder()
                 .hostType(hostType)
-                .context(context)
+                .cookieStoreProvider(cookieStoreProvider)
                 .debug(debug)
                 .build()
     }

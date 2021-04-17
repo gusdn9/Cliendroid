@@ -1,5 +1,6 @@
 package com.hyunwoo.cliendroid
 
+import android.content.Context
 import android.os.Build
 import coil.ImageLoader
 import coil.decode.GifDecoder
@@ -7,6 +8,7 @@ import coil.decode.ImageDecoderDecoder
 import com.hyunwoo.cliendroid.data.DataLayerModule
 import com.hyunwoo.cliendroid.domain.DomainLayerModule
 import com.hyunwoo.cliendroid.presentation.PresentationModule
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineName
@@ -18,6 +20,7 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
+        BindModule::class,
         PresentationModule::class,
         DomainLayerModule::class,
         DataLayerModule::class
@@ -43,4 +46,11 @@ class AppModule {
                 }
             }
         }.build()
+}
+
+@Module
+internal interface BindModule {
+
+    @Binds
+    fun bindContext(application: ClienApplication): Context
 }
