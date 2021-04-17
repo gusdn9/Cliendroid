@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
 
-@kotlinx.coroutines.ExperimentalCoroutinesApi
+@Suppress("EXPERIMENTAL_API_USAGE")
 class EventChannel<T>(
     private val scope: CoroutineScope
 ) {
