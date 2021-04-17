@@ -1,7 +1,11 @@
 package com.hyunwoo.cliendroid.data
 
 import com.hyunwoo.cliendroid.data.repository.CommunityRepositoryImpl
+import com.hyunwoo.cliendroid.data.repository.CookieStoreImpl
+import com.hyunwoo.cliendroid.data.repository.LoggedInUserDataSourceImpl
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
+import com.hyunwoo.cliendroid.domain.repository.LoggedInUserDataSource
+import com.hyunwoo.cliendroid.network.CookieStore
 import dagger.Binds
 import dagger.Module
 
@@ -17,4 +21,10 @@ interface DataLayerBindingModule {
 
     @Binds
     fun bindCommunityRepository(impl: CommunityRepositoryImpl): CommunityRepository
+
+    @Binds
+    fun bindCookieStore(impl: CookieStoreImpl): CookieStore
+
+    @Binds
+    fun bindLoggedInUserDataSource(impl: LoggedInUserDataSourceImpl): LoggedInUserDataSource
 }
