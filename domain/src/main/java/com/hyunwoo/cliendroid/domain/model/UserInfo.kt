@@ -1,6 +1,6 @@
-package com.hyunwoo.cliendroid.network.model
+package com.hyunwoo.cliendroid.domain.model
 
-data class UserInfoRes(
+data class UserInfo(
     val nickname: String,
     val startDate: String?,
     val email: String?

@@ -17,8 +17,8 @@ class EveryoneParkDetailCommentViewHolder private constructor(
     fun bind(comment: Comment) {
         binding.reCommentSpace.isVisible = comment.isReply
 
-        binding.user.userNickName.isVisible = comment.user.nickName != null
-        binding.user.userNickName.text = comment.user.nickName
+        binding.user.userNickname.isVisible = comment.user.nickName != null
+        binding.user.userNickname.text = comment.user.nickName
 
         binding.user.userImage.isVisible = comment.user.image != null
         binding.user.userImage.load(comment.user.image, imageLoader)

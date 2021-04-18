@@ -94,7 +94,7 @@ class ExampleUnitTest {
         }
 
         val info = service.getUserInfo(id)
-        println("id:$id, nickName:${info.nickName}, email:${info.email}, startDate:${info.startDate}")
+        println("id:$id, nickName:${info.nickname}, email:${info.email}, startDate:${info.startDate}")
 
         //
         // val myPage = service.myPage()
