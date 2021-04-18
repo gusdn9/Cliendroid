@@ -49,7 +49,7 @@ class ExampleUnitTest {
     // }
 
     @Test
-    fun loginForm() = runBlocking {
+    fun login() = runBlocking {
         val sharedPreferences =
             context.getSharedPreferences(context.getString(R.string.cliendroid_network), Context.MODE_PRIVATE)
         val edit = sharedPreferences.edit()
@@ -60,7 +60,6 @@ class ExampleUnitTest {
             }
 
             val cookieStore = object : CookieStore {
-
                 override fun getCookies(): Set<String> {
                     return sharedPreferences.getStringSet("COOKIES", HashSet()) as Set<String>
                 }
@@ -94,9 +93,12 @@ class ExampleUnitTest {
             }
         }
 
+        val info = service.getUserInfo(id)
+        println("id:$id, nickName:${info.nickName}, email:${info.email}, startDate:${info.startDate}")
+
         //
-        val myPage = service.myPage()
-        println(myPage.body())
+        // val myPage = service.myPage()
+        // println(myPage.body())
 
     }
 }

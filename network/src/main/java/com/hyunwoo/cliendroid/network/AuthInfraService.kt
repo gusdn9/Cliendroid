@@ -2,6 +2,7 @@ package com.hyunwoo.cliendroid.network
 
 import com.hyunwoo.cliendroid.network.model.LoginPreparedStatementRes
 import com.hyunwoo.cliendroid.network.model.LoginRes
+import com.hyunwoo.cliendroid.network.model.UserInfoRes
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -28,10 +29,10 @@ interface AuthInfraService {
         @Field("_csrf") csrf: String,
     ): LoginRes
 
-    @GET("service/service/popup/userInfo/basic/{userId}")
+    @GET("service/popup/userInfo/basic/{userId}")
     suspend fun getUserInfo(
         @Path("userId") userId: String
-    )
+    ): UserInfoRes
 
     @GET("service/mypage/myInfoComfrim")
     suspend fun myPage(): Response<String>

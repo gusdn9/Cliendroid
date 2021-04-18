@@ -1,9 +1,9 @@
 package com.hyunwoo.cliendroid.network
 
-import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.hyunwoo.cliendroid.network.converter.auth.LoginConverter
 import com.hyunwoo.cliendroid.network.converter.auth.PreparedStatementConverter
+import com.hyunwoo.cliendroid.network.converter.auth.UserInfoConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumDetailConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumListConverter
 import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
@@ -141,12 +141,14 @@ internal class NetworkModule {
         @Named("Mobile") hostType: HostType,
         okHttpClient: OkHttpClient,
         @Named("LoginPreparedStatement") loginPreparedStatementConverter: Converter.Factory,
-        @Named("Login") loginConverter: Converter.Factory
+        @Named("Login") loginConverter: Converter.Factory,
+        @Named("UserInfo") userInfoConverter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
             .addConverterFactory(loginPreparedStatementConverter)
             .addConverterFactory(loginConverter)
+            .addConverterFactory(userInfoConverter)
             .addConverterFactory(ScalarsConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -189,6 +191,12 @@ internal class NetworkModule {
     @Singleton
     fun provideLoginConverter(): Converter.Factory =
         LoginConverter.create()
+
+    @Named("UserInfo")
+    @Provides
+    @Singleton
+    fun provideUserInfoConverter(): Converter.Factory =
+        UserInfoConverter.create()
 
     companion object {
 
