@@ -78,8 +78,8 @@ class EveryoneParkDetailFragment : AppFragment() {
 
     private fun setHeader(content: EveryoneParkForumContent) {
         binding.title.text = content.title
-        binding.user.userNickName.isVisible = content.user.nickName != null
-        binding.user.userNickName.text = content.user.nickName
+        binding.user.userNickname.isVisible = content.user.nickName != null
+        binding.user.userNickname.text = content.user.nickName
         binding.user.userImage.isVisible = content.user.image != null
         binding.user.userImage.load(content.user.image, imageLoader)
         binding.time.text = content.time

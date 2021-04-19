@@ -45,17 +45,20 @@ interface AppComponent : AndroidInjector<ClienApplication>, CookieStoreProvider 
                 BuildConfig.DEBUG
             )
 
-            return DaggerAppComponent.builder()
+            val component = DaggerAppComponent.builder()
                 .application(application)
                 .networkProvider(networkProvider)
                 .build()
+            bridge.component = component
+
+            return component
         }
 
         private fun getHostType(): HostType =
             HostType.PROD
     }
 
-    private class DelegationBridge: CookieStoreProvider {
+    private class DelegationBridge : CookieStoreProvider {
         lateinit var component: AppComponent
 
         override fun provideCookieStore(): CookieStore =

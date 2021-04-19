@@ -33,8 +33,8 @@ class ForumListViewHolder private constructor(
         binding.title.text = forumItem.title
         binding.time.text = forumItem.time
 
-        binding.user.userNickName.isVisible = forumItem.user.nickName != null
-        binding.user.userNickName.text = forumItem.user.nickName
+        binding.user.userNickname.isVisible = forumItem.user.nickName != null
+        binding.user.userNickname.text = forumItem.user.nickName
 
         binding.user.userImage.isVisible = forumItem.user.image != null
         binding.user.userImage.load(forumItem.user.image, imageLoader)
