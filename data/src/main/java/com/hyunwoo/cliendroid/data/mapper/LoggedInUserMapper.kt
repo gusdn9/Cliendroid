@@ -7,12 +7,16 @@ fun LoggedInUserEntity.toLoggedInUser() =
     LoggedInUser(
         cookies,
         userId,
-        userNickname
+        userNickname,
+        userEmail,
+        startDate
     )
 
 fun LoggedInUser.toUserEntity() =
     LoggedInUserEntity(
         cookies,
         userId,
-        userNickname
+        userNickname,
+        userEmail,
+        startDate
     )
