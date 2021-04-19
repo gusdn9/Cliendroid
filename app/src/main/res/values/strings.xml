@@ -3,19 +3,9 @@
 
     <string name="everyone_park_list_label">모두의 공원</string>
 
-
-    <string name="everyone_park_detail_body" formatted="false">
-        <![CDATA[
-        <head>
-        <meta name="viewport" content="width=device-width, user-scalable=no" />
-        <style>
-            img, video, iframe{display: inline height: auto max-width: 100% }
-            body { color: %1$s }
-        </style>
-        </head>
-        <body>%2$s</body>
-        ]]>
-    </string>
-
     <string name="everyone_park_detail_reply_label">댓글</string>
+    
+    <string name="navigation_drawer_login_label">로그인</string>
+    <string name="navigation_drawer_logout_label">로그아웃</string>
+
 </resources>
