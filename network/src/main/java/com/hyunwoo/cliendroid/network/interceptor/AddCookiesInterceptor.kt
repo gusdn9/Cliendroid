@@ -9,7 +9,7 @@ class AddCookiesInterceptor(private val cookieStore: CookieStore) : Interceptor 
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder = chain.request().newBuilder()
         val getCookies = cookieStore.getCookies()
-        getCookies.forEach { cookie ->
+        getCookies?.forEach { cookie ->
             builder.addHeader("Cookie", cookie)
         }
         return chain.proceed(builder.build())

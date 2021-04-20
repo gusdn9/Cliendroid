@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 interface CookieStore {
 
-    fun getCookies(): Set<String>
+    fun getCookies(): Set<String>?
 
     fun saveCookie(cookies: Set<String>)
 }
