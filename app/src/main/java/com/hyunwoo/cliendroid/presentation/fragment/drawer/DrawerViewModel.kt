@@ -6,33 +6,24 @@ import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
+import com.hyunwoo.cliendroid.domain.model.LogoutCause
+import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.LoginUseCase
-import com.hyunwoo.cliendroid.domain.usecase.event.LoggedInSubscribeUseCase
-import com.hyunwoo.cliendroid.domain.usecase.event.LoggedOutSubscribeUseCase
+import com.hyunwoo.cliendroid.domain.usecase.auth.LogoutUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DrawerViewModel @AssistedInject constructor(
     @Assisted initialState: State,
     private val loginUseCase: LoginUseCase,
-    private val loggedInSubscribeUseCase: LoggedInSubscribeUseCase,
-    private val loggedOutSubscribeUseCase: LoggedOutSubscribeUseCase
+    private val logoutUseCase: LogoutUseCase,
+    private val getLoggedInUserUseCase: GetLoggedInUserUseCase,
 ) : AppMvRxViewModel<State>(initialState) {
 
     init {
-        viewModelScope.launch {
-            loggedInSubscribeUseCase().collect { event ->
-                setState {
-                    copy(loggedInUser = event.user)
-                }
-            }
-            loggedOutSubscribeUseCase().collect {
-                setState {
-                    copy(loggedInUser = null)
-                }
-            }
+        setState {
+            copy(loggedInUser = getLoggedInUserUseCase())
         }
     }
 
@@ -44,11 +35,16 @@ class DrawerViewModel @AssistedInject constructor(
             loginUseCase::invoke.asAsync(id, password) { async ->
                 var nextState = this
                 if (async is Success) {
-                    nextState = nextState.copy(loggedInUser = async())
+                    nextState = copy(loggedInUser = async())
                 }
                 nextState.copy(loginAsync = async)
             }
         }
+    }
+
+    fun logout() = setState {
+        logoutUseCase.invoke(LogoutCause.USER_INTENTION)
+        copy(loggedInUser = null)
     }
 
     @AssistedInject.Factory

@@ -6,11 +6,48 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/notLoggedInLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_vertical"
         android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userIdInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="10dp"
+            app:endIconMode="clear_text">
+
+            <EditText
+                android:id="@+id/userIdInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/navigation_drawer_login_id_label"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userPasswordInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="10dp"
+            app:endIconMode="password_toggle">
+
+            <EditText
+                android:id="@+id/userPasswordInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/navigation_drawer_login_password_label"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/loginButton"
@@ -19,7 +56,7 @@
             android:layout_gravity="center_vertical"
             android:text="@string/navigation_drawer_login_label"/>
 
-    </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/loggedInLayout"
@@ -40,7 +77,6 @@
             android:id="@+id/logoutButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
             android:text="@string/navigation_drawer_logout_label"
             app:layout_constraintTop_toBottomOf="@id/userId"/>
     </LinearLayout>

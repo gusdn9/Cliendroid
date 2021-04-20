@@ -7,6 +7,5 @@ import com.hyunwoo.cliendroid.domain.model.LoggedInUser
 
 data class State(
     val loggedInUser: LoggedInUser? = null,
-    val loginAsync: Async<LoggedInUser> = Uninitialized,
-    val logoutAsync: Async<LoggedInUser> = Uninitialized
+    val loginAsync: Async<LoggedInUser> = Uninitialized
 ) : MavericksState
