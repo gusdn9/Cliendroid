@@ -14,6 +14,8 @@ import javax.inject.Singleton
 class LoggedInUserRepository @Inject constructor(
     private val dataSource: LoggedInUserDataSource,
 
+    private val cookieDataSource: CookieDataSource,
+
     @Named("LoggedInChannel")
     private val loggedInChannel: EventChannel<LoggedInEvent>,
 

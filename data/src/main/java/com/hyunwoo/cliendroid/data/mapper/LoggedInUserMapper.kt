@@ -5,7 +5,6 @@ import com.hyunwoo.cliendroid.domain.model.LoggedInUser
 
 fun LoggedInUserEntity.toLoggedInUser() =
     LoggedInUser(
-        cookies,
         userId,
         userNickname,
         userEmail,
@@ -14,7 +13,6 @@ fun LoggedInUserEntity.toLoggedInUser() =
 
 fun LoggedInUser.toUserEntity() =
     LoggedInUserEntity(
-        cookies,
         userId,
         userNickname,
         userEmail,

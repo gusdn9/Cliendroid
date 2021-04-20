@@ -8,6 +8,5 @@ class GetLoggedInUserUseCase @Inject constructor(
     private val loggedInUserRepository: LoggedInUserRepository
 ) {
 
-    suspend operator fun invoke(): LoggedInUser? =
-        loggedInUserRepository.loggedInUser
+    operator fun invoke(): LoggedInUser? = loggedInUserRepository.loggedInUser
 }
