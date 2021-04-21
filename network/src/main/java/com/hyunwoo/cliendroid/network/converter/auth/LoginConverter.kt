@@ -12,7 +12,7 @@ class LoginConverter : Converter<ResponseBody, LoginRes> {
         val document = Jsoup.parse(value.string())
         // body가 비어서 오면 로그인 성공한 것으로 판단.
         val result = document.body().childrenSize() < 1
-        // 메모 리스트가 javascript에 들어가 있다. 추후에 webview 등으로 꺼내야 하지 않을까
+        // TODO 메모 리스트가 javascript에 들어가 있다. 추후에 webview 등으로 꺼내야 하지 않을까
         val script = document.select("script").first()
 
         return LoginRes(result)
