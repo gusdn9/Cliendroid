@@ -24,6 +24,7 @@ class MainActivity : AppActivity() {
         setContentView(binding.root)
 
         initViews()
+        initListeners()
     }
 
     private fun initViews() {
@@ -35,14 +36,28 @@ class MainActivity : AppActivity() {
         setupDrawer(navController)
     }
 
+    private fun initListeners() {
+        binding.drawer.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.settings -> {
+                    navController.navigate(R.id.action_everyoneParkListFragment_to_settingsFragment)
+                }
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+    }
+
     private fun setupDrawer(navController: NavController) {
         // Root가 아닌 경우 drawer를 gesture로 열지 못하게 막음.
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == navController.graph.startDestination) {
-                DrawerLayout.LOCK_MODE_UNLOCKED
-            } else {
-                DrawerLayout.LOCK_MODE_LOCKED_CLOSED
-            }
+            binding.drawerLayout.setDrawerLockMode(
+                if (destination.id == navController.graph.startDestination) {
+                    DrawerLayout.LOCK_MODE_UNLOCKED
+                } else {
+                    DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+                }
+            )
         }
     }
 

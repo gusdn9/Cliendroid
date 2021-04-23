@@ -4,7 +4,7 @@
     <string name="everyone_park_list_label">모두의 공원</string>
 
     <string name="everyone_park_detail_reply_label">댓글</string>
-    
+
     <string name="navigation_drawer_login_label">로그인</string>
     <string name="navigation_drawer_login_id_label">아이디</string>
     <string name="navigation_drawer_login_password_label">패스워드</string>
@@ -13,4 +13,26 @@
     <string name="navigation_drawer_logout_label">로그아웃</string>
     <string name="navigation_drawer_login_failed">로그인에 실패하였습니다.</string>
 
+    <string name="settings_label">환경 설정</string>
+
+    <string name="theme_auto">mode_auto</string>
+    <string name="theme_day">mode_day</string>
+    <string name="theme_night">mode_night</string>
+
+    <string name="settings_application_theme">테마 정보</string>
+    <string name="settings_application_theme_summary">밝은 테마, 어두운 테마, 사용자의 낮과 밤에 따라서 자동으로 바뀌는 테마를 선택할 수 있습니다.</string>
+
+    <string name="application_key_theme" translatable="false">main_theme</string>
+
+    <string-array name="application_theme_type">
+        <item>자동</item>
+        <item>밝은 테마</item>
+        <item>어두운 테마</item>
+    </string-array>
+
+    <string-array name="application_theme_type_value">
+        <item>@string/theme_auto</item>
+        <item>@string/theme_day</item>
+        <item>@string/theme_night</item>
+    </string-array>
 </resources>

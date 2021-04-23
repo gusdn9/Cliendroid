@@ -14,11 +14,20 @@
         <action
             android:id="@+id/action_everyoneParkListFragment_to_everyoneParkDetailFragment"
             app:destination="@id/everyoneParkDetailFragment"/>
+
+        <action
+            android:id="@+id/action_everyoneParkListFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/everyoneParkDetailFragment"
         android:name="com.hyunwoo.cliendroid.presentation.fragment.everyonepark.detail.EveryoneParkDetailFragment"
         tools:layout="@layout/fragment_everyone_park_detail"/>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.hyunwoo.cliendroid.presentation.fragment.settings.SettingsFragment"
+        tools:layout="se"/>
 
 </navigation>
