@@ -1,5 +1,6 @@
 package com.hyunwoo.cliendroid.network.converter.everyonepark
 
+import com.hyunwoo.cliendroid.network.extension.textOrNull
 import com.hyunwoo.cliendroid.network.model.BaseCommentDto
 import com.hyunwoo.cliendroid.network.model.BlockedCommentDto
 import com.hyunwoo.cliendroid.network.model.CommentDto
@@ -29,7 +30,7 @@ class EveryoneParkForumDetailConverter : Converter<ResponseBody, EveryoneParkFor
             timeDiv.text()
         }
         val hits = document.getElementsByClass("view_count").text()
-        val likes = document.select(".symph_count strong").text().toLong()
+        val likes = document.select(".symph_count strong").textOrNull()?.toLong() ?: 0L
         val authorIpAddress = document.getElementsByClass("author_ip").text()
 
         val comments: ArrayList<BaseCommentDto> = ArrayList()
