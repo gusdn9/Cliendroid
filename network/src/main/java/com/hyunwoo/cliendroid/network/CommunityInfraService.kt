@@ -15,4 +15,10 @@ interface CommunityInfraService {
     suspend fun getEveryoneParkForumDetail(
         @Path("detailUrl", encoded = true) detailUrl: String
     ): EveryoneParkForumDetailRes
+
+    @GET("service/search")
+    suspend fun search(
+        @Query("q") keyword: String,
+        @Query("sort") sort: String
+    )
 }
