@@ -6,6 +6,7 @@ import com.hyunwoo.cliendroid.network.converter.auth.PreparedStatementConverter
 import com.hyunwoo.cliendroid.network.converter.auth.UserInfoConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumDetailConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumListConverter
+import com.hyunwoo.cliendroid.network.converter.everyonepark.SearchListConverter
 import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
 import com.hyunwoo.cliendroid.network.interceptor.ReceivedCookiesInterceptor
 import com.squareup.moshi.Moshi
@@ -125,12 +126,14 @@ internal class NetworkModule {
         @Named("Prod") hostType: HostType,
         okHttpClient: OkHttpClient,
         @Named("EveryoneParkForum") listConverter: Converter.Factory,
-        @Named("EveryoneParkForumDetail") detailConverter: Converter.Factory
+        @Named("EveryoneParkForumDetail") detailConverter: Converter.Factory,
+        @Named("SearchList") searchListConverter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
             .addConverterFactory(listConverter)
             .addConverterFactory(detailConverter)
+            .addConverterFactory(searchListConverter)
             .client(okHttpClient)
             .build()
 
@@ -197,6 +200,12 @@ internal class NetworkModule {
     @Singleton
     fun provideUserInfoConverter(): Converter.Factory =
         UserInfoConverter.create()
+
+    @Named("SearchList")
+    @Provides
+    @Singleton
+    fun provideSearchListConverter(): Converter.Factory =
+        SearchListConverter.create()
 
     companion object {
 
