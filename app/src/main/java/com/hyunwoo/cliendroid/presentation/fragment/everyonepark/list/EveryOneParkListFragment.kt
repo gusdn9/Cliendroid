@@ -1,9 +1,15 @@
 package com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +46,7 @@ class EveryoneParkListFragment : AppFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         subscribeStates()
     }
 
@@ -92,6 +99,25 @@ class EveryoneParkListFragment : AppFragment() {
                 }
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+
+        val searchManager = requireContext().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.action_search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        }
+        // super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> {
+                return false
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {
