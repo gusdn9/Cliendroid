@@ -49,9 +49,7 @@ class EveryoneParkListViewModel @AssistedInject constructor(
         val prevEntries = state.listData ?: return@withState
 
         loadMoreJob = viewModelScope.launch {
-            suspend {
-                getEveryoneParkForumListUseCase(state.page + 1)
-            }.asAsync { async ->
+            getEveryoneParkForumListUseCase::invoke.asAsync(state.page + 1) { async ->
                 var nextState = this
                 if (async is Success) {
                     nextState = nextState.copy(listData = prevEntries + async(), page = state.page + 1)
@@ -60,10 +58,6 @@ class EveryoneParkListViewModel @AssistedInject constructor(
             }
         }
 
-    }
-
-    private fun setPage(page: Int) = setState {
-        copy(page = page)
     }
 
     @AssistedInject.Factory
