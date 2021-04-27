@@ -29,9 +29,7 @@ class EveryoneParkListViewModel @AssistedInject constructor(
         }
 
         viewModelScope.launch {
-            suspend {
-                getEveryoneParkForumListUseCase(0)
-            }.asAsync { async ->
+            getEveryoneParkForumListUseCase::invoke.asAsync(0) { async ->
                 var nextState = this
                 if (async is Success) {
                     nextState = nextState.copy(listData = async(), page = 0)

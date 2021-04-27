@@ -26,9 +26,7 @@ class EveryoneParkDetailViewModel @AssistedInject constructor(
         }
 
         viewModelScope.launch {
-            suspend {
-                getEveryoneParkForumDetailUseCase(state.url)
-            }.asAsync { async ->
+            getEveryoneParkForumDetailUseCase::invoke.asAsync(state.url) { async ->
                 var nextState = this
                 if (async is Success) {
                     nextState = nextState.copy(content = async())
