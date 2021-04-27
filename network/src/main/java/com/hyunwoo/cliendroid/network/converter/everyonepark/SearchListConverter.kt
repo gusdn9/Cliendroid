@@ -1,9 +1,10 @@
 package com.hyunwoo.cliendroid.network.converter.everyonepark
 
 import com.hyunwoo.cliendroid.network.extension.parseLargeNumber
-import com.hyunwoo.cliendroid.network.model.BoardDto
+import com.hyunwoo.cliendroid.network.extension.textOrNull
+import com.hyunwoo.cliendroid.network.model.BoardItemDto
 import com.hyunwoo.cliendroid.network.model.SearchItemDto
-import com.hyunwoo.cliendroid.network.model.SearchListRes
+import com.hyunwoo.cliendroid.network.model.SearchRes
 import com.hyunwoo.cliendroid.network.model.UserDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
@@ -11,11 +12,18 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-class SearchListConverter : Converter<ResponseBody, SearchListRes> {
-    override fun convert(value: ResponseBody): SearchListRes? {
+class SearchListConverter : Converter<ResponseBody, SearchRes> {
+    override fun convert(value: ResponseBody): SearchRes {
 
         val list: ArrayList<SearchItemDto> = ArrayList()
+        val boardList: ArrayList<BoardItemDto> = ArrayList()
         val document = Jsoup.parse(value.string())
+        document.select("#selectBoardCd option").forEach { option ->
+            val id = option.attr("value")
+            val name = option.text()
+            boardList.add(BoardItemDto(id, name))
+        }
+
         document.select(".list_item").forEach { element ->
             val onclick = element.selectFirst(".search").attr("onclick")
             val regex = "'(.*?)'".toRegex()
@@ -27,7 +35,7 @@ class SearchListConverter : Converter<ResponseBody, SearchListRes> {
                     1 -> boardName = result.value
                 }
             }
-            val board = BoardDto(boardId, boardName)
+            val board = BoardItemDto(boardId, boardName)
 
             val subject = element.selectFirst(".list_subject")
             val title = subject.text()
@@ -35,7 +43,12 @@ class SearchListConverter : Converter<ResponseBody, SearchListRes> {
             val summary = element.selectFirst(".preview_search").text()
             val time = element.selectFirst(".list_time").text()
             val hits = element.selectFirst(".list_hit")?.text()?.parseLargeNumber() ?: 0L
-            val nickname = element.selectFirst(".nickname").text()
+            val nickNameClass = element.getElementsByClass("nickname")
+            val user = UserDto(
+                null,
+                nickNameClass.textOrNull(),
+                element.selectFirst("img")?.attr("src")
+            )
             list.add(
                 SearchItemDto(
                     board = board,
@@ -44,11 +57,11 @@ class SearchListConverter : Converter<ResponseBody, SearchListRes> {
                     link = link,
                     time = time,
                     hit = hits,
-                    user = UserDto(null, nickName = nickname, null)
+                    user = user
                 )
             )
         }
-        return SearchListRes(list)
+        return SearchRes(list, boardList)
     }
 
     companion object {
@@ -59,7 +72,7 @@ class SearchListConverter : Converter<ResponseBody, SearchListRes> {
                     annotations: Array<Annotation>,
                     retrofit: Retrofit
                 ): Converter<ResponseBody, *>? {
-                    if (type != SearchListRes::class.java) return null
+                    if (type != SearchRes::class.java) return null
                     return SearchListConverter()
                 }
             }
