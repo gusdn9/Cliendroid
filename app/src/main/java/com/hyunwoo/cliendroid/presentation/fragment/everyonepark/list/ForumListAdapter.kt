@@ -52,7 +52,7 @@ class ForumListAdapter(
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: BaseEveryoneParkForum, newItem: BaseEveryoneParkForum): Boolean =
-                oldItem.hashCode() == newItem.hashCode()
+                oldItem.id == newItem.id
         }
     }
 }
