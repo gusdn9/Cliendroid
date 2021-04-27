@@ -53,7 +53,10 @@ class EveryoneParkDetailCommentAdapter(
                 }
 
             override fun areContentsTheSame(oldItem: BaseComment, newItem: BaseComment): Boolean =
-                oldItem.hashCode() == newItem.hashCode()
+                when (oldItem) {
+                    is Comment -> oldItem.id == (newItem as Comment).id
+                    is BlockedComment -> oldItem == newItem
+                }
         }
     }
 }
