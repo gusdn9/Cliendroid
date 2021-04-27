@@ -18,12 +18,21 @@
         <action
             android:id="@+id/action_everyoneParkListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"/>
+
+        <action
+            android:id="@+id/action_everyoneParkListFragment_to_searchFragment"
+            app:destination="@id/searchFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/everyoneParkDetailFragment"
         android:name="com.hyunwoo.cliendroid.presentation.fragment.everyonepark.detail.EveryoneParkDetailFragment"
         tools:layout="@layout/fragment_everyone_park_detail"/>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.hyunwoo.cliendroid.presentation.fragment.search.SearchFragment"
+        tools:layout="@layout/fragment_search"/>
 
     <fragment
         android:id="@+id/settingsFragment"

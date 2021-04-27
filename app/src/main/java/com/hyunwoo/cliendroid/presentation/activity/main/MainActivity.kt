@@ -1,5 +1,7 @@
 package com.hyunwoo.cliendroid.presentation.activity.main
 
+import android.app.SearchManager
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -10,6 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppActivity
 import com.hyunwoo.cliendroid.databinding.ActivityMainBinding
+import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
+import com.hyunwoo.cliendroid.presentation.fragment.search.SearchArgs
 
 class MainActivity : AppActivity() {
 
@@ -58,6 +62,23 @@ class MainActivity : AppActivity() {
                     DrawerLayout.LOCK_MODE_LOCKED_CLOSED
                 }
             )
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        if (Intent.ACTION_SEARCH == intent?.action) {
+            intent.getStringExtra(SearchManager.QUERY)?.let { query ->
+                val args = SearchArgs(query)
+                navController.navigate(
+                    R.id.action_everyoneParkListFragment_to_searchFragment,
+                    args.toFragmentArgsBundle()
+                )
+            }
         }
     }
 

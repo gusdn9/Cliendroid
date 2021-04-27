@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.load
 import com.hyunwoo.cliendroid.R
-import com.hyunwoo.cliendroid.databinding.ItemEveryoneForumListBinding
+import com.hyunwoo.cliendroid.databinding.ItemCommonListBinding
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 import com.hyunwoo.cliendroid.extension.getColorWithAttr
 
 class ForumListViewHolder private constructor(
-    private val binding: ItemEveryoneForumListBinding,
+    private val binding: ItemCommonListBinding,
     private val imageLoader: ImageLoader,
     private val onForumItemClicked: (EveryoneParkForum) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -57,7 +57,7 @@ class ForumListViewHolder private constructor(
             onForumItemClicked: (EveryoneParkForum) -> Unit
         ): ForumListViewHolder =
             ForumListViewHolder(
-                ItemEveryoneForumListBinding.inflate(inflater, parent, false),
+                ItemCommonListBinding.inflate(inflater, parent, false),
                 imageLoader,
                 onForumItemClicked
             )
