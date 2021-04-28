@@ -4,6 +4,7 @@ import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.Success
+import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.usecase.GetEveryoneParkForumListUseCase
@@ -27,6 +28,9 @@ class EveryoneParkListViewModel @AssistedInject constructor(
         if (state.listDataRefreshAsync is Loading) {
             return@withState
         }
+
+        loadMoreJob?.cancel()
+        setState { copy(listDataLoadMoreAsync = Uninitialized) }
 
         viewModelScope.launch {
             getEveryoneParkForumListUseCase::invoke.asAsync(0) { async ->
