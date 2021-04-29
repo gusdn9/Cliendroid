@@ -1,16 +1,16 @@
-package com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list
+package com.hyunwoo.cliendroid.presentation.fragment.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hyunwoo.cliendroid.databinding.ItemBlockedListBinding
-import com.hyunwoo.cliendroid.domain.model.BlockedEveryoneParkForum
+import com.hyunwoo.cliendroid.domain.model.BlockedSearchItem
 
-class BlockedForumListViewHolder private constructor(
+class BlockedSearchListViewHolder private constructor(
     private val binding: ItemBlockedListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: BlockedEveryoneParkForum) {
+    fun bind(item: BlockedSearchItem) {
         binding.title.text = item.title
     }
 
@@ -19,7 +19,7 @@ class BlockedForumListViewHolder private constructor(
         fun create(
             inflater: LayoutInflater,
             parent: ViewGroup
-        ): BlockedForumListViewHolder =
-            BlockedForumListViewHolder(ItemBlockedListBinding.inflate(inflater, parent, false))
+        ): BlockedSearchListViewHolder =
+            BlockedSearchListViewHolder(ItemBlockedListBinding.inflate(inflater, parent, false))
     }
 }

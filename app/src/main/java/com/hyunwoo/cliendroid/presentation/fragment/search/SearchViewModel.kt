@@ -83,6 +83,10 @@ class SearchViewModel @AssistedInject constructor(
         copy(boardId = id)
     }
 
+    fun setKeyword(query: String) = setState {
+        copy(keyword = query)
+    }
+
     @AssistedInject.Factory
     interface Factory {
         fun create(initialState: State): SearchViewModel
