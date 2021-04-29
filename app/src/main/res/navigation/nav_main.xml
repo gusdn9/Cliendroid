@@ -33,7 +33,12 @@
         android:id="@+id/searchFragment"
         android:name="com.hyunwoo.cliendroid.presentation.fragment.search.SearchFragment"
         android:label="@string/search_label"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_searchFragment_to_everyoneParkDetailFragment"
+            app:destination="@id/everyoneParkDetailFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"

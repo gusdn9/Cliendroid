@@ -21,6 +21,9 @@ import com.hyunwoo.cliendroid.databinding.FragmentSearchBinding
 import com.hyunwoo.cliendroid.domain.model.SearchItem
 import com.hyunwoo.cliendroid.domain.model.SearchSort
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
+import com.hyunwoo.cliendroid.extension.navigateGraph
+import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
+import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.detail.EveryoneParkDetailArgs
 import javax.inject.Inject
 
 class SearchFragment : AppFragment() {
@@ -158,6 +161,10 @@ class SearchFragment : AppFragment() {
     }
 
     private fun onSearchItemClicked(searchItem: SearchItem) {
-        // TODO 상세로 이동해야함.
+        val args = EveryoneParkDetailArgs(searchItem.link)
+        navigateGraph(
+            R.id.action_searchFragment_to_everyoneParkDetailFragment,
+            args.toFragmentArgsBundle()
+        )
     }
 }

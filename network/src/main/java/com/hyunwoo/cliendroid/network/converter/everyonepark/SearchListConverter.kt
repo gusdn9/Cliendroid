@@ -51,7 +51,7 @@ class SearchListConverter : Converter<ResponseBody, SearchRes> {
 
                 val subject = element.selectFirst(".list_subject")
                 val title = subject.text()
-                val link = subject.attr("href")
+                val link = subject.attr("href").substringBefore("?")
                 val summary = element.selectFirst(".preview_search").text()
                 val time = element.selectFirst(".list_time").text()
                 val hits = element.selectFirst(".list_hit")?.text()?.parseLargeNumber() ?: 0L
