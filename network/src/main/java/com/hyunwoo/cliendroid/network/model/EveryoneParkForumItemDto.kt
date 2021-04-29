@@ -1,6 +1,6 @@
 package com.hyunwoo.cliendroid.network.model
 
-sealed class BaseEveryoneParkForumItemDto(
+sealed class BaseListItemDto(
     open val id: Long,
     open val title: String
 )
@@ -14,9 +14,9 @@ data class EveryoneParkForumItemDto(
     val time: String,
     val likes: Long?,
     val user: UserDto
-) : BaseEveryoneParkForumItemDto(id, title)
+) : BaseListItemDto(id, title)
 
 data class BlockedEveryoneParkForumItemDto(
     override val id: Long,
     override val title: String
-) : BaseEveryoneParkForumItemDto(id, title)
+) : BaseListItemDto(id, title)

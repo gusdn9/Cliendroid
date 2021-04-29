@@ -2,7 +2,7 @@ package com.hyunwoo.cliendroid.network.converter.everyonepark
 
 import com.hyunwoo.cliendroid.network.extension.parseLargeNumber
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.BaseEveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.BaseListItemDto
 import com.hyunwoo.cliendroid.network.model.BlockedEveryoneParkForumItemDto
 import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
 import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListRes
@@ -17,7 +17,7 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, EveryoneParkForum
 
     override fun convert(value: ResponseBody): EveryoneParkForumListRes {
 
-        val list: ArrayList<BaseEveryoneParkForumItemDto> = ArrayList()
+        val list: ArrayList<BaseListItemDto> = ArrayList()
         val document = Jsoup.parse(value.string())
         document.getElementsByClass("list_item").forEach { element ->
             val isNotice = element.hasClass("notice")
@@ -37,7 +37,7 @@ class EveryoneParkForumListConverter : Converter<ResponseBody, EveryoneParkForum
                         .replace("'", "")
                         .substringAfterLast("/")
                 } else {
-                    element.selectFirst(".list_item").attr("data-board-sn")
+                    element.attr("data-board-sn")
                 }
                 val nickNameClass = element.getElementsByClass("nickname")
                 val user = UserDto(

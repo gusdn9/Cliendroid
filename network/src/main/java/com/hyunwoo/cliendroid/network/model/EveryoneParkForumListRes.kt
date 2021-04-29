@@ -1,5 +1,5 @@
 package com.hyunwoo.cliendroid.network.model
 
 data class EveryoneParkForumListRes(
-    val contents: List<BaseEveryoneParkForumItemDto>
+    val contents: List<BaseListItemDto>
 )

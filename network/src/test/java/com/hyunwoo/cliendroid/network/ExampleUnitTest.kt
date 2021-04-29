@@ -69,7 +69,7 @@ class ExampleUnitTest {
     fun search() = runBlocking {
         val network = NetworkProvider.create(HostType.PROD, cookieStoreProvider, true)
         val service = network.provideCommunityService()
-        val result = service.search("3080")
+        val result = service.search(keyword = "3080", sort = "accuracy", page = 1)
         print(result.contents.size)
     }
 
