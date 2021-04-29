@@ -41,7 +41,8 @@ class SearchViewModel @AssistedInject constructor(
                     nextState = nextState.copy(
                         boardList = result.boardList,
                         searchResultList = result.searchList,
-                        page = 0
+                        page = 0,
+                        endOfPage = result.endOfPage
                     )
                 }
                 nextState.copy(searchRefreshAsync = async)
@@ -50,7 +51,7 @@ class SearchViewModel @AssistedInject constructor(
     }
 
     fun loadMore() = withState { state ->
-        if (state.searchRefreshAsync is Loading || state.searchLoadMoreAsync is Loading) {
+        if (state.searchRefreshAsync is Loading || state.searchLoadMoreAsync is Loading || state.endOfPage) {
             return@withState
         }
 
@@ -62,7 +63,8 @@ class SearchViewModel @AssistedInject constructor(
                     val result = async()
                     nextState = nextState.copy(
                         searchResultList = prevEntries + result.searchList,
-                        page = state.page + 1
+                        page = state.page + 1,
+                        endOfPage = result.endOfPage
                     )
                 }
                 nextState.copy(searchLoadMoreAsync = async)

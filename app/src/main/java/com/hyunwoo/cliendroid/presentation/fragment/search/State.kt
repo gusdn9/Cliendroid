@@ -16,6 +16,7 @@ data class State(
     val page: Int = 0,
     val boardList: List<Board>? = null,
     val searchResultList: List<BaseSearchItem>? = null,
+    val endOfPage: Boolean = false,
     val searchRefreshAsync: Async<SearchContent> = Uninitialized,
     val searchLoadMoreAsync: Async<SearchContent> = Uninitialized
 ) : MavericksState {

@@ -75,7 +75,8 @@ class SearchListConverter : Converter<ResponseBody, SearchRes> {
                 )
             }
         }
-        return SearchRes(list, boardList)
+        val endOfPage = document.getElementsByClass("board-nav-next").size <= 0
+        return SearchRes(list, boardList, endOfPage)
     }
 
     companion object {

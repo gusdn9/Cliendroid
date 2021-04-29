@@ -17,7 +17,8 @@ fun SearchRes.toSearchContent(): SearchContent =
                 is BlockedSearchItemDto -> item.toSearchItem()
             }
         },
-        boardList = boards.map { Board(it.id, it.name) }
+        boardList = boards.map { Board(it.id, it.name) },
+        endOfPage = endOfPage
     )
 
 fun SearchItemDto.toSearchItem(): SearchItem =
