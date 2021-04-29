@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -138,6 +139,16 @@ class SearchFragment : AppFragment() {
 
             override fun onNothingSelected(parentView: AdapterView<*>?) = Unit
         }
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null)
+                    viewModel.setKeyword(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean = false
+        })
     }
 
     override fun onDestroyView() {
