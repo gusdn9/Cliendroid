@@ -65,13 +65,13 @@ class ExampleUnitTest {
     //     }
     // }
 
-    @Test
-    fun search() = runBlocking {
-        val network = NetworkProvider.create(HostType.PROD, cookieStoreProvider, true)
-        val service = network.provideCommunityService()
-        val result = service.search(keyword = "3080", sort = "accuracy", page = 1)
-        print(result.contents.size)
-    }
+    // @Test
+    // fun search() = runBlocking {
+    //     val network = NetworkProvider.create(HostType.PROD, cookieStoreProvider, true)
+    //     val service = network.provideCommunityService()
+    //     val result = service.search(keyword = "3080", sort = "accuracy", page = 1)
+    //     print(result.contents.size)
+    // }
 
     // @Test
     // fun login() = runBlocking {
@@ -126,4 +126,12 @@ class ExampleUnitTest {
     //     // println(myPage.body())
     //
     // }
+
+    @Test
+    fun getBoardList() = runBlocking {
+        val network = NetworkProvider.create(HostType.PROD, cookieStoreProvider, true)
+        val service = network.provideCommunityService()
+        val boardList = service.getBoardList()
+        println(boardList.boardList.size)
+    }
 }

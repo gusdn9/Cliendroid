@@ -1,5 +1,6 @@
 package com.hyunwoo.cliendroid.network
 
+import com.hyunwoo.cliendroid.network.model.BoardRes
 import com.hyunwoo.cliendroid.network.model.EveryoneParkForumDetailRes
 import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListRes
 import com.hyunwoo.cliendroid.network.model.SearchRes
@@ -24,4 +25,7 @@ interface CommunityInfraService {
         @Query("sort") sort: String? = null,
         @Query("boardCd") boardId: String? = null
     ): SearchRes
+
+    @GET("service/")
+    suspend fun getBoardList(): BoardRes
 }
