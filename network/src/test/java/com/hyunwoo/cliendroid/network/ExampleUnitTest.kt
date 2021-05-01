@@ -132,6 +132,6 @@ class ExampleUnitTest {
         val network = NetworkProvider.create(HostType.PROD, cookieStoreProvider, true)
         val service = network.provideCommunityService()
         val boardList = service.getBoardList()
-        println(boardList.boardList.size)
+        println(boardList.communities.size)
     }
 }
