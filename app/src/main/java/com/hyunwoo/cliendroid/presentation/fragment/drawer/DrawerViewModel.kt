@@ -7,6 +7,7 @@ import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.model.LogoutCause
+import com.hyunwoo.cliendroid.domain.usecase.GetMenuBoardListUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.LoginUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.LogoutUseCase
@@ -19,18 +20,19 @@ class DrawerViewModel @AssistedInject constructor(
     private val loginUseCase: LoginUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val getLoggedInUserUseCase: GetLoggedInUserUseCase,
+    private val getMenuBoardListUseCase: GetMenuBoardListUseCase
 ) : AppMvRxViewModel<State>(initialState) {
 
     init {
         setState {
             copy(loggedInUser = getLoggedInUserUseCase())
         }
+        getMenuList()
     }
 
     fun login(id: String, password: String) = withState { state ->
-        if (state.loginAsync is Loading) {
-            return@withState
-        }
+        if (state.loginAsync is Loading) return@withState
+
         viewModelScope.launch {
             loginUseCase::invoke.asAsync(id, password) { async ->
                 var nextState = this
@@ -45,6 +47,20 @@ class DrawerViewModel @AssistedInject constructor(
     fun logout() = setState {
         logoutUseCase.invoke(LogoutCause.USER_INTENTION)
         copy(loggedInUser = null)
+    }
+
+    private fun getMenuList() = withState { state ->
+        if (state.menuListAsync is Loading) return@withState
+
+        viewModelScope.launch {
+            getMenuBoardListUseCase::invoke.asAsync { async ->
+                var nextState = this
+                if (async is Success) {
+                    nextState = copy(menuList = async())
+                }
+                nextState.copy(menuListAsync = async)
+            }
+        }
     }
 
     @AssistedInject.Factory

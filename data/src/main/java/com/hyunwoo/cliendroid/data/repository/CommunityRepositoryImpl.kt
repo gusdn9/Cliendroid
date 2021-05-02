@@ -3,9 +3,11 @@ package com.hyunwoo.cliendroid.data.repository
 import com.hyunwoo.cliendroid.data.mapper.toBlockedEveryoneParkForum
 import com.hyunwoo.cliendroid.data.mapper.toEveryoneParkForum
 import com.hyunwoo.cliendroid.data.mapper.toEveryoneParkForumContent
+import com.hyunwoo.cliendroid.data.mapper.toMenuBoards
 import com.hyunwoo.cliendroid.data.mapper.toSearchContent
 import com.hyunwoo.cliendroid.domain.model.BaseEveryoneParkForum
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForumContent
+import com.hyunwoo.cliendroid.domain.model.MenuBoards
 import com.hyunwoo.cliendroid.domain.model.SearchContent
 import com.hyunwoo.cliendroid.domain.model.SearchSort
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
@@ -36,4 +38,7 @@ class CommunityRepositoryImpl @Inject constructor(
     override suspend fun search(keyword: String, page: Int, sort: SearchSort?, boardId: String?): SearchContent =
         communityService.search(keyword, page, sort?.value, boardId)
             .toSearchContent()
+
+    override suspend fun getMenuList(): MenuBoards =
+        communityService.getBoardList().toMenuBoards()
 }
