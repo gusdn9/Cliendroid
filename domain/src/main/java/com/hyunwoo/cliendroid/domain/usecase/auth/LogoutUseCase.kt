@@ -11,7 +11,7 @@ class LogoutUseCase @Inject constructor(
     private val cookieRepository: CookieRepository
 ) {
 
-    fun invoke(cause: LogoutCause): LoggedInUser? {
+    operator fun invoke(cause: LogoutCause): LoggedInUser? {
         cookieRepository.setCookie(null)
         return loggedInUserRepository.logout(cause)
     }
