@@ -1,9 +1,11 @@
 package com.hyunwoo.cliendroid.common.error
 
+import java.net.ProtocolException
+
 typealias OnRetry = () -> Unit
 typealias OnResolved = () -> Unit
 
-interface Resolution<T : ErrorView> {
+interface Resolution<T : ErrorView> : FatalErrorResolvable<T> {
 
     /**
      * 에러를 resolution의 로직에 맞춰 resolve한다.
@@ -13,7 +15,12 @@ interface Resolution<T : ErrorView> {
      * @param onRetry non-null일 경우 재시도할 수 있는 방법을 제공하여 해당 callback이 실행되게 한다.
      */
     fun resolve(errorView: T, throwable: Throwable, onRetry: OnRetry? = null, onResolved: OnResolved? = null) {
-        errorView.onUndefinedError(throwable.message, onRetry, onResolved)
+        when (throwable) {
+            is ProtocolException -> {
+                errorView.onUnauthorized()
+            }
+            else -> errorView.onUndefinedError(throwable.message, onRetry, onResolved)
+        }
         throwable.printStackTrace()
     }
 

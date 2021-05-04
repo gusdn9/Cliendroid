@@ -4,6 +4,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.hyunwoo.cliendroid.R
+import com.hyunwoo.cliendroid.common.error.FatalErrorResolvable
+import com.hyunwoo.cliendroid.common.error.FatalErrorResolvableImpl
 import com.hyunwoo.cliendroid.common.error.OnResolved
 import com.hyunwoo.cliendroid.common.error.OnRetry
 import com.hyunwoo.cliendroid.common.error.Resolution
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 class DialogErrorResolution @Inject constructor(
     logoutUseCase: LogoutUseCase
-) : Resolution<DialogErrorView> {
+) : Resolution<DialogErrorView>,
+    FatalErrorResolvable<DialogErrorView> by FatalErrorResolvableImpl(logoutUseCase) {
 
     /**
      * 에러를 resolution의 로직에 맞춰 resolve한다.
@@ -46,7 +49,6 @@ class DialogErrorResolution @Inject constructor(
     ) {
         resolve(DialogErrorView.forFragment(fragment), throwable, onRetry, onResolved)
     }
-
 
     override fun DialogErrorView.onUndefinedError(message: String?, onRetry: OnRetry?, onResolved: OnResolved?) {
         showAlert(onRetry, onResolved, R.string.error_resolution_undefined_error, message)
