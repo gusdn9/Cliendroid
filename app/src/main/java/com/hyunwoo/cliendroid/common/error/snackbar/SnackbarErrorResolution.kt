@@ -10,11 +10,12 @@ import com.hyunwoo.cliendroid.common.error.FatalErrorResolvableImpl
 import com.hyunwoo.cliendroid.common.error.OnResolved
 import com.hyunwoo.cliendroid.common.error.OnRetry
 import com.hyunwoo.cliendroid.common.error.Resolution
+import com.hyunwoo.cliendroid.domain.model.LogoutCause
 import com.hyunwoo.cliendroid.domain.usecase.auth.LogoutUseCase
 import javax.inject.Inject
 
 class SnackbarErrorResolution @Inject constructor(
-    logoutUseCase: LogoutUseCase
+    private val logoutUseCase: LogoutUseCase
 ) : Resolution<SnackbarErrorView>,
     FatalErrorResolvable<SnackbarErrorView> by FatalErrorResolvableImpl(logoutUseCase) {
 
@@ -54,6 +55,11 @@ class SnackbarErrorResolution @Inject constructor(
 
     override fun SnackbarErrorView.onUndefinedError(message: String?, onRetry: OnRetry?, onResolved: OnResolved?) {
         showSnackbar(onRetry, R.string.error_resolution_undefined_error, message, onRetry)
+    }
+
+    override fun SnackbarErrorView.onUnauthorized(onRetry: OnRetry?) {
+        logoutUseCase(LogoutCause.EXPIRED_SESSION)
+        showSnackbar(onRetry, R.string.error_resolution_fatal_unauthorized)
     }
 
     private fun SnackbarErrorView.showSnackbar(

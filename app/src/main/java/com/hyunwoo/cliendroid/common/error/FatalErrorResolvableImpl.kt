@@ -9,7 +9,7 @@ class FatalErrorResolvableImpl<T : ErrorView>(
     private val logoutUseCase: LogoutUseCase
 ) : FatalErrorResolvable<T> {
 
-    override fun T.onUnauthorized() {
+    override fun T.onUnauthorized(onRetry: OnRetry?) {
         showAlert {
             titleResId = R.string.error_view_alert_title
             messageResId = R.string.error_resolution_fatal_unauthorized

@@ -17,7 +17,7 @@ interface Resolution<T : ErrorView> : FatalErrorResolvable<T> {
     fun resolve(errorView: T, throwable: Throwable, onRetry: OnRetry? = null, onResolved: OnResolved? = null) {
         when (throwable) {
             is ProtocolException -> {
-                errorView.onUnauthorized()
+                errorView.onUnauthorized(onRetry)
             }
             else -> errorView.onUndefinedError(throwable.message, onRetry, onResolved)
         }
