@@ -16,7 +16,7 @@
     <string name="navigation_drawer_login_password_error_empty">아이디를 입력해 주세요.</string>
     <string name="navigation_drawer_logout_label">로그아웃</string>
     <string name="navigation_drawer_login_failed">로그인에 실패하였습니다.</string>
-    
+
     <string name="search_label">검색</string>
     <string name="search_hint">검색어를 입력하세요.</string>
     <string name="search_sort_recency">최신순</string>
@@ -26,7 +26,7 @@
     <string name="error_view_alert_confirm">@string/confirm</string>
     <string name="error_view_alert_retry">@string/retry</string>
 
-    <string name="error_resolution_fatal_unauthorized">세션이 만료되었습니다. 다시 로그인 해주세요.</string>
+    <string name="error_resolution_fatal_unauthorized">세션이 만료되었습니다. 로그아웃되었습니다.</string>
     <string name="error_resolution_undefined_error">일시적인 문제가 발생하였습니다.\n%s</string>
 
     <string name="snackbar_retry">@string/retry</string>

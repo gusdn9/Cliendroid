@@ -18,6 +18,8 @@ import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
+import com.hyunwoo.cliendroid.common.SnackbarHolder
+import com.hyunwoo.cliendroid.common.error.snackbar.SnackbarErrorResolution
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentEveryoneParkListBinding
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
@@ -39,6 +41,13 @@ class EveryoneParkListFragment : AppFragment() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
+    @Inject
+    lateinit var snackbarErrorResolution: SnackbarErrorResolution
+
+    private val snackbarHolder by lazy {
+        SnackbarHolder.forFragment(this, R.id.rootFrameLayout)
+    }
 
     private val adapter by lazy {
         ForumListAdapter(imageLoader, this::onForumClicked)
@@ -62,6 +71,16 @@ class EveryoneParkListFragment : AppFragment() {
         viewModel.onEach(State::listDataLoadMoreAsync) { async ->
             isProgressDialogVisible = async is Loading
         }
+
+        viewModel.onAsync(
+            State::listDataRefreshAsync,
+            uniqueOnly("listDataRefreshAsync"),
+            onFail = { throwable ->
+                snackbarErrorResolution.resolve(this, snackbarHolder, throwable) {
+                    viewModel.refresh()
+                }
+            }
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
