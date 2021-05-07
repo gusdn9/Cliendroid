@@ -8,6 +8,7 @@ import com.hyunwoo.cliendroid.network.converter.everyonepark.BoardListConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumDetailConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumListConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.SearchListConverter
+import com.hyunwoo.cliendroid.network.converter.user.UserCommentConverter
 import com.hyunwoo.cliendroid.network.converter.user.UserPostConverter
 import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
 import com.hyunwoo.cliendroid.network.interceptor.ReceivedCookiesInterceptor
@@ -24,7 +25,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -159,7 +159,6 @@ internal class NetworkModule {
             .addConverterFactory(loginPreparedStatementConverter)
             .addConverterFactory(loginConverter)
             .addConverterFactory(userInfoConverter)
-            .addConverterFactory(ScalarsConverterFactory.create())
             .client(okHttpClient)
             .build()
 
@@ -169,11 +168,13 @@ internal class NetworkModule {
     fun provideUserRetrofit(
         @Named("Mobile") hostType: HostType,
         okHttpClient: OkHttpClient,
-        @Named("UserPost") userPostConverter: Converter.Factory
+        @Named("UserPost") userPostConverter: Converter.Factory,
+        @Named("UserComment") userCommentConverter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
             .addConverterFactory(userPostConverter)
+            .addConverterFactory(userCommentConverter)
             .client(okHttpClient)
             .build()
 
@@ -252,6 +253,12 @@ internal class NetworkModule {
     @Singleton
     fun provideUserPostConverter(): Converter.Factory =
         UserPostConverter.create()
+
+    @Named("UserComment")
+    @Provides
+    @Singleton
+    fun provideUserCoomentConverter(): Converter.Factory =
+        UserCommentConverter.create()
 
     companion object {
 

@@ -171,8 +171,8 @@ class ExampleUnitTest {
 
         val userService = network.provideUserService()
         try {
-            val postRes = userService.getUserPosts("hikingbo")
-            print(postRes.posts.size)
+            val commentsRes = userService.getUserComments("hikingbo")
+            println("${commentsRes.userComments.size}")
         } catch (e: Exception) {
             println(e)
         }
