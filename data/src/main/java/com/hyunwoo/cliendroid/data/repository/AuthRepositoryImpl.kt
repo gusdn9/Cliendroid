@@ -3,7 +3,7 @@ package com.hyunwoo.cliendroid.data.repository
 import com.hyunwoo.cliendroid.data.mapper.toUserInfo
 import com.hyunwoo.cliendroid.domain.model.UserInfo
 import com.hyunwoo.cliendroid.domain.repository.AuthRepository
-import com.hyunwoo.cliendroid.network.AuthInfraService
+import com.hyunwoo.cliendroid.network.service.AuthInfraService
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

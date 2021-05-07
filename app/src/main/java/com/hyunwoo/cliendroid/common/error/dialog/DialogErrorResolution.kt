@@ -4,19 +4,17 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.hyunwoo.cliendroid.R
-import com.hyunwoo.cliendroid.common.error.FatalErrorResolvable
-import com.hyunwoo.cliendroid.common.error.FatalErrorResolvableImpl
 import com.hyunwoo.cliendroid.common.error.OnResolved
 import com.hyunwoo.cliendroid.common.error.OnRetry
 import com.hyunwoo.cliendroid.common.error.Resolution
+import com.hyunwoo.cliendroid.domain.model.LogoutCause
 import com.hyunwoo.cliendroid.domain.usecase.auth.LogoutUseCase
 import com.hyunwoo.cliendroid.extension.AlertButton
 import javax.inject.Inject
 
 class DialogErrorResolution @Inject constructor(
-    logoutUseCase: LogoutUseCase
-) : Resolution<DialogErrorView>,
-    FatalErrorResolvable<DialogErrorView> by FatalErrorResolvableImpl(logoutUseCase) {
+    private val logoutUseCase: LogoutUseCase
+) : Resolution<DialogErrorView> {
 
     /**
      * 에러를 resolution의 로직에 맞춰 resolve한다.
@@ -80,6 +78,17 @@ class DialogErrorResolution @Inject constructor(
                     onRetry()
                 }
             }
+        }
+    }
+
+    override fun DialogErrorView.onUnauthorized(onRetry: OnRetry?) {
+        showAlert {
+            titleResId = R.string.error_view_alert_title
+            messageResId = R.string.error_resolution_fatal_unauthorized
+            positiveButton = AlertButton(R.string.error_view_alert_confirm) {
+                logoutUseCase(LogoutCause.EXPIRED_SESSION)
+            }
+            cancelable = false
         }
     }
 }

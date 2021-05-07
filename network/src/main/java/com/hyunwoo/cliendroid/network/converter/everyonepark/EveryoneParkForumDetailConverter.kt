@@ -1,11 +1,11 @@
 package com.hyunwoo.cliendroid.network.converter.everyonepark
 
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.BaseCommentDto
-import com.hyunwoo.cliendroid.network.model.BlockedCommentDto
-import com.hyunwoo.cliendroid.network.model.CommentDto
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumDetailRes
-import com.hyunwoo.cliendroid.network.model.UserDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.BaseCommentDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedCommentDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.CommentDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumDetailRes
+import com.hyunwoo.cliendroid.network.model.user.UserDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter

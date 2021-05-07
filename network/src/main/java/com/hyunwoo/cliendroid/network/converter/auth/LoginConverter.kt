@@ -1,6 +1,6 @@
 package com.hyunwoo.cliendroid.network.converter.auth
 
-import com.hyunwoo.cliendroid.network.model.LoginRes
+import com.hyunwoo.cliendroid.network.model.auth.LoginRes
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter

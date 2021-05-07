@@ -5,9 +5,9 @@ import com.hyunwoo.cliendroid.domain.model.Board
 import com.hyunwoo.cliendroid.domain.model.SearchContent
 import com.hyunwoo.cliendroid.domain.model.SearchItem
 import com.hyunwoo.cliendroid.domain.model.User
-import com.hyunwoo.cliendroid.network.model.BlockedSearchItemDto
-import com.hyunwoo.cliendroid.network.model.SearchItemDto
-import com.hyunwoo.cliendroid.network.model.SearchRes
+import com.hyunwoo.cliendroid.network.model.search.BlockedSearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.SearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.SearchRes
 
 fun SearchRes.toSearchContent(): SearchContent =
     SearchContent(

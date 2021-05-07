@@ -2,9 +2,9 @@ package com.hyunwoo.cliendroid.data.mapper
 
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForumContent
 import com.hyunwoo.cliendroid.domain.model.User
-import com.hyunwoo.cliendroid.network.model.BlockedCommentDto
-import com.hyunwoo.cliendroid.network.model.CommentDto
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumDetailRes
+import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedCommentDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.CommentDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumDetailRes
 
 fun EveryoneParkForumDetailRes.toEveryoneParkForumContent(): EveryoneParkForumContent =
     EveryoneParkForumContent(

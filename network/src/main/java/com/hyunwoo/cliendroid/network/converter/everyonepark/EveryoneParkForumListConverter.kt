@@ -2,11 +2,11 @@ package com.hyunwoo.cliendroid.network.converter.everyonepark
 
 import com.hyunwoo.cliendroid.network.extension.parseLargeNumber
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.BaseListItemDto
-import com.hyunwoo.cliendroid.network.model.BlockedEveryoneParkForumItemDto
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListRes
-import com.hyunwoo.cliendroid.network.model.UserDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.BaseListItemDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedEveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumListRes
+import com.hyunwoo.cliendroid.network.model.user.UserDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter

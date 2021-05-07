@@ -11,9 +11,9 @@ import com.hyunwoo.cliendroid.domain.model.MenuBoards
 import com.hyunwoo.cliendroid.domain.model.SearchContent
 import com.hyunwoo.cliendroid.domain.model.SearchSort
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
-import com.hyunwoo.cliendroid.network.CommunityInfraService
-import com.hyunwoo.cliendroid.network.model.BlockedEveryoneParkForumItemDto
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.service.CommunityInfraService
+import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedEveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumItemDto
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -13,7 +13,10 @@ import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppActivity
 import com.hyunwoo.cliendroid.databinding.ActivityMainBinding
 import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
+import com.hyunwoo.cliendroid.presentation.fragment.drawer.DrawerFragment
 import com.hyunwoo.cliendroid.presentation.fragment.search.SearchArgs
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 class MainActivity : AppActivity() {
 
@@ -21,6 +24,7 @@ class MainActivity : AppActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
+    private lateinit var drawerFragment: DrawerFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,10 @@ class MainActivity : AppActivity() {
 
     private fun initViews() {
         setSupportActionBar(binding.toolbar)
+
+        drawerFragment = supportFragmentManager.findFragmentById(R.id.drawerFragment) as DrawerFragment
+        adjustDrawerRatio()
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
@@ -40,16 +48,24 @@ class MainActivity : AppActivity() {
         setupDrawer(navController)
     }
 
-    private fun initListeners() {
-        binding.drawer.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.settings -> {
-                    navController.navigate(R.id.action_everyoneParkListFragment_to_settingsFragment)
-                }
-            }
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-            true
+    private fun adjustDrawerRatio() {
+        val ratioWidth = (resources.displayMetrics.widthPixels * DRAWER_MAX_FILL_RATIO).roundToInt()
+        val fixedWidth = resources.getDimensionPixelSize(R.dimen.main_drawer_fragment_min_width)
+        drawerFragment.view?.layoutParams = drawerFragment.view?.layoutParams?.apply {
+            width = min(ratioWidth, fixedWidth)
         }
+    }
+
+    private fun initListeners() {
+        // binding.drawer.setNavigationItemSelectedListener { menuItem ->
+        //     when (menuItem.itemId) {
+        //         R.id.settings -> {
+        //             navController.navigate(R.id.action_everyoneParkListFragment_to_settingsFragment)
+        //         }
+        //     }
+        //     binding.drawerLayout.closeDrawer(GravityCompat.START)
+        //     true
+        // }
     }
 
     private fun setupDrawer(navController: NavController) {
@@ -88,5 +104,10 @@ class MainActivity : AppActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    companion object {
+
+        private const val DRAWER_MAX_FILL_RATIO = 0.78f
     }
 }

@@ -3,8 +3,8 @@ package com.hyunwoo.cliendroid.data.mapper
 import com.hyunwoo.cliendroid.domain.model.BlockedComment
 import com.hyunwoo.cliendroid.domain.model.Comment
 import com.hyunwoo.cliendroid.domain.model.User
-import com.hyunwoo.cliendroid.network.model.BlockedCommentDto
-import com.hyunwoo.cliendroid.network.model.CommentDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedCommentDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.CommentDto
 
 fun CommentDto.toComment(): Comment =
     Comment(

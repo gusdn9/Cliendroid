@@ -127,11 +127,54 @@ class ExampleUnitTest {
     //
     // }
 
+    // @Test
+    // fun getBoardList() = runBlocking {
+    //     val network = NetworkProvider.create(HostType.PROD, cookieStoreProvider, true)
+    //     val service = network.provideCommunityService()
+    //     val boardList = service.getBoardList()
+    //     println(boardList.communities.size)
+    // }
+
     @Test
-    fun getBoardList() = runBlocking {
-        val network = NetworkProvider.create(HostType.PROD, cookieStoreProvider, true)
-        val service = network.provideCommunityService()
-        val boardList = service.getBoardList()
-        println(boardList.communities.size)
+    fun getUserPost() = runBlocking {
+        val sharedPreferences =
+            context.getSharedPreferences(context.getString(R.string.cliendroid_network), Context.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+
+        val cookieStoreProvider = object : CookieStoreProvider {
+            override fun provideCookieStore(): CookieStore {
+                return cookieStore
+            }
+
+            val cookieStore = object : CookieStore {
+                override fun getCookies(): Set<String> {
+                    return sharedPreferences.getStringSet("COOKIES", HashSet()) as Set<String>
+                }
+
+                override fun saveCookie(cookies: Set<String>) {
+                    edit.putStringSet("COOKIES", cookies).apply()
+                }
+            }
+        }
+        val network = NetworkProvider.create(HostType.MOBILE, cookieStoreProvider, true)
+        val authService = network.provideAuthService()
+        val loginPreparedStatementRes = authService.loginPreparedStatement()
+        println(loginPreparedStatementRes.csrf)
+
+        println("### GET CSRF  ${loginPreparedStatementRes.csrf}")
+
+        val id = "test"
+        val pw = "test"
+
+        val result = authService.login(id, pw, loginPreparedStatementRes.csrf)
+        println("login result - $result")
+
+        val userService = network.provideUserService()
+        try {
+            val postRes = userService.getUserPosts("hikingbo")
+            print(postRes.posts.size)
+        } catch (e: Exception) {
+            println(e)
+        }
     }
 }

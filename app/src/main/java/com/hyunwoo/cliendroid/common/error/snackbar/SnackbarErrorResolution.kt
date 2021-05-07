@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.common.SnackbarHolder
-import com.hyunwoo.cliendroid.common.error.FatalErrorResolvable
-import com.hyunwoo.cliendroid.common.error.FatalErrorResolvableImpl
 import com.hyunwoo.cliendroid.common.error.OnResolved
 import com.hyunwoo.cliendroid.common.error.OnRetry
 import com.hyunwoo.cliendroid.common.error.Resolution
@@ -16,8 +14,7 @@ import javax.inject.Inject
 
 class SnackbarErrorResolution @Inject constructor(
     private val logoutUseCase: LogoutUseCase
-) : Resolution<SnackbarErrorView>,
-    FatalErrorResolvable<SnackbarErrorView> by FatalErrorResolvableImpl(logoutUseCase) {
+) : Resolution<SnackbarErrorView> {
 
     /**
      * 에러를 resolution의 로직에 맞춰 resolve한다.

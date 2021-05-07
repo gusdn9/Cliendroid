@@ -3,8 +3,8 @@ package com.hyunwoo.cliendroid.data.mapper
 import com.hyunwoo.cliendroid.domain.model.BlockedEveryoneParkForum
 import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
 import com.hyunwoo.cliendroid.domain.model.User
-import com.hyunwoo.cliendroid.network.model.BlockedEveryoneParkForumItemDto
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedEveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumItemDto
 
 fun EveryoneParkForumItemDto.toEveryoneParkForum() =
     EveryoneParkForum(

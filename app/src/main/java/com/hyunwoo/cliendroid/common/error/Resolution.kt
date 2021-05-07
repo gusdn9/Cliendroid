@@ -5,7 +5,7 @@ import java.net.ProtocolException
 typealias OnRetry = () -> Unit
 typealias OnResolved = () -> Unit
 
-interface Resolution<T : ErrorView> : FatalErrorResolvable<T> {
+interface Resolution<T : ErrorView> {
 
     /**
      * 에러를 resolution의 로직에 맞춰 resolve한다.
@@ -25,4 +25,6 @@ interface Resolution<T : ErrorView> : FatalErrorResolvable<T> {
     }
 
     fun T.onUndefinedError(message: String?, onRetry: OnRetry?, onResolved: OnResolved?)
+
+    fun T.onUnauthorized(onRetry: OnRetry? = null)
 }

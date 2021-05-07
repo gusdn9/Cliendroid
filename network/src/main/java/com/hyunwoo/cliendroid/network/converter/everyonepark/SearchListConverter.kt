@@ -2,12 +2,12 @@ package com.hyunwoo.cliendroid.network.converter.everyonepark
 
 import com.hyunwoo.cliendroid.network.extension.parseLargeNumber
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.BaseSearchItemDto
-import com.hyunwoo.cliendroid.network.model.BlockedSearchItemDto
-import com.hyunwoo.cliendroid.network.model.BoardItemDto
-import com.hyunwoo.cliendroid.network.model.SearchItemDto
-import com.hyunwoo.cliendroid.network.model.SearchRes
-import com.hyunwoo.cliendroid.network.model.UserDto
+import com.hyunwoo.cliendroid.network.model.search.BaseSearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.BlockedSearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.BoardItemDto
+import com.hyunwoo.cliendroid.network.model.search.SearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.SearchRes
+import com.hyunwoo.cliendroid.network.model.user.UserDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import retrofit2.Converter

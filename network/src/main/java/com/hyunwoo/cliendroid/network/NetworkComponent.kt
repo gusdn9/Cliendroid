@@ -8,8 +8,12 @@ import com.hyunwoo.cliendroid.network.converter.everyonepark.BoardListConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumDetailConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumListConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.SearchListConverter
+import com.hyunwoo.cliendroid.network.converter.user.UserPostConverter
 import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
 import com.hyunwoo.cliendroid.network.interceptor.ReceivedCookiesInterceptor
+import com.hyunwoo.cliendroid.network.service.AuthInfraService
+import com.hyunwoo.cliendroid.network.service.CommunityInfraService
+import com.hyunwoo.cliendroid.network.service.UserInfraService
 import com.squareup.moshi.Moshi
 import dagger.BindsInstance
 import dagger.Component
@@ -159,10 +163,28 @@ internal class NetworkModule {
             .client(okHttpClient)
             .build()
 
+    @Named("User")
+    @Provides
+    @Singleton
+    fun provideUserRetrofit(
+        @Named("Mobile") hostType: HostType,
+        okHttpClient: OkHttpClient,
+        @Named("UserPost") userPostConverter: Converter.Factory
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(hostType.url)
+            .addConverterFactory(userPostConverter)
+            .client(okHttpClient)
+            .build()
+
     @Provides
     @Singleton
     fun provideMoshi(): Moshi =
         Moshi.Builder().build()
+
+    /**
+     * Provide Services
+     */
 
     @Provides
     @Singleton
@@ -173,6 +195,15 @@ internal class NetworkModule {
     @Singleton
     fun provideAuthService(@Named("Auth") retrofit: Retrofit): AuthInfraService =
         retrofit.create(AuthInfraService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserService(@Named("User") retrofit: Retrofit): UserInfraService =
+        retrofit.create(UserInfraService::class.java)
+
+    /**
+     * Provide Converter
+     */
 
     @Named("EveryoneParkForum")
     @Provides
@@ -215,6 +246,12 @@ internal class NetworkModule {
     @Singleton
     fun provideBoardListConverter(): Converter.Factory =
         BoardListConverter.create()
+
+    @Named("UserPost")
+    @Provides
+    @Singleton
+    fun provideUserPostConverter(): Converter.Factory =
+        UserPostConverter.create()
 
     companion object {
 
