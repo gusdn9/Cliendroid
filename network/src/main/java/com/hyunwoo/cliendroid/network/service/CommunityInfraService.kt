@@ -1,9 +1,9 @@
-package com.hyunwoo.cliendroid.network
+package com.hyunwoo.cliendroid.network.service
 
 import com.hyunwoo.cliendroid.network.model.BoardRes
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumDetailRes
-import com.hyunwoo.cliendroid.network.model.EveryoneParkForumListRes
-import com.hyunwoo.cliendroid.network.model.SearchRes
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumDetailRes
+import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumListRes
+import com.hyunwoo.cliendroid.network.model.search.SearchRes
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

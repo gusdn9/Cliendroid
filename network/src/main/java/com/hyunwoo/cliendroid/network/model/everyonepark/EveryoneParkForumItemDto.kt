@@ -1,4 +1,6 @@
-package com.hyunwoo.cliendroid.network.model
+package com.hyunwoo.cliendroid.network.model.everyonepark
+
+import com.hyunwoo.cliendroid.network.model.user.UserDto
 
 sealed class BaseListItemDto(
     open val id: Long,

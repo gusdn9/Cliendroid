@@ -1,4 +1,6 @@
-package com.hyunwoo.cliendroid.network.model
+package com.hyunwoo.cliendroid.network.model.search
+
+import com.hyunwoo.cliendroid.network.model.user.UserDto
 
 sealed class BaseSearchItemDto(
     open val id: Long,

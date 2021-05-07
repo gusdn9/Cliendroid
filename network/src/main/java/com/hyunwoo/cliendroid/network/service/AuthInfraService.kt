@@ -1,9 +1,8 @@
-package com.hyunwoo.cliendroid.network
+package com.hyunwoo.cliendroid.network.service
 
-import com.hyunwoo.cliendroid.network.model.LoginPreparedStatementRes
-import com.hyunwoo.cliendroid.network.model.LoginRes
-import com.hyunwoo.cliendroid.network.model.UserInfoRes
-import retrofit2.Response
+import com.hyunwoo.cliendroid.network.model.auth.LoginPreparedStatementRes
+import com.hyunwoo.cliendroid.network.model.auth.LoginRes
+import com.hyunwoo.cliendroid.network.model.user.UserInfoRes
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -33,7 +32,4 @@ interface AuthInfraService {
     suspend fun getUserInfo(
         @Path("userId") userId: String
     ): UserInfoRes
-
-    @GET("service/mypage/myInfoComfrim")
-    suspend fun myPage(): Response<String>
 }
