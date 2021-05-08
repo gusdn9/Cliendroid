@@ -3,7 +3,7 @@ package com.hyunwoo.cliendroid.network
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.hyunwoo.cliendroid.network.converter.auth.LoginConverter
 import com.hyunwoo.cliendroid.network.converter.auth.PreparedStatementConverter
-import com.hyunwoo.cliendroid.network.converter.auth.UserInfoConverter
+import com.hyunwoo.cliendroid.network.converter.user.UserInfoConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.BoardListConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumDetailConverter
 import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumListConverter
@@ -75,20 +75,37 @@ internal class NetworkModule {
     fun provideReceivedCookiesInterceptor(cookieStore: CookieStore): ReceivedCookiesInterceptor =
         ReceivedCookiesInterceptor(cookieStore)
 
+    @Named("WithoutAuth")
     @Provides
     @Singleton
     fun provideOkHttpClient(
         @Named("Prod") hostType: HostType,
         @Named("Debug") debug: Boolean,
+        addCookiesInterceptor: AddCookiesInterceptor
+    ): OkHttpClient = buildOkHttp(hostType, debug, addCookiesInterceptor)
+
+    @Named("Auth")
+    @Provides
+    @Singleton
+    fun provideLoginOkHttpClient(
+        @Named("Prod") hostType: HostType,
+        @Named("Debug") debug: Boolean,
         addCookiesInterceptor: AddCookiesInterceptor,
         receivedCookiesInterceptor: ReceivedCookiesInterceptor
+    ): OkHttpClient = buildOkHttp(hostType, debug, addCookiesInterceptor, receivedCookiesInterceptor)
+
+    private fun buildOkHttp(
+        hostType: HostType,
+        debug: Boolean,
+        addCookiesInterceptor: AddCookiesInterceptor? = null,
+        receivedCookiesInterceptor: ReceivedCookiesInterceptor? = null
     ): OkHttpClient {
         val builder = OkHttpClient.Builder().apply {
             connectTimeout(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
             writeTimeout(WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
             readTimeout(READ_TIMEOUT, TimeUnit.MILLISECONDS)
-            interceptors().add(addCookiesInterceptor)
-            interceptors().add(receivedCookiesInterceptor)
+            if (addCookiesInterceptor != null) interceptors().add(addCookiesInterceptor)
+            if (receivedCookiesInterceptor != null) interceptors().add(receivedCookiesInterceptor)
             if (debug) {
                 val loggingInterceptor = HttpLoggingInterceptor()
                 loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -115,7 +132,7 @@ internal class NetworkModule {
     @Singleton
     fun provideRetrofit(
         @Named("Prod") hostType: HostType,
-        okHttpClient: OkHttpClient,
+        @Named("WithoutAuth") okHttpClient: OkHttpClient,
         moshi: Moshi
     ): Retrofit =
         Retrofit.Builder()
@@ -129,7 +146,7 @@ internal class NetworkModule {
     @Singleton
     fun provideEveryOneParkForumRetrofit(
         @Named("Prod") hostType: HostType,
-        okHttpClient: OkHttpClient,
+        @Named("WithoutAuth") okHttpClient: OkHttpClient,
         @Named("EveryoneParkForum") listConverter: Converter.Factory,
         @Named("EveryoneParkForumDetail") detailConverter: Converter.Factory,
         @Named("SearchList") searchListConverter: Converter.Factory,
@@ -149,16 +166,14 @@ internal class NetworkModule {
     @Singleton
     fun provideAuthRetrofit(
         @Named("Mobile") hostType: HostType,
-        okHttpClient: OkHttpClient,
+        @Named("Auth") okHttpClient: OkHttpClient,
         @Named("LoginPreparedStatement") loginPreparedStatementConverter: Converter.Factory,
-        @Named("Login") loginConverter: Converter.Factory,
-        @Named("UserInfo") userInfoConverter: Converter.Factory
+        @Named("Login") loginConverter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
             .addConverterFactory(loginPreparedStatementConverter)
             .addConverterFactory(loginConverter)
-            .addConverterFactory(userInfoConverter)
             .client(okHttpClient)
             .build()
 
@@ -167,14 +182,16 @@ internal class NetworkModule {
     @Singleton
     fun provideUserRetrofit(
         @Named("Mobile") hostType: HostType,
-        okHttpClient: OkHttpClient,
+        @Named("WithoutAuth") okHttpClient: OkHttpClient,
         @Named("UserPost") userPostConverter: Converter.Factory,
-        @Named("UserComment") userCommentConverter: Converter.Factory
+        @Named("UserComment") userCommentConverter: Converter.Factory,
+        @Named("UserInfo") userInfoConverter: Converter.Factory
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
             .addConverterFactory(userPostConverter)
             .addConverterFactory(userCommentConverter)
+            .addConverterFactory(userInfoConverter)
             .client(okHttpClient)
             .build()
 

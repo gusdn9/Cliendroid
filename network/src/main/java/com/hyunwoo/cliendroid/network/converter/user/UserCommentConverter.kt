@@ -11,7 +11,7 @@ import java.lang.reflect.Type
 
 class UserCommentConverter : Converter<ResponseBody, UserCommentRes> {
 
-    override fun convert(value: ResponseBody): UserCommentRes? {
+    override fun convert(value: ResponseBody): UserCommentRes {
         val document = Jsoup.parse(value.string())
 
         val notLogin = document.getElementsByClass("not_login").size > 0

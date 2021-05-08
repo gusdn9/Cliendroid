@@ -27,9 +27,4 @@ interface AuthInfraService {
         @Field("userPassword") password: String,
         @Field("_csrf") csrf: String,
     ): LoginRes
-
-    @GET("service/popup/userInfo/basic/{userId}")
-    suspend fun getUserInfo(
-        @Path("userId") userId: String
-    ): UserInfoRes
 }

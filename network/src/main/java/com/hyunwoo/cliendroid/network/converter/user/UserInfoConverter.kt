@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.network.converter.auth
+package com.hyunwoo.cliendroid.network.converter.user
 
 import com.hyunwoo.cliendroid.network.model.user.UserInfoRes
 import okhttp3.ResponseBody

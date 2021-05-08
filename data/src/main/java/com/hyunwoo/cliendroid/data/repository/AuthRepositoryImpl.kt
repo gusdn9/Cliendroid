@@ -4,10 +4,12 @@ import com.hyunwoo.cliendroid.data.mapper.toUserInfo
 import com.hyunwoo.cliendroid.domain.model.UserInfo
 import com.hyunwoo.cliendroid.domain.repository.AuthRepository
 import com.hyunwoo.cliendroid.network.service.AuthInfraService
+import com.hyunwoo.cliendroid.network.service.UserInfraService
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val authService: AuthInfraService
+    private val authService: AuthInfraService,
+    private val userService: UserInfraService
 ) : AuthRepository {
 
     override suspend fun loginPreparedStatement(): String =
@@ -17,5 +19,5 @@ class AuthRepositoryImpl @Inject constructor(
         authService.login(id, password, csrf).result
 
     override suspend fun getUserInfo(id: String): UserInfo =
-        authService.getUserInfo(id).toUserInfo()
+        userService.getUserInfo(id).toUserInfo()
 }
