@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
 import com.hyunwoo.cliendroid.R
@@ -13,6 +15,7 @@ import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentDrawerBinding
 import com.hyunwoo.cliendroid.domain.exception.LoginFailedException
+import com.hyunwoo.cliendroid.domain.model.MenuBoardItem
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
 import com.hyunwoo.cliendroid.extension.navigateGraph
 import javax.inject.Inject
@@ -26,6 +29,10 @@ class DrawerFragment : AppFragment() {
 
     @Inject
     lateinit var viewModelFactory: DrawerViewModel.Factory
+
+    private val menuAdapter by lazy {
+        MenuListAdapter(::onMenuItemClicked)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +48,10 @@ class DrawerFragment : AppFragment() {
 
         viewModel.onEach(State::loginAsync) { async ->
             isProgressDialogVisible = async is Loading
+        }
+
+        viewModel.onEach(State::menuList) { menus ->
+            menuAdapter.submitList(menus)
         }
 
         viewModel.onAsync(
@@ -63,12 +74,18 @@ class DrawerFragment : AppFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
         initListeners()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun initViews() {
+        binding.recyclerView.adapter = menuAdapter
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                binding.recyclerView.context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
     }
 
     private fun initListeners() {
@@ -113,9 +130,17 @@ class DrawerFragment : AppFragment() {
         return true
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun navigateMenu(actionId: Int, args: Bundle? = null) {
         navigateGraph(actionId, args)
         (activity as? Callback)?.onMenuCLicked()
+    }
+
+    private fun onMenuItemClicked(item: MenuBoardItem) {
     }
 
     interface Callback {

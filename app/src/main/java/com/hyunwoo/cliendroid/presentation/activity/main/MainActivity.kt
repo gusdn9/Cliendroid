@@ -15,7 +15,7 @@ import com.hyunwoo.cliendroid.databinding.ActivityMainBinding
 import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
 import com.hyunwoo.cliendroid.presentation.fragment.drawer.DrawerFragment
 import com.hyunwoo.cliendroid.presentation.fragment.search.SearchArgs
-import kotlin.math.min
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 class MainActivity : AppActivity(), DrawerFragment.Callback {
@@ -51,7 +51,7 @@ class MainActivity : AppActivity(), DrawerFragment.Callback {
         val ratioWidth = (resources.displayMetrics.widthPixels * DRAWER_MAX_FILL_RATIO).roundToInt()
         val fixedWidth = resources.getDimensionPixelSize(R.dimen.main_drawer_fragment_min_width)
         drawerFragment.view?.layoutParams = drawerFragment.view?.layoutParams?.apply {
-            width = min(ratioWidth, fixedWidth)
+            width = max(ratioWidth, fixedWidth)
         }
     }
 
@@ -99,6 +99,5 @@ class MainActivity : AppActivity(), DrawerFragment.Callback {
     }
 
     override fun onMenuCLicked() {
-
     }
 }

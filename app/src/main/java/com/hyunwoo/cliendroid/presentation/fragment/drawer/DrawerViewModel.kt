@@ -56,7 +56,8 @@ class DrawerViewModel @AssistedInject constructor(
             getMenuBoardListUseCase::invoke.asAsync { async ->
                 var nextState = this
                 if (async is Success) {
-                    nextState = copy(menuList = async())
+                    val result = async()
+                    nextState = copy(menuList = result.communities + result.somoimList)
                 }
                 nextState.copy(menuListAsync = async)
             }
