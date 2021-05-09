@@ -14,6 +14,7 @@ import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentDrawerBinding
 import com.hyunwoo.cliendroid.domain.exception.LoginFailedException
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
+import com.hyunwoo.cliendroid.extension.navigateGraph
 import javax.inject.Inject
 
 class DrawerFragment : AppFragment() {
@@ -73,7 +74,7 @@ class DrawerFragment : AppFragment() {
     private fun initListeners() {
         binding.loginButton.setOnClickListener {
             if (validateId().not() || validatePassword().not()) return@setOnClickListener
-            
+
             val id = binding.userIdInput.text.toString()
             val password = binding.userPasswordInput.text.toString()
             binding.userIdInput.setText("")
@@ -83,6 +84,10 @@ class DrawerFragment : AppFragment() {
 
         binding.logoutButton.setOnClickListener {
             viewModel.logout()
+        }
+
+        binding.settingsButton.setOnClickListener {
+            navigateMenu(R.id.action_to_settingsFragment)
         }
     }
 
@@ -106,5 +111,14 @@ class DrawerFragment : AppFragment() {
         }
         binding.userPasswordInputLayout.error = null
         return true
+    }
+
+    private fun navigateMenu(actionId: Int, args: Bundle? = null) {
+        navigateGraph(actionId, args)
+        (activity as? Callback)?.onMenuCLicked()
+    }
+
+    interface Callback {
+        fun onMenuCLicked()
     }
 }

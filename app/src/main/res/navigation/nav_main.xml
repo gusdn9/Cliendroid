@@ -5,6 +5,10 @@
     android:id="@+id/nav_main"
     app:startDestination="@id/everyoneParkListFragment">
 
+    <action
+        android:id="@+id/action_to_settingsFragment"
+        app:destination="@id/settingsFragment"/>
+
     <fragment
         android:id="@+id/everyoneParkListFragment"
         android:name="com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.EveryoneParkListFragment"
@@ -14,10 +18,6 @@
         <action
             android:id="@+id/action_everyoneParkListFragment_to_everyoneParkDetailFragment"
             app:destination="@id/everyoneParkDetailFragment"/>
-
-        <action
-            android:id="@+id/action_everyoneParkListFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"/>
 
         <action
             android:id="@+id/action_everyoneParkListFragment_to_searchFragment"

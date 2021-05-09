@@ -18,7 +18,7 @@ import com.hyunwoo.cliendroid.presentation.fragment.search.SearchArgs
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-class MainActivity : AppActivity() {
+class MainActivity : AppActivity(), DrawerFragment.Callback {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -32,7 +32,6 @@ class MainActivity : AppActivity() {
         setContentView(binding.root)
 
         initViews()
-        initListeners()
     }
 
     private fun initViews() {
@@ -54,18 +53,6 @@ class MainActivity : AppActivity() {
         drawerFragment.view?.layoutParams = drawerFragment.view?.layoutParams?.apply {
             width = min(ratioWidth, fixedWidth)
         }
-    }
-
-    private fun initListeners() {
-        // binding.drawer.setNavigationItemSelectedListener { menuItem ->
-        //     when (menuItem.itemId) {
-        //         R.id.settings -> {
-        //             navController.navigate(R.id.action_everyoneParkListFragment_to_settingsFragment)
-        //         }
-        //     }
-        //     binding.drawerLayout.closeDrawer(GravityCompat.START)
-        //     true
-        // }
     }
 
     private fun setupDrawer(navController: NavController) {
@@ -109,5 +96,9 @@ class MainActivity : AppActivity() {
     companion object {
 
         private const val DRAWER_MAX_FILL_RATIO = 0.78f
+    }
+
+    override fun onMenuCLicked() {
+
     }
 }
