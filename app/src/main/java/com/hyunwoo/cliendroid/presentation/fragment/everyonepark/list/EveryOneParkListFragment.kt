@@ -151,4 +151,8 @@ class EveryoneParkListFragment : AppFragment() {
             args.toFragmentArgsBundle()
         )
     }
+
+    companion object {
+        const val EXTRA_TITLE = "title"
+    }
 }

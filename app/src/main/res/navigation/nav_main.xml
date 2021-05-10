@@ -9,11 +9,21 @@
         android:id="@+id/action_to_settingsFragment"
         app:destination="@id/settingsFragment"/>
 
+    <action
+        android:id="@+id/action_to_ForumListFragment"
+        app:destination="@id/everyoneParkListFragment"
+        app:popUpTo="@id/everyoneParkListFragment"
+        app:popUpToInclusive="true"/>
+
     <fragment
         android:id="@+id/everyoneParkListFragment"
         android:name="com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.EveryoneParkListFragment"
-        android:label="@string/everyone_park_list_label"
+        android:label="{title}"
         tools:layout="@layout/fragment_everyone_park_list">
+        <argument
+            android:name="title"
+            android:defaultValue=""
+            app:argType="string"/>
 
         <action
             android:id="@+id/action_everyoneParkListFragment_to_everyoneParkDetailFragment"

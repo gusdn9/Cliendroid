@@ -12,6 +12,8 @@ interface CommunityRepository {
 
     suspend fun getEveryoneParkForumDetail(detailUrl: String): EveryoneParkForumContent
 
+    suspend fun getForumList(link: String, page: Int): List<BaseEveryoneParkForum>
+
     suspend fun search(
         keyword: String,
         page: Int,

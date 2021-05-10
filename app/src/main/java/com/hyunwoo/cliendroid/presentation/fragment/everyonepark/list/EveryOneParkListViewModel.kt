@@ -7,7 +7,7 @@ import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
-import com.hyunwoo.cliendroid.domain.usecase.GetEveryoneParkForumListUseCase
+import com.hyunwoo.cliendroid.domain.usecase.GetForumListUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Job
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class EveryoneParkListViewModel @AssistedInject constructor(
     @Assisted initialState: State,
-    private val getEveryoneParkForumListUseCase: GetEveryoneParkForumListUseCase
+    private val getForumListUseCase: GetForumListUseCase
 ) : AppMvRxViewModel<State>(initialState) {
 
     private var loadMoreJob: Job? = null
@@ -33,7 +33,7 @@ class EveryoneParkListViewModel @AssistedInject constructor(
         setState { copy(listDataLoadMoreAsync = Uninitialized) }
 
         viewModelScope.launch {
-            getEveryoneParkForumListUseCase::invoke.asAsync(0) { async ->
+            getForumListUseCase::invoke.asAsync(state.url, 0) { async ->
                 var nextState = this
                 if (async is Success) {
                     nextState = nextState.copy(listData = async(), page = 0)
@@ -51,7 +51,7 @@ class EveryoneParkListViewModel @AssistedInject constructor(
         val prevEntries = state.listData ?: return@withState
 
         loadMoreJob = viewModelScope.launch {
-            getEveryoneParkForumListUseCase::invoke.asAsync(state.page + 1) { async ->
+            getForumListUseCase::invoke.asAsync(state.url, state.page + 1) { async ->
                 var nextState = this
                 if (async is Success) {
                     nextState = nextState.copy(listData = prevEntries + async(), page = state.page + 1)

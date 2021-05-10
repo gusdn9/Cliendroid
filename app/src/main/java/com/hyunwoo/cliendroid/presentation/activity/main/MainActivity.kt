@@ -99,5 +99,6 @@ class MainActivity : AppActivity(), DrawerFragment.Callback {
     }
 
     override fun onMenuCLicked() {
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 }

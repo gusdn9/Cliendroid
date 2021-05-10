@@ -18,6 +18,12 @@ interface CommunityInfraService {
         @Path("detailUrl", encoded = true) detailUrl: String
     ): EveryoneParkForumDetailRes
 
+    @GET("{boardLink}")
+    suspend fun getForumList(
+        @Path("boardLink", encoded = true) link: String,
+        @Query("po") page: Int
+    ): EveryoneParkForumListRes
+
     @GET("service/search")
     suspend fun search(
         @Query("q") keyword: String,
@@ -27,5 +33,5 @@ interface CommunityInfraService {
     ): SearchRes
 
     @GET("service/")
-    suspend fun getBoardList(): BoardRes
+    suspend fun getMenuList(): BoardRes
 }

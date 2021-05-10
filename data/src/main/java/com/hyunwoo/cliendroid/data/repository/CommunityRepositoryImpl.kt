@@ -11,9 +11,9 @@ import com.hyunwoo.cliendroid.domain.model.MenuBoards
 import com.hyunwoo.cliendroid.domain.model.SearchContent
 import com.hyunwoo.cliendroid.domain.model.SearchSort
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
-import com.hyunwoo.cliendroid.network.service.CommunityInfraService
 import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedEveryoneParkForumItemDto
 import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.service.CommunityInfraService
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -35,10 +35,19 @@ class CommunityRepositoryImpl @Inject constructor(
         communityService.getEveryoneParkForumDetail(detailUrl)
             .toEveryoneParkForumContent()
 
+    override suspend fun getForumList(link: String, page: Int): List<BaseEveryoneParkForum> =
+        communityService.getForumList(link, page)
+            .contents.map { forum ->
+                when (forum) {
+                    is EveryoneParkForumItemDto -> forum.toEveryoneParkForum()
+                    is BlockedEveryoneParkForumItemDto -> forum.toBlockedEveryoneParkForum()
+                }
+            }
+
     override suspend fun search(keyword: String, page: Int, sort: SearchSort?, boardId: String?): SearchContent =
         communityService.search(keyword, page, sort?.value, boardId)
             .toSearchContent()
 
     override suspend fun getMenuList(): MenuBoards =
-        communityService.getBoardList().toMenuBoards()
+        communityService.getMenuList().toMenuBoards()
 }
