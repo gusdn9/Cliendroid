@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/everyoneParkListFragment">
+    app:startDestination="@id/forumListFragment">
 
     <action
         android:id="@+id/action_to_settingsFragment"
@@ -11,33 +11,33 @@
 
     <action
         android:id="@+id/action_to_ForumListFragment"
-        app:destination="@id/everyoneParkListFragment"
-        app:popUpTo="@id/everyoneParkListFragment"
+        app:destination="@id/forumListFragment"
+        app:popUpTo="@id/forumListFragment"
         app:popUpToInclusive="true"/>
 
     <fragment
-        android:id="@+id/everyoneParkListFragment"
-        android:name="com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.EveryoneParkListFragment"
+        android:id="@+id/forumListFragment"
+        android:name="com.hyunwoo.cliendroid.presentation.fragment.forum.list.ForumListFragment"
         android:label="{title}"
-        tools:layout="@layout/fragment_everyone_park_list">
+        tools:layout="@layout/fragment_forum_list">
         <argument
             android:name="title"
             android:defaultValue=""
             app:argType="string"/>
 
         <action
-            android:id="@+id/action_everyoneParkListFragment_to_everyoneParkDetailFragment"
-            app:destination="@id/everyoneParkDetailFragment"/>
+            android:id="@+id/action_forumListFragment_to_forumDetailFragment"
+            app:destination="@id/forumDetailFragment"/>
 
         <action
-            android:id="@+id/action_everyoneParkListFragment_to_searchFragment"
+            android:id="@+id/action_forumListFragment_to_searchFragment"
             app:destination="@id/searchFragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/everyoneParkDetailFragment"
-        android:name="com.hyunwoo.cliendroid.presentation.fragment.everyonepark.detail.EveryoneParkDetailFragment"
-        tools:layout="@layout/fragment_everyone_park_detail"/>
+        android:id="@+id/forumDetailFragment"
+        android:name="com.hyunwoo.cliendroid.presentation.fragment.forum.detail.ForumDetailFragment"
+        tools:layout="@layout/fragment_forum_detail"/>
 
     <fragment
         android:id="@+id/searchFragment"
@@ -46,8 +46,8 @@
         tools:layout="@layout/fragment_search">
 
         <action
-            android:id="@+id/action_searchFragment_to_everyoneParkDetailFragment"
-            app:destination="@id/everyoneParkDetailFragment"/>
+            android:id="@+id/action_searchFragment_to_forumDetailFragment"
+            app:destination="@id/forumDetailFragment"/>
     </fragment>
 
     <fragment

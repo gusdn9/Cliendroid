@@ -1,18 +1,16 @@
 package com.hyunwoo.cliendroid.domain.repository
 
-import com.hyunwoo.cliendroid.domain.model.BaseEveryoneParkForum
-import com.hyunwoo.cliendroid.domain.model.EveryoneParkForumContent
+import com.hyunwoo.cliendroid.domain.model.BaseForum
+import com.hyunwoo.cliendroid.domain.model.ForumContent
 import com.hyunwoo.cliendroid.domain.model.MenuBoards
 import com.hyunwoo.cliendroid.domain.model.SearchContent
 import com.hyunwoo.cliendroid.domain.model.SearchSort
 
 interface CommunityRepository {
 
-    suspend fun getEveryoneParkForumList(page: Int): List<BaseEveryoneParkForum>
+    suspend fun getForumList(link: String, page: Int): List<BaseForum>
 
-    suspend fun getEveryoneParkForumDetail(detailUrl: String): EveryoneParkForumContent
-
-    suspend fun getForumList(link: String, page: Int): List<BaseEveryoneParkForum>
+    suspend fun getForumDetail(detailUrl: String): ForumContent
 
     suspend fun search(
         keyword: String,

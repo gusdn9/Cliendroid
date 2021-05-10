@@ -1,13 +1,13 @@
 package com.hyunwoo.cliendroid.data.mapper
 
-import com.hyunwoo.cliendroid.domain.model.BlockedEveryoneParkForum
-import com.hyunwoo.cliendroid.domain.model.EveryoneParkForum
+import com.hyunwoo.cliendroid.domain.model.BlockedForum
+import com.hyunwoo.cliendroid.domain.model.Forum
 import com.hyunwoo.cliendroid.domain.model.User
-import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedEveryoneParkForumItemDto
-import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumItemDto
+import com.hyunwoo.cliendroid.network.model.forum.BlockedForumItemDto
+import com.hyunwoo.cliendroid.network.model.forum.ForumItemDto
 
-fun EveryoneParkForumItemDto.toEveryoneParkForum() =
-    EveryoneParkForum(
+fun ForumItemDto.toForum() =
+    Forum(
         id,
         title,
         link,
@@ -18,8 +18,8 @@ fun EveryoneParkForumItemDto.toEveryoneParkForum() =
         User(null, user.nickName, user.image)
     )
 
-fun BlockedEveryoneParkForumItemDto.toBlockedEveryoneParkForum() =
-    BlockedEveryoneParkForum(
+fun BlockedForumItemDto.toBlockedForum() =
+    BlockedForum(
         id,
         title
     )

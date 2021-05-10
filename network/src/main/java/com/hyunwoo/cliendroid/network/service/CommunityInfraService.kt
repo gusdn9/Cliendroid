@@ -1,8 +1,8 @@
 package com.hyunwoo.cliendroid.network.service
 
 import com.hyunwoo.cliendroid.network.model.BoardRes
-import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumDetailRes
-import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumListRes
+import com.hyunwoo.cliendroid.network.model.forum.ForumDetailRes
+import com.hyunwoo.cliendroid.network.model.forum.ForumListRes
 import com.hyunwoo.cliendroid.network.model.search.SearchRes
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,19 +10,16 @@ import retrofit2.http.Query
 
 interface CommunityInfraService {
 
-    @GET("service/board/park")
-    suspend fun getEveryoneParkForumList(@Query("po") page: Int): EveryoneParkForumListRes
-
-    @GET("{detailUrl}")
-    suspend fun getEveryoneParkForumDetail(
-        @Path("detailUrl", encoded = true) detailUrl: String
-    ): EveryoneParkForumDetailRes
-
     @GET("{boardLink}")
     suspend fun getForumList(
         @Path("boardLink", encoded = true) link: String,
         @Query("po") page: Int
-    ): EveryoneParkForumListRes
+    ): ForumListRes
+
+    @GET("{detailUrl}")
+    suspend fun getForumDetail(
+        @Path("detailUrl", encoded = true) detailUrl: String
+    ): ForumDetailRes
 
     @GET("service/search")
     suspend fun search(

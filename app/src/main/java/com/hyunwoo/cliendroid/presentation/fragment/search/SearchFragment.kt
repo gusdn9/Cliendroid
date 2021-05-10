@@ -23,7 +23,7 @@ import com.hyunwoo.cliendroid.domain.model.SearchSort
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
 import com.hyunwoo.cliendroid.extension.navigateGraph
 import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
-import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.detail.EveryoneParkDetailArgs
+import com.hyunwoo.cliendroid.presentation.fragment.forum.detail.ForumDetailArgs
 import javax.inject.Inject
 
 class SearchFragment : AppFragment() {
@@ -161,9 +161,9 @@ class SearchFragment : AppFragment() {
     }
 
     private fun onSearchItemClicked(searchItem: SearchItem) {
-        val args = EveryoneParkDetailArgs(searchItem.link)
+        val args = ForumDetailArgs(searchItem.link)
         navigateGraph(
-            R.id.action_searchFragment_to_everyoneParkDetailFragment,
+            R.id.action_searchFragment_to_forumDetailFragment,
             args.toFragmentArgsBundle()
         )
     }

@@ -1,7 +1,7 @@
 package com.hyunwoo.cliendroid.network
 
-import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedCommentDto
-import com.hyunwoo.cliendroid.network.model.everyonepark.CommentDto
+import com.hyunwoo.cliendroid.network.model.forum.BlockedCommentDto
+import com.hyunwoo.cliendroid.network.model.forum.CommentDto
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,14 +14,14 @@ class BoardServiceUnitTest : BaseUnitTest() {
 
     @Test
     fun requestList() = runBlocking {
-        val forums = network.provideCommunityService().getEveryoneParkForumList(0)
+        val forums = network.provideCommunityService().getForumList(0)
         print(forums.contents.size)
     }
 
     @Test
     fun requestDetail() = runBlocking {
         val url = "/service/board/park/16061901"
-        val res = network.provideCommunityService().getEveryoneParkForumDetail(url)
+        val res = network.provideCommunityService().getForumDetail(url)
         println(res.htmlBody)
         res.comments.forEach { comment ->
             when (comment) {

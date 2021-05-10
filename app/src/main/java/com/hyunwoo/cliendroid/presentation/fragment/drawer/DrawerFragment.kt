@@ -19,8 +19,8 @@ import com.hyunwoo.cliendroid.domain.model.MenuBoardItem
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
 import com.hyunwoo.cliendroid.extension.navigateGraph
 import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
-import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.EveryoneParkListFragment
-import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.list.ForumListArgs
+import com.hyunwoo.cliendroid.presentation.fragment.forum.list.ForumListArgs
+import com.hyunwoo.cliendroid.presentation.fragment.forum.list.ForumListFragment
 import javax.inject.Inject
 
 class DrawerFragment : AppFragment() {
@@ -146,7 +146,7 @@ class DrawerFragment : AppFragment() {
     private fun onMenuItemClicked(item: MenuBoardItem) {
         val args = ForumListArgs(item.name, item.link)
         navigateMenu(R.id.action_to_ForumListFragment, args.toFragmentArgsBundle().apply {
-            putString(EveryoneParkListFragment.EXTRA_TITLE, item.name)
+            putString(ForumListFragment.EXTRA_TITLE, item.name)
         })
     }
 

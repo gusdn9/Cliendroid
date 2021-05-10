@@ -1,13 +1,13 @@
 package com.hyunwoo.cliendroid.data.mapper
 
-import com.hyunwoo.cliendroid.domain.model.EveryoneParkForumContent
+import com.hyunwoo.cliendroid.domain.model.ForumContent
 import com.hyunwoo.cliendroid.domain.model.User
-import com.hyunwoo.cliendroid.network.model.everyonepark.BlockedCommentDto
-import com.hyunwoo.cliendroid.network.model.everyonepark.CommentDto
-import com.hyunwoo.cliendroid.network.model.everyonepark.EveryoneParkForumDetailRes
+import com.hyunwoo.cliendroid.network.model.forum.BlockedCommentDto
+import com.hyunwoo.cliendroid.network.model.forum.CommentDto
+import com.hyunwoo.cliendroid.network.model.forum.ForumDetailRes
 
-fun EveryoneParkForumDetailRes.toEveryoneParkForumContent(): EveryoneParkForumContent =
-    EveryoneParkForumContent(
+fun ForumDetailRes.toForumContent(): ForumContent =
+    ForumContent(
         title = title,
         user = User(user.id, user.nickName, user.image),
         time = time,

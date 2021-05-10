@@ -2,7 +2,7 @@ package com.hyunwoo.cliendroid.presentation.activity.main
 
 import com.hyunwoo.cliendroid.architecture.ActivityScope
 import com.hyunwoo.cliendroid.presentation.fragment.drawer.DrawerFragmentBuilderModule
-import com.hyunwoo.cliendroid.presentation.fragment.everyonepark.EveryoneParkFragmentBuilderModule
+import com.hyunwoo.cliendroid.presentation.fragment.forum.ForumFragmentBuilderModule
 import com.hyunwoo.cliendroid.presentation.fragment.search.SearchFragmentBuilderModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,7 +15,7 @@ abstract class MainActivityBuilderModule {
         modules = [
             MainActivityModule::class,
             DrawerFragmentBuilderModule::class,
-            EveryoneParkFragmentBuilderModule::class,
+            ForumFragmentBuilderModule::class,
             SearchFragmentBuilderModule::class
         ]
     )

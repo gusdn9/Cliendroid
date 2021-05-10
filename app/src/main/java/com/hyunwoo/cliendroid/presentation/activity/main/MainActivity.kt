@@ -78,7 +78,7 @@ class MainActivity : AppActivity(), DrawerFragment.Callback {
             intent.getStringExtra(SearchManager.QUERY)?.let { query ->
                 val args = SearchArgs(query)
                 navController.navigate(
-                    R.id.action_everyoneParkListFragment_to_searchFragment,
+                    R.id.action_forumListFragment_to_searchFragment,
                     args.toFragmentArgsBundle()
                 )
             }

@@ -4,10 +4,10 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.hyunwoo.cliendroid.network.converter.auth.LoginConverter
 import com.hyunwoo.cliendroid.network.converter.auth.PreparedStatementConverter
 import com.hyunwoo.cliendroid.network.converter.user.UserInfoConverter
-import com.hyunwoo.cliendroid.network.converter.everyonepark.BoardListConverter
-import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumDetailConverter
-import com.hyunwoo.cliendroid.network.converter.everyonepark.EveryoneParkForumListConverter
-import com.hyunwoo.cliendroid.network.converter.everyonepark.SearchListConverter
+import com.hyunwoo.cliendroid.network.converter.forum.BoardListConverter
+import com.hyunwoo.cliendroid.network.converter.forum.ForumDetailConverter
+import com.hyunwoo.cliendroid.network.converter.forum.ForumListConverter
+import com.hyunwoo.cliendroid.network.converter.forum.SearchListConverter
 import com.hyunwoo.cliendroid.network.converter.user.UserCommentConverter
 import com.hyunwoo.cliendroid.network.converter.user.UserPostConverter
 import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
@@ -141,14 +141,14 @@ internal class NetworkModule {
             .client(okHttpClient)
             .build()
 
-    @Named("EveryoneParkForum")
+    @Named("Forum")
     @Provides
     @Singleton
-    fun provideEveryOneParkForumRetrofit(
+    fun provideForumRetrofit(
         @Named("Prod") hostType: HostType,
         @Named("WithoutAuth") okHttpClient: OkHttpClient,
-        @Named("EveryoneParkForum") listConverter: Converter.Factory,
-        @Named("EveryoneParkForumDetail") detailConverter: Converter.Factory,
+        @Named("Forum") listConverter: Converter.Factory,
+        @Named("ForumDetail") detailConverter: Converter.Factory,
         @Named("SearchList") searchListConverter: Converter.Factory,
         @Named("BoardList") boardListConverter: Converter.Factory
     ): Retrofit =
@@ -206,7 +206,7 @@ internal class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCommunityService(@Named("EveryoneParkForum") retrofit: Retrofit): CommunityInfraService =
+    fun provideCommunityService(@Named("Forum") retrofit: Retrofit): CommunityInfraService =
         retrofit.create(CommunityInfraService::class.java)
 
     @Provides
@@ -223,17 +223,17 @@ internal class NetworkModule {
      * Provide Converter
      */
 
-    @Named("EveryoneParkForum")
+    @Named("Forum")
     @Provides
     @Singleton
-    fun provideEveryOneParkForumConverter(): Converter.Factory =
-        EveryoneParkForumListConverter.create()
+    fun provideForumConverter(): Converter.Factory =
+        ForumListConverter.create()
 
-    @Named("EveryoneParkForumDetail")
+    @Named("ForumDetail")
     @Provides
     @Singleton
-    fun provideEveryOneParkDetailForumConverter(): Converter.Factory =
-        EveryoneParkForumDetailConverter.create()
+    fun provideForumDetailForumConverter(): Converter.Factory =
+        ForumDetailConverter.create()
 
     @Named("LoginPreparedStatement")
     @Provides
