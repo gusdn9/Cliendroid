@@ -7,16 +7,22 @@ import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.usecase.GetForumDetailUseCase
+import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.launch
 
 class ForumDetailViewModel @AssistedInject constructor(
     @Assisted initialState: State,
-    private val getForumDetailUseCase: GetForumDetailUseCase
+    private val getForumDetailUseCase: GetForumDetailUseCase,
+    private val getLoggedInUserUseCase: GetLoggedInUserUseCase
 ) : AppMvRxViewModel<State>(initialState) {
 
     init {
+        setState {
+            copy(loggedInUser = getLoggedInUserUseCase())
+        }
+
         refresh()
     }
 

@@ -14,6 +14,13 @@ class ForumDetailCommentAdapter(
     private val imageLoader: ImageLoader
 ) : ListAdapter<BaseComment, RecyclerView.ViewHolder>(commentComparator) {
 
+    private var isLoggedInUser: Boolean = false
+
+    fun setIsLoggedIn(isLogin: Boolean) {
+        isLoggedInUser = isLogin
+        notifyDataSetChanged()
+    }
+
     override fun getItemViewType(position: Int): Int =
         when (getItem(position)) {
             is Comment -> VIEW_TYPE_COMMENT
@@ -36,7 +43,7 @@ class ForumDetailCommentAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         when (holder) {
-            is ForumDetailCommentViewHolder -> holder.bind(getItem(position) as Comment)
+            is ForumDetailCommentViewHolder -> holder.bind(getItem(position) as Comment, isLoggedInUser)
             is ForumDetailBlockedCommentViewHolder -> holder.bind(getItem(position) as BlockedComment)
             else -> throw IllegalArgumentException("unknown view type")
         }

@@ -11,8 +11,10 @@ import com.hyunwoo.cliendroid.domain.usecase.GetMenuBoardListUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.LoginUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.LogoutUseCase
+import com.hyunwoo.cliendroid.domain.usecase.event.LoggedOutSubscribeUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DrawerViewModel @AssistedInject constructor(
@@ -20,13 +22,23 @@ class DrawerViewModel @AssistedInject constructor(
     private val loginUseCase: LoginUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val getLoggedInUserUseCase: GetLoggedInUserUseCase,
-    private val getMenuBoardListUseCase: GetMenuBoardListUseCase
+    private val getMenuBoardListUseCase: GetMenuBoardListUseCase,
+    private val loggedOutSubscribeUseCase: LoggedOutSubscribeUseCase
 ) : AppMvRxViewModel<State>(initialState) {
 
     init {
         setState {
             copy(loggedInUser = getLoggedInUserUseCase())
         }
+
+        viewModelScope.launch {
+            loggedOutSubscribeUseCase().collect {
+                setState {
+                    copy(loggedInUser = null)
+                }
+            }
+        }
+
         getMenuList()
     }
 

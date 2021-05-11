@@ -74,6 +74,10 @@ class ForumDetailFragment : AppFragment() {
         viewModel.onEach(State::refreshAsync) { async ->
             binding.refreshLayout.isRefreshing = async is Loading
         }
+
+        viewModel.onEach(State::loggedInUser) { loggedInUser ->
+            adapter.setIsLoggedIn(loggedInUser != null)
+        }
     }
 
     private fun setHeader(content: ForumContent) {

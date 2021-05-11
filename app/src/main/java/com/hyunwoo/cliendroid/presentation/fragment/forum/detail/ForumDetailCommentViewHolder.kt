@@ -14,7 +14,7 @@ class ForumDetailCommentViewHolder private constructor(
     private val imageLoader: ImageLoader
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(comment: Comment) {
+    fun bind(comment: Comment, isLogin: Boolean) {
         binding.reCommentSpace.isVisible = comment.isReply
 
         binding.user.userNickname.isVisible = comment.user.nickName != null
@@ -29,6 +29,8 @@ class ForumDetailCommentViewHolder private constructor(
         binding.contents.text = comment.contents
 
         binding.time.text = comment.time
+
+        binding.moreButton.isVisible = isLogin
     }
 
     companion object {
