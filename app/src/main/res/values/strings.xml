@@ -22,6 +22,10 @@
     <string name="search_sort_recency">최신순</string>
     <string name="search_sort_accuracy">정확도순</string>
 
+    <string name="menu_action_user" formatted="true">ID : %s1</string>
+    <string name="menu_action_search_user_contents">게시글 검색</string>
+    <string name="menu_action_search_user_comments">댓글 검색</string>
+
     <string name="error_view_alert_title">문제가 발생했습니다.</string>
     <string name="error_view_alert_confirm">@string/confirm</string>
     <string name="error_view_alert_retry">@string/retry</string>
