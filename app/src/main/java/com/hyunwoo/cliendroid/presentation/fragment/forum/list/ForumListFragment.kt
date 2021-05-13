@@ -127,7 +127,6 @@ class ForumListFragment : AppFragment() {
         (menu.findItem(R.id.action_search).actionView as SearchView).apply {
             setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
         }
-        // super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
