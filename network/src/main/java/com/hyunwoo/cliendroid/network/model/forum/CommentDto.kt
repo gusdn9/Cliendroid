@@ -7,6 +7,8 @@ sealed class BaseCommentDto(open val isReply: Boolean = false)
 data class CommentDto(
     val id: Long,
     val contents: String,
+    val contentsImage: String? = null,
+    val contentsVideo: String? = null,
     val ipAddress: String,
     val time: String,
     val likes: Long,

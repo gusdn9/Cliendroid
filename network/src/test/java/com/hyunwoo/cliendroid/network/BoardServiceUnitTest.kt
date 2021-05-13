@@ -14,13 +14,13 @@ class BoardServiceUnitTest : BaseUnitTest() {
 
     @Test
     fun requestList() = runBlocking {
-        val forums = network.provideCommunityService().getForumList(0)
+        val forums = network.provideCommunityService().getForumList("service/board/park",0)
         print(forums.contents.size)
     }
 
     @Test
     fun requestDetail() = runBlocking {
-        val url = "/service/board/park/16061901"
+        val url = "/service/board/park/16135669"
         val res = network.provideCommunityService().getForumDetail(url)
         println(res.htmlBody)
         res.comments.forEach { comment ->

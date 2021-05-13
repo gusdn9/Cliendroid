@@ -8,13 +8,15 @@ import com.hyunwoo.cliendroid.network.model.forum.CommentDto
 
 fun CommentDto.toComment(): Comment =
     Comment(
-        id,
-        contents,
-        ipAddress,
-        time,
-        likes,
-        User(user.id, user.nickName, user.image),
-        isReply
+        id = id,
+        contents = contents,
+        contentsImage = contentsImage,
+        contentsVideo = contentsVideo,
+        ipAddress = ipAddress,
+        time = time,
+        likes = likes,
+        user = User(user.id, user.nickName, user.image),
+        isReply = isReply
     )
 
 fun BlockedCommentDto.toComment(): BlockedComment =

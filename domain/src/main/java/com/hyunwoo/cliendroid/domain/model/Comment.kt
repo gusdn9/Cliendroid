@@ -5,6 +5,8 @@ sealed class BaseComment(open val isReply: Boolean = false)
 data class Comment(
     val id: Long,
     val contents: String,
+    val contentsImage: String? = null,
+    val contentsVideo: String? = null,
     val ipAddress: String,
     val time: String,
     val likes: Long,
