@@ -47,7 +47,7 @@ class ForumDetailCommentViewHolder private constructor(
             comment.contentsVideo?.let { contentImage.append(it) }
             binding.contentsWebView.loadDataWithBaseURL(
                 null,
-                contentImage.toString(),
+                contentImage.toHtml(),
                 "text/html; charset=utf-8",
                 "utf-8",
                 null
@@ -59,6 +59,18 @@ class ForumDetailCommentViewHolder private constructor(
         binding.time.text = comment.time
 
         binding.moreButton.isVisible = isLogin
+    }
+
+    private fun StringBuilder.toHtml(): String {
+        insert(
+            0, "<html>" +
+                    "<head><meta name='viewport' content='width=device-width, user-scalable=no' />" +
+                    "<style>" +
+                    "img, video, iframe {display: inline;height: auto;max-width: 100%;} " +
+                    "</style></head><body>"
+        )
+        append("</body></html>")
+        return toString()
     }
 
     companion object {
