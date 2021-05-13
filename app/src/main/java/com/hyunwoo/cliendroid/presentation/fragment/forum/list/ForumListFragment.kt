@@ -145,7 +145,8 @@ class ForumListFragment : AppFragment() {
     }
 
     private fun onForumClicked(forum: Forum) {
-        val args = ForumDetailArgs(forum.link)
+        // val args = ForumDetailArgs(forum.link)
+        val args = ForumDetailArgs("service/board/park/16135669")
         navigateGraph(
             R.id.action_forumListFragment_to_forumDetailFragment,
             args.toFragmentArgsBundle()

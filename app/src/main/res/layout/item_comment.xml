@@ -45,6 +45,22 @@
         app:layout_constraintTop_toTopOf="@id/user"
         tools:text="10:00"/>
 
+    <FrameLayout
+        android:id="@+id/contentsWebFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user"
+        tools:visibility="visible">
+
+        <WebView
+            android:id="@+id/contentsWebView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
     <TextView
         android:id="@+id/contents"
         android:layout_width="0dp"
@@ -55,7 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/moreButton"
         app:layout_constraintStart_toStartOf="@id/user"
-        app:layout_constraintTop_toBottomOf="@id/user"
+        app:layout_constraintTop_toBottomOf="@id/contentsWebFrame"
         tools:text="본문입니다."/>
 
     <ImageButton

@@ -39,6 +39,21 @@ class ForumDetailCommentViewHolder private constructor(
         binding.likes.isVisible = comment.likes > 0
         binding.likes.text = comment.likes.toString()
 
+        val hasContentsImage = comment.contentsImage != null || comment.contentsVideo != null
+        binding.contentsWebFrame.isVisible = hasContentsImage
+        if (hasContentsImage) {
+            val contentImage = StringBuilder()
+            comment.contentsImage?.let { contentImage.append(it) }
+            comment.contentsVideo?.let { contentImage.append(it) }
+            binding.contentsWebView.loadDataWithBaseURL(
+                null,
+                contentImage.toString(),
+                "text/html; charset=utf-8",
+                "utf-8",
+                null
+            )
+        }
+
         binding.contents.text = comment.contents
 
         binding.time.text = comment.time
