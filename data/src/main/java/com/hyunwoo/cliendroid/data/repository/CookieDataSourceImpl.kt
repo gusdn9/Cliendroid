@@ -16,7 +16,9 @@ class CookieDataSourceImpl @Inject constructor(
     override var cookies: Set<String>?
         get() = pref.getStringSet(KEY_COOKIES, null)
         set(value) = pref.edit {
+            clear()
             putStringSet(KEY_COOKIES, value)
+            apply()
         }
 
     companion object {
