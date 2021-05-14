@@ -66,6 +66,7 @@ class ForumDetailCommentViewHolder private constructor(
             0, "<html>" +
                     "<head><meta name='viewport' content='width=device-width, user-scalable=no' />" +
                     "<style>" +
+                    ".comment-video button{position:absolute;z-index:1;width:100%;height:100%;top:0;left:0;padding:0;margin:0;border:0;background:#fff;opacity:0}.comment-video button:focus{outline:0}" +
                     "img, video, iframe {display: inline;height: auto;max-width: 100%;} " +
                     "</style></head><body>"
         )
