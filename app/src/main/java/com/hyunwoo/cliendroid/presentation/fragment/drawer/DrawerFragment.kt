@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -100,6 +101,11 @@ class DrawerFragment : AppFragment() {
             binding.userIdInput.setText("")
             binding.userPasswordInput.setText("")
             viewModel.login(id, password)
+        }
+
+        binding.userPasswordInput.setOnEditorActionListener { _, i, _ ->
+            if (i == EditorInfo.IME_ACTION_DONE) binding.loginButton.performClick()
+            false
         }
 
         binding.logoutButton.setOnClickListener {
