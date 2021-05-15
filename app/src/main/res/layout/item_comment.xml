@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@id/user"
         tools:visibility="visible">
 
-        <WebView
+        <com.hyunwoo.cliendroid.common.webview.ImageClickableWebView
             android:id="@+id/contentsWebView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

@@ -1,5 +1,7 @@
 package com.hyunwoo.cliendroid.presentation.fragment.forum.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
@@ -15,12 +17,13 @@ class ForumDetailCommentViewHolder private constructor(
     private val binding: ItemCommentBinding,
     private val imageLoader: ImageLoader
 ) : RecyclerView.ViewHolder(binding.root) {
+    private val context = binding.root.context
 
     fun bind(comment: Comment, isLogin: Boolean) {
         binding.user.userLayout.setOnClickListener {
-            PopupMenu(binding.root.context, it).apply {
+            PopupMenu(context, it).apply {
                 menuInflater.inflate(R.menu.menu_user, menu)
-                menu.getItem(0).title = binding.root.context.getString(R.string.menu_action_user, comment.user.id)
+                menu.getItem(0).title = context.getString(R.string.menu_action_user, comment.user.id)
                 setOnMenuItemClickListener {
                     false
                 }
@@ -52,6 +55,9 @@ class ForumDetailCommentViewHolder private constructor(
                 "utf-8",
                 null
             )
+            binding.contentsWebView.setImageClickListener { image ->
+                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(image)))
+            }
         }
 
         binding.contents.text = comment.contents
