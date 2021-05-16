@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.network.model.search
+package com.hyunwoo.cliendroid.network.model.search.withoutauth
 
 import com.hyunwoo.cliendroid.network.model.user.UserDto
 

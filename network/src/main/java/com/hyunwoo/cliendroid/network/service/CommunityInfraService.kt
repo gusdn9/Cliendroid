@@ -3,7 +3,7 @@ package com.hyunwoo.cliendroid.network.service
 import com.hyunwoo.cliendroid.network.model.BoardRes
 import com.hyunwoo.cliendroid.network.model.forum.ForumDetailRes
 import com.hyunwoo.cliendroid.network.model.forum.ForumListRes
-import com.hyunwoo.cliendroid.network.model.search.SearchRes
+import com.hyunwoo.cliendroid.network.model.search.withoutauth.SearchRes
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

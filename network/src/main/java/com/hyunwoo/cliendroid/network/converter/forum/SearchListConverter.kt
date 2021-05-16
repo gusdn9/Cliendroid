@@ -2,11 +2,11 @@ package com.hyunwoo.cliendroid.network.converter.forum
 
 import com.hyunwoo.cliendroid.network.extension.parseLargeNumber
 import com.hyunwoo.cliendroid.network.extension.textOrNull
-import com.hyunwoo.cliendroid.network.model.search.BaseSearchItemDto
-import com.hyunwoo.cliendroid.network.model.search.BlockedSearchItemDto
-import com.hyunwoo.cliendroid.network.model.search.BoardItemDto
-import com.hyunwoo.cliendroid.network.model.search.SearchItemDto
-import com.hyunwoo.cliendroid.network.model.search.SearchRes
+import com.hyunwoo.cliendroid.network.model.search.withoutauth.BaseSearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.withoutauth.BlockedSearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.withoutauth.BoardItemDto
+import com.hyunwoo.cliendroid.network.model.search.withoutauth.SearchItemDto
+import com.hyunwoo.cliendroid.network.model.search.withoutauth.SearchRes
 import com.hyunwoo.cliendroid.network.model.user.UserDto
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup

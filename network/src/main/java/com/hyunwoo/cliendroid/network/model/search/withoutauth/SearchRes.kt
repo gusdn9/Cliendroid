@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.network.model.search
+package com.hyunwoo.cliendroid.network.model.search.withoutauth
 
 data class SearchRes(
     val contents: List<BaseSearchItemDto>,
