@@ -92,6 +92,15 @@ internal class NetworkModule {
         @Named("Prod") hostType: HostType,
         @Named("Debug") debug: Boolean,
         addCookiesInterceptor: AddCookiesInterceptor,
+    ): OkHttpClient = buildOkHttp(hostType, debug, addCookiesInterceptor)
+
+    @Named("Login")
+    @Provides
+    @Singleton
+    fun provideLoginOkHttpClient(
+        @Named("Prod") hostType: HostType,
+        @Named("Debug") debug: Boolean,
+        addCookiesInterceptor: AddCookiesInterceptor,
         receivedCookiesInterceptor: ReceivedCookiesInterceptor
     ): OkHttpClient = buildOkHttp(hostType, debug, addCookiesInterceptor, receivedCookiesInterceptor)
 
@@ -167,7 +176,7 @@ internal class NetworkModule {
     @Singleton
     fun provideAuthRetrofit(
         @Named("Mobile") hostType: HostType,
-        @Named("Auth") okHttpClient: OkHttpClient,
+        @Named("Login") okHttpClient: OkHttpClient,
         @Named("LoginPreparedStatement") loginPreparedStatementConverter: Converter.Factory,
         @Named("Login") loginConverter: Converter.Factory
     ): Retrofit =
