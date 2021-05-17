@@ -2,6 +2,7 @@ package com.hyunwoo.cliendroid.network
 
 import com.hyunwoo.cliendroid.network.service.AuthInfraService
 import com.hyunwoo.cliendroid.network.service.CommunityInfraService
+import com.hyunwoo.cliendroid.network.service.SearchInfraService
 import com.hyunwoo.cliendroid.network.service.UserInfraService
 import javax.inject.Named
 
@@ -18,6 +19,8 @@ interface NetworkProvider {
     fun provideAuthService(): AuthInfraService
 
     fun provideUserService(): UserInfraService
+
+    fun provideSearchAuthService(): SearchInfraService
 
     companion object {
         fun create(

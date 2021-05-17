@@ -3,17 +3,19 @@ package com.hyunwoo.cliendroid.network
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.hyunwoo.cliendroid.network.converter.auth.LoginConverter
 import com.hyunwoo.cliendroid.network.converter.auth.PreparedStatementConverter
-import com.hyunwoo.cliendroid.network.converter.user.UserInfoConverter
 import com.hyunwoo.cliendroid.network.converter.forum.BoardListConverter
 import com.hyunwoo.cliendroid.network.converter.forum.ForumDetailConverter
 import com.hyunwoo.cliendroid.network.converter.forum.ForumListConverter
 import com.hyunwoo.cliendroid.network.converter.forum.SearchListConverter
+import com.hyunwoo.cliendroid.network.converter.search.SearchAuthConverter
 import com.hyunwoo.cliendroid.network.converter.user.UserCommentConverter
+import com.hyunwoo.cliendroid.network.converter.user.UserInfoConverter
 import com.hyunwoo.cliendroid.network.converter.user.UserPostConverter
 import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
 import com.hyunwoo.cliendroid.network.interceptor.ReceivedCookiesInterceptor
 import com.hyunwoo.cliendroid.network.service.AuthInfraService
 import com.hyunwoo.cliendroid.network.service.CommunityInfraService
+import com.hyunwoo.cliendroid.network.service.SearchInfraService
 import com.hyunwoo.cliendroid.network.service.UserInfraService
 import com.squareup.moshi.Moshi
 import dagger.BindsInstance
@@ -194,6 +196,20 @@ internal class NetworkModule {
             .client(okHttpClient)
             .build()
 
+    @Named("SearchAuth")
+    @Provides
+    @Singleton
+    fun provideSearchAuthRetrofit(
+        @Named("Mobile") hostType: HostType,
+        @Named("Auth") okHttpClient: OkHttpClient,
+        @Named("SearchAuth") searchAuthConverter: Converter.Factory
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(hostType.url)
+            .addConverterFactory(searchAuthConverter)
+            .client(okHttpClient)
+            .build()
+
     @Provides
     @Singleton
     fun provideMoshi(): Moshi =
@@ -217,6 +233,11 @@ internal class NetworkModule {
     @Singleton
     fun provideUserService(@Named("User") retrofit: Retrofit): UserInfraService =
         retrofit.create(UserInfraService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSearchAuthService(@Named("SearchAuth") retrofit: Retrofit): SearchInfraService =
+        retrofit.create(SearchInfraService::class.java)
 
     /**
      * Provide Converter
@@ -275,6 +296,12 @@ internal class NetworkModule {
     @Singleton
     fun provideUserCoomentConverter(): Converter.Factory =
         UserCommentConverter.create()
+
+    @Named("SearchAuth")
+    @Provides
+    @Singleton
+    fun provideSearchAuthConverter(): Converter.Factory =
+        SearchAuthConverter.create()
 
     companion object {
 
