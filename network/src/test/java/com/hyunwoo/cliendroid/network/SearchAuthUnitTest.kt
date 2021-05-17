@@ -27,6 +27,8 @@ class SearchAuthUnitTest : BaseUnitTest() {
 
         val info = userService.getUserInfo(id)
         println("id:$id, nickName:${info.nickname}, email:${info.email}, startDate:${info.startDate}")
+        val info2 = userService.getUserInfo(id)
+        println("id:$id, nickName:${info2.nickname}, email:${info2.email}, startDate:${info2.startDate}")
     }
 
     @Test
@@ -35,6 +37,7 @@ class SearchAuthUnitTest : BaseUnitTest() {
 
         val searchService = network.provideSearchAuthService()
         val searchResult = searchService.search(target = "content", keyword = "재택", page = 0)
+        println("${searchResult.contents.size}")
 
     }
 }

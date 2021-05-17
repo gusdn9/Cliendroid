@@ -27,7 +27,7 @@ open class BaseUnitTest {
                 }
 
                 override fun saveCookie(cookies: Set<String>) {
-                    edit.clear().putStringSet("COOKIES", cookies).apply()
+                    edit.putStringSet("COOKIES", cookies).apply()
                 }
             }
         }

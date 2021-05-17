@@ -1,5 +1,6 @@
 package com.hyunwoo.cliendroid.network.converter.user
 
+import com.hyunwoo.cliendroid.network.exception.RequiredLoginException
 import com.hyunwoo.cliendroid.network.model.user.UserInfoRes
 import okhttp3.ResponseBody
 import org.jsoup.Jsoup
@@ -10,6 +11,10 @@ import java.lang.reflect.Type
 class UserInfoConverter : Converter<ResponseBody, UserInfoRes> {
     override fun convert(value: ResponseBody): UserInfoRes? {
         val document = Jsoup.parse(value.string())
+
+        val notLogin = document.getElementsByClass("not_login").size > 0
+        if (notLogin) throw RequiredLoginException()
+
         val nickName = document.selectFirst(".nicktext").text()
 
         val userActivities = document.select(".user_activity li")

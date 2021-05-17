@@ -15,6 +15,7 @@ data class BlockedSearchAuthItemDto(
 data class SearchAuthItemDto(
     override val id: Long,
     override val title: String,
+    val replyCount: Long,
     val likes: Long,
     val board: String,
     val link: String,
