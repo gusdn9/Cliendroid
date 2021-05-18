@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.RadioGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
-import com.google.android.material.tabs.TabLayout
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
@@ -47,21 +47,15 @@ class SearchFragment : AppFragment() {
         SearchListAdapter(imageLoader, this::onSearchItemClicked)
     }
 
-    private val tabSelectedListener = object : TabLayout.OnTabSelectedListener {
-        override fun onTabSelected(tab: TabLayout.Tab?) {
-            when (tab?.text) {
-                getString(R.string.search_sort_recency) -> {
-                    viewModel.setSort(SearchSort.RECENCY)
-                }
-                getString(R.string.search_sort_accuracy) -> {
-                    viewModel.setSort(SearchSort.ACCURACY)
-                }
+    private val radioCheckedChangeListener = RadioGroup.OnCheckedChangeListener { _, checkedId ->
+        when (checkedId) {
+            R.id.sortRecency -> {
+                viewModel.setSort(SearchSort.RECENCY)
+            }
+            R.id.sortAccuracy -> {
+                viewModel.setSort(SearchSort.ACCURACY)
             }
         }
-
-        override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
-
-        override fun onTabReselected(tab: TabLayout.Tab?) = Unit
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,7 +127,7 @@ class SearchFragment : AppFragment() {
             }
         })
 
-        binding.tabLayout.addOnTabSelectedListener(tabSelectedListener)
+        binding.sortedRadioGroup.setOnCheckedChangeListener(radioCheckedChangeListener)
 
         binding.boardSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
@@ -155,7 +149,6 @@ class SearchFragment : AppFragment() {
     }
 
     override fun onDestroyView() {
-        binding.tabLayout.removeOnTabSelectedListener(tabSelectedListener)
         super.onDestroyView()
         _binding = null
     }

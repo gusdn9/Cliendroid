@@ -34,22 +34,25 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <RadioGroup
+        android:id="@+id/sortedRadioGroup"
+        android:checkedButton="@id/sortRecency"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/sortRecency"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_sort_recency"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/sortAccuracy"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_sort_accuracy"/>
-
-    </com.google.android.material.tabs.TabLayout>
+    </RadioGroup>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"

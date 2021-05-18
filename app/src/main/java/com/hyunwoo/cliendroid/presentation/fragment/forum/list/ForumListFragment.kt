@@ -145,6 +145,8 @@ class ForumListFragment : AppFragment() {
 
     private fun onForumClicked(forum: Forum) {
         val args = ForumDetailArgs(forum.link)
+        // TODO youtube 있는 링크. 어떻게 보여줄 것인지
+        // val args = ForumDetailArgs("service/board/park/16149846")
         navigateGraph(
             R.id.action_forumListFragment_to_forumDetailFragment,
             args.toFragmentArgsBundle()
