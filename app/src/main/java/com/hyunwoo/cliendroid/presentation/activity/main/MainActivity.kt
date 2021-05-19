@@ -14,7 +14,7 @@ import com.hyunwoo.cliendroid.architecture.AppActivity
 import com.hyunwoo.cliendroid.databinding.ActivityMainBinding
 import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
 import com.hyunwoo.cliendroid.presentation.fragment.drawer.DrawerFragment
-import com.hyunwoo.cliendroid.presentation.fragment.search.SearchArgs
+import com.hyunwoo.cliendroid.presentation.fragment.search.board.SearchBoardArgs
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -76,7 +76,7 @@ class MainActivity : AppActivity(), DrawerFragment.Callback {
     private fun handleIntent(intent: Intent?) {
         if (Intent.ACTION_SEARCH == intent?.action) {
             intent.getStringExtra(SearchManager.QUERY)?.let { query ->
-                val args = SearchArgs(query)
+                val args = SearchBoardArgs(query)
                 navController.navigate(
                     R.id.action_forumListFragment_to_searchFragment,
                     args.toFragmentArgsBundle()

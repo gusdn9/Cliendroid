@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.presentation.fragment.search
+package com.hyunwoo.cliendroid.presentation.fragment.search.board
 
 import android.content.Context
 import android.view.View

@@ -3,7 +3,7 @@ package com.hyunwoo.cliendroid.presentation.activity.main
 import com.hyunwoo.cliendroid.architecture.ActivityScope
 import com.hyunwoo.cliendroid.presentation.fragment.drawer.DrawerFragmentBuilderModule
 import com.hyunwoo.cliendroid.presentation.fragment.forum.ForumFragmentBuilderModule
-import com.hyunwoo.cliendroid.presentation.fragment.search.SearchFragmentBuilderModule
+import com.hyunwoo.cliendroid.presentation.fragment.search.board.SearchBoardFragmentBuilderModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,7 +16,7 @@ abstract class MainActivityBuilderModule {
             MainActivityModule::class,
             DrawerFragmentBuilderModule::class,
             ForumFragmentBuilderModule::class,
-            SearchFragmentBuilderModule::class
+            SearchBoardFragmentBuilderModule::class
         ]
     )
     abstract fun contributeMainActivity(): MainActivity

@@ -41,9 +41,9 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.hyunwoo.cliendroid.presentation.fragment.search.SearchFragment"
+        android:name="com.hyunwoo.cliendroid.presentation.fragment.search.board.SearchBoardFragment"
         android:label="@string/search_label"
-        tools:layout="@layout/fragment_search">
+        tools:layout="@layout/fragment_board_search">
 
         <action
             android:id="@+id/action_searchFragment_to_forumDetailFragment"

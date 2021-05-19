@@ -1,13 +1,13 @@
-package com.hyunwoo.cliendroid.presentation.fragment.search
+package com.hyunwoo.cliendroid.presentation.fragment.search.board
 
 import com.hyunwoo.cliendroid.architecture.FragmentScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class SearchFragmentBuilderModule {
+abstract class SearchBoardFragmentBuilderModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun contributeSearchFragment(): SearchFragment
+    abstract fun contributeSearchFragment(): SearchBoardFragment
 }

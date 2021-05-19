@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.presentation.fragment.search
+package com.hyunwoo.cliendroid.presentation.fragment.search.board
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hyunwoo.cliendroid.databinding.ItemBlockedListBinding
 import com.hyunwoo.cliendroid.domain.model.BlockedSearchItem
 
-class BlockedSearchListViewHolder private constructor(
+class BlockedSearchBoardListViewHolder private constructor(
     private val binding: ItemBlockedListBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -19,7 +19,7 @@ class BlockedSearchListViewHolder private constructor(
         fun create(
             inflater: LayoutInflater,
             parent: ViewGroup
-        ): BlockedSearchListViewHolder =
-            BlockedSearchListViewHolder(ItemBlockedListBinding.inflate(inflater, parent, false))
+        ): BlockedSearchBoardListViewHolder =
+            BlockedSearchBoardListViewHolder(ItemBlockedListBinding.inflate(inflater, parent, false))
     }
 }

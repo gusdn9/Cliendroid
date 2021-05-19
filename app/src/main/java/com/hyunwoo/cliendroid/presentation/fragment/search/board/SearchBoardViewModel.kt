@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.presentation.fragment.search
+package com.hyunwoo.cliendroid.presentation.fragment.search.board
 
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.Loading
@@ -14,7 +14,7 @@ import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class SearchViewModel @AssistedInject constructor(
+class SearchBoardViewModel @AssistedInject constructor(
     @Assisted initialState: State,
     private val searchUseCase: SearchUseCase
 ) : AppMvRxViewModel<State>(initialState) {
@@ -91,14 +91,14 @@ class SearchViewModel @AssistedInject constructor(
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(initialState: State): SearchViewModel
+        fun create(initialState: State): SearchBoardViewModel
     }
 
-    companion object : MavericksViewModelFactory<SearchViewModel, State> {
+    companion object : MavericksViewModelFactory<SearchBoardViewModel, State> {
 
         @JvmStatic
-        override fun create(viewModelContext: ViewModelContext, state: State): SearchViewModel {
-            val fragment: SearchFragment = (viewModelContext as FragmentViewModelContext).fragment()
+        override fun create(viewModelContext: ViewModelContext, state: State): SearchBoardViewModel {
+            val fragment: SearchBoardFragment = (viewModelContext as FragmentViewModelContext).fragment()
             return fragment.viewModelFactory.create(state)
         }
     }

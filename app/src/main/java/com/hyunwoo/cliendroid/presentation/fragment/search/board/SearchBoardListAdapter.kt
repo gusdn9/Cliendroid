@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.presentation.fragment.search
+package com.hyunwoo.cliendroid.presentation.fragment.search.board
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.hyunwoo.cliendroid.domain.model.BaseSearchItem
 import com.hyunwoo.cliendroid.domain.model.BlockedSearchItem
 import com.hyunwoo.cliendroid.domain.model.SearchItem
 
-class SearchListAdapter(
+class SearchBoardListAdapter(
     private val imageLoader: ImageLoader,
     private val onSearchItemClicked: (SearchItem) -> Unit
 ) : ListAdapter<BaseSearchItem, RecyclerView.ViewHolder>(searchComparator) {
@@ -23,13 +23,13 @@ class SearchListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            VIEW_TYPE_CONTENT -> SearchListViewHolder.create(
+            VIEW_TYPE_CONTENT -> SearchBoardListViewHolder.create(
                 LayoutInflater.from(parent.context),
                 parent,
                 imageLoader,
                 onSearchItemClicked
             )
-            VIEW_TYPE_BLOCKED -> BlockedSearchListViewHolder.create(
+            VIEW_TYPE_BLOCKED -> BlockedSearchBoardListViewHolder.create(
                 LayoutInflater.from(parent.context),
                 parent
             )
@@ -38,8 +38,8 @@ class SearchListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         when (holder) {
-            is SearchListViewHolder -> holder.bind(getItem(position) as SearchItem)
-            is BlockedSearchListViewHolder -> holder.bind(getItem(position) as BlockedSearchItem)
+            is SearchBoardListViewHolder -> holder.bind(getItem(position) as SearchItem)
+            is BlockedSearchBoardListViewHolder -> holder.bind(getItem(position) as BlockedSearchItem)
             else -> throw IllegalArgumentException("unknown view type")
         }
 

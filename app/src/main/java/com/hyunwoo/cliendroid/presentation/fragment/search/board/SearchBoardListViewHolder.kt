@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.presentation.fragment.search
+package com.hyunwoo.cliendroid.presentation.fragment.search.board
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.hyunwoo.cliendroid.databinding.ItemCommonListBinding
 import com.hyunwoo.cliendroid.domain.model.SearchItem
 import com.hyunwoo.cliendroid.extension.getColorWithAttr
 
-class SearchListViewHolder private constructor(
+class SearchBoardListViewHolder private constructor(
     private val binding: ItemCommonListBinding,
     private val imageLoader: ImageLoader,
     private val onSearchItemClicked: (SearchItem) -> Unit
@@ -55,8 +55,8 @@ class SearchListViewHolder private constructor(
             parent: ViewGroup,
             imageLoader: ImageLoader,
             onSearchItemClicked: (SearchItem) -> Unit
-        ): SearchListViewHolder =
-            SearchListViewHolder(
+        ): SearchBoardListViewHolder =
+            SearchBoardListViewHolder(
                 ItemCommonListBinding.inflate(inflater, parent, false),
                 imageLoader,
                 onSearchItemClicked

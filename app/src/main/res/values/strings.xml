@@ -25,6 +25,9 @@
     <string name="menu_action_user" formatted="true">ID : %s1</string>
     <string name="menu_action_search_user_contents">게시글 검색</string>
     <string name="menu_action_search_user_comments">댓글 검색</string>
+    
+    <string name="menu_search_board">게시판 검색</string>
+    <string name="menu_search_type">분류 검색</string>
 
     <string name="error_view_alert_title">문제가 발생했습니다.</string>
     <string name="error_view_alert_confirm">@string/confirm</string>
