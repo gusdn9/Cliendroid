@@ -10,6 +10,8 @@ import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentSearchBinding
+import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
+import javax.inject.Inject
 
 class SearchFragment : AppFragment() {
 
@@ -17,6 +19,9 @@ class SearchFragment : AppFragment() {
     private val binding get() = _binding ?: throw ViewBindingException()
 
     private val args by args<SearchArgs>()
+
+    @Inject
+    lateinit var getLoggedInUserUseCase: GetLoggedInUserUseCase
 
     private lateinit var tabLayoutMediator: TabLayoutMediator
 
@@ -34,6 +39,8 @@ class SearchFragment : AppFragment() {
     private fun initViewPager() {
         binding.viewPager.adapter = SearchTabAdapter(this).apply {
             setArgs(args)
+            val isLoggedInUser = getLoggedInUserUseCase() != null
+            setIsLoggedIn(isLoggedInUser)
         }
 
         tabLayoutMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->

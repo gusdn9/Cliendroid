@@ -7,12 +7,21 @@ import com.hyunwoo.cliendroid.presentation.fragment.search.board.SearchBoardFrag
 
 class SearchTabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     private var args: SearchArgs? = null
+    private var isLoggedIn: Boolean = false
 
     fun setArgs(args: SearchArgs) {
         this.args = args
     }
 
-    override fun getItemCount(): Int = Tab.ALL.size
+    fun setIsLoggedIn(isLoggedIn: Boolean) {
+        this.isLoggedIn = isLoggedIn
+    }
+
+    override fun getItemCount(): Int =
+        if (isLoggedIn)
+            Tab.ALL.size
+        else
+            Tab.ALL.size - 1
 
     override fun createFragment(position: Int): Fragment {
         return SearchBoardFragment().apply {
