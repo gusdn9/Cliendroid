@@ -20,8 +20,8 @@ import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentForumDetailBinding
-import com.hyunwoo.cliendroid.domain.model.BaseComment
-import com.hyunwoo.cliendroid.domain.model.ForumContent
+import com.hyunwoo.cliendroid.domain.model.forum.BaseComment
+import com.hyunwoo.cliendroid.domain.model.forum.ForumContent
 import com.hyunwoo.cliendroid.extension.getColorWithAttr
 import javax.inject.Inject
 

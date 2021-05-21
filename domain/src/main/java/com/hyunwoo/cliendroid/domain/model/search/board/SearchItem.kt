@@ -1,4 +1,6 @@
-package com.hyunwoo.cliendroid.domain.model
+package com.hyunwoo.cliendroid.domain.model.search.board
+
+import com.hyunwoo.cliendroid.domain.model.User
 
 sealed class BaseSearchItem(
     open val id: Long,

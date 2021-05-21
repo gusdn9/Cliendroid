@@ -8,7 +8,7 @@ import coil.ImageLoader
 import coil.load
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.databinding.ItemCommonListBinding
-import com.hyunwoo.cliendroid.domain.model.SearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchItem
 import com.hyunwoo.cliendroid.extension.getColorWithAttr
 
 class SearchBoardListViewHolder private constructor(

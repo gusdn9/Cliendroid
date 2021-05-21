@@ -5,11 +5,11 @@ import com.hyunwoo.cliendroid.data.mapper.toForum
 import com.hyunwoo.cliendroid.data.mapper.toForumContent
 import com.hyunwoo.cliendroid.data.mapper.toMenuBoards
 import com.hyunwoo.cliendroid.data.mapper.toSearchContent
-import com.hyunwoo.cliendroid.domain.model.BaseForum
-import com.hyunwoo.cliendroid.domain.model.ForumContent
+import com.hyunwoo.cliendroid.domain.model.forum.BaseForum
+import com.hyunwoo.cliendroid.domain.model.forum.ForumContent
 import com.hyunwoo.cliendroid.domain.model.MenuBoards
-import com.hyunwoo.cliendroid.domain.model.SearchContent
-import com.hyunwoo.cliendroid.domain.model.SearchSort
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchContent
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
 import com.hyunwoo.cliendroid.network.model.forum.BlockedForumItemDto
 import com.hyunwoo.cliendroid.network.model.forum.ForumItemDto

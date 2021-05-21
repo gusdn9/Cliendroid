@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import com.hyunwoo.cliendroid.domain.model.BaseForum
-import com.hyunwoo.cliendroid.domain.model.BlockedForum
-import com.hyunwoo.cliendroid.domain.model.Forum
+import com.hyunwoo.cliendroid.domain.model.forum.BaseForum
+import com.hyunwoo.cliendroid.domain.model.forum.BlockedForum
+import com.hyunwoo.cliendroid.domain.model.forum.Forum
 
 class ForumListAdapter(
     private val imageLoader: ImageLoader,

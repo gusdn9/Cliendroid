@@ -1,6 +1,6 @@
 package com.hyunwoo.cliendroid.domain.usecase
 
-import com.hyunwoo.cliendroid.domain.model.BaseForum
+import com.hyunwoo.cliendroid.domain.model.forum.BaseForum
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
 import javax.inject.Inject
 

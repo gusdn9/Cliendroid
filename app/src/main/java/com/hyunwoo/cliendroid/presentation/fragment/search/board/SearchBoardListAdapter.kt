@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import com.hyunwoo.cliendroid.domain.model.BaseSearchItem
-import com.hyunwoo.cliendroid.domain.model.BlockedSearchItem
-import com.hyunwoo.cliendroid.domain.model.SearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.BaseSearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.BlockedSearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchItem
 
 class SearchBoardListAdapter(
     private val imageLoader: ImageLoader,

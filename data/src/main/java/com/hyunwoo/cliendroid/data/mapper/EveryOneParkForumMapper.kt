@@ -1,7 +1,7 @@
 package com.hyunwoo.cliendroid.data.mapper
 
-import com.hyunwoo.cliendroid.domain.model.BlockedForum
-import com.hyunwoo.cliendroid.domain.model.Forum
+import com.hyunwoo.cliendroid.domain.model.forum.BlockedForum
+import com.hyunwoo.cliendroid.domain.model.forum.Forum
 import com.hyunwoo.cliendroid.domain.model.User
 import com.hyunwoo.cliendroid.network.model.forum.BlockedForumItemDto
 import com.hyunwoo.cliendroid.network.model.forum.ForumItemDto

@@ -8,7 +8,7 @@ import coil.ImageLoader
 import coil.load
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.databinding.ItemCommonListBinding
-import com.hyunwoo.cliendroid.domain.model.Forum
+import com.hyunwoo.cliendroid.domain.model.forum.Forum
 import com.hyunwoo.cliendroid.extension.getColorWithAttr
 
 class ForumListViewHolder private constructor(

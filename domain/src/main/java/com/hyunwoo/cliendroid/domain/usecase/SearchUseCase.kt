@@ -1,7 +1,7 @@
 package com.hyunwoo.cliendroid.domain.usecase
 
-import com.hyunwoo.cliendroid.domain.model.SearchContent
-import com.hyunwoo.cliendroid.domain.model.SearchSort
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchContent
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
 import javax.inject.Inject
 

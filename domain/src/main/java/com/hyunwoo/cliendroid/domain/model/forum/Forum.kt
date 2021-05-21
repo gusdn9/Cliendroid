@@ -1,4 +1,6 @@
-package com.hyunwoo.cliendroid.domain.model
+package com.hyunwoo.cliendroid.domain.model.forum
+
+import com.hyunwoo.cliendroid.domain.model.User
 
 sealed class BaseForum(
     open val id: Long,

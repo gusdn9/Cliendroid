@@ -1,4 +1,4 @@
-package com.hyunwoo.cliendroid.domain.model
+package com.hyunwoo.cliendroid.domain.model.search.board
 
 data class Board(
     val id: String,

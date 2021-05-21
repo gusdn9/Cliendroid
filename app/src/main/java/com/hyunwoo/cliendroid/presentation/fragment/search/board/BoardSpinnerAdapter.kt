@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.hyunwoo.cliendroid.R
-import com.hyunwoo.cliendroid.domain.model.Board
+import com.hyunwoo.cliendroid.domain.model.search.board.Board
 
 class BoardSpinnerAdapter(
     context: Context,

@@ -1,10 +1,10 @@
 package com.hyunwoo.cliendroid.domain.repository
 
-import com.hyunwoo.cliendroid.domain.model.BaseForum
-import com.hyunwoo.cliendroid.domain.model.ForumContent
+import com.hyunwoo.cliendroid.domain.model.forum.BaseForum
+import com.hyunwoo.cliendroid.domain.model.forum.ForumContent
 import com.hyunwoo.cliendroid.domain.model.MenuBoards
-import com.hyunwoo.cliendroid.domain.model.SearchContent
-import com.hyunwoo.cliendroid.domain.model.SearchSort
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchContent
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
 
 interface CommunityRepository {
 

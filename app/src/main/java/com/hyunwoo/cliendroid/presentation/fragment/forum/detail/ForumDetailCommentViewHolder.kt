@@ -11,7 +11,7 @@ import coil.ImageLoader
 import coil.load
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.databinding.ItemCommentBinding
-import com.hyunwoo.cliendroid.domain.model.Comment
+import com.hyunwoo.cliendroid.domain.model.forum.Comment
 
 class ForumDetailCommentViewHolder private constructor(
     private val binding: ItemCommentBinding,

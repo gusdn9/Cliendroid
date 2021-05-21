@@ -18,8 +18,8 @@ import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentBoardSearchBinding
-import com.hyunwoo.cliendroid.domain.model.SearchItem
-import com.hyunwoo.cliendroid.domain.model.SearchSort
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
 import com.hyunwoo.cliendroid.extension.navigateGraph
 import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle

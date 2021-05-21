@@ -7,7 +7,7 @@ import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
-import com.hyunwoo.cliendroid.domain.model.SearchSort
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
 import com.hyunwoo.cliendroid.domain.usecase.SearchUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject

@@ -22,7 +22,7 @@ import com.hyunwoo.cliendroid.common.SnackbarHolder
 import com.hyunwoo.cliendroid.common.error.snackbar.SnackbarErrorResolution
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentForumListBinding
-import com.hyunwoo.cliendroid.domain.model.Forum
+import com.hyunwoo.cliendroid.domain.model.forum.Forum
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
 import com.hyunwoo.cliendroid.extension.navigateGraph
 import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle

@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import com.hyunwoo.cliendroid.domain.model.BaseComment
-import com.hyunwoo.cliendroid.domain.model.BlockedComment
-import com.hyunwoo.cliendroid.domain.model.Comment
+import com.hyunwoo.cliendroid.domain.model.forum.BaseComment
+import com.hyunwoo.cliendroid.domain.model.forum.BlockedComment
+import com.hyunwoo.cliendroid.domain.model.forum.Comment
 
 class ForumDetailCommentAdapter(
     private val imageLoader: ImageLoader

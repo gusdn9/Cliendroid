@@ -1,6 +1,6 @@
 package com.hyunwoo.cliendroid.data.mapper
 
-import com.hyunwoo.cliendroid.domain.model.ForumContent
+import com.hyunwoo.cliendroid.domain.model.forum.ForumContent
 import com.hyunwoo.cliendroid.domain.model.User
 import com.hyunwoo.cliendroid.network.model.forum.BlockedCommentDto
 import com.hyunwoo.cliendroid.network.model.forum.CommentDto

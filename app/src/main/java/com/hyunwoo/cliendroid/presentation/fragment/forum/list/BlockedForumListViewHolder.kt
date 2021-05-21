@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hyunwoo.cliendroid.databinding.ItemBlockedListBinding
-import com.hyunwoo.cliendroid.domain.model.BlockedForum
+import com.hyunwoo.cliendroid.domain.model.forum.BlockedForum
 
 class BlockedForumListViewHolder private constructor(
     private val binding: ItemBlockedListBinding

@@ -3,10 +3,10 @@ package com.hyunwoo.cliendroid.presentation.fragment.search.board
 import com.airbnb.mvrx.Async
 import com.airbnb.mvrx.MavericksState
 import com.airbnb.mvrx.Uninitialized
-import com.hyunwoo.cliendroid.domain.model.BaseSearchItem
-import com.hyunwoo.cliendroid.domain.model.Board
-import com.hyunwoo.cliendroid.domain.model.SearchContent
-import com.hyunwoo.cliendroid.domain.model.SearchSort
+import com.hyunwoo.cliendroid.domain.model.search.board.BaseSearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.Board
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchContent
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
 import com.hyunwoo.cliendroid.presentation.fragment.search.SearchArgs
 
 data class State(

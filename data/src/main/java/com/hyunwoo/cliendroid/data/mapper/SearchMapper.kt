@@ -1,9 +1,9 @@
 package com.hyunwoo.cliendroid.data.mapper
 
-import com.hyunwoo.cliendroid.domain.model.BlockedSearchItem
-import com.hyunwoo.cliendroid.domain.model.Board
-import com.hyunwoo.cliendroid.domain.model.SearchContent
-import com.hyunwoo.cliendroid.domain.model.SearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.BlockedSearchItem
+import com.hyunwoo.cliendroid.domain.model.search.board.Board
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchContent
+import com.hyunwoo.cliendroid.domain.model.search.board.SearchItem
 import com.hyunwoo.cliendroid.domain.model.User
 import com.hyunwoo.cliendroid.network.model.search.withoutauth.BlockedSearchItemDto
 import com.hyunwoo.cliendroid.network.model.search.withoutauth.SearchItemDto

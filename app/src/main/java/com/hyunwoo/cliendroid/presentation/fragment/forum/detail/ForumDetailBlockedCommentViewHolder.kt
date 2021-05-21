@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.hyunwoo.cliendroid.databinding.ItemBlockedCommentBinding
-import com.hyunwoo.cliendroid.domain.model.BlockedComment
+import com.hyunwoo.cliendroid.domain.model.forum.BlockedComment
 
 class ForumDetailBlockedCommentViewHolder private constructor(
     private val binding: ItemBlockedCommentBinding
