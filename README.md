@@ -21,7 +21,7 @@ API또한 위에서 설명한 것처럼 별도의 API 서버가 있는것처럼 
 화면을 구성하는 presentation layer에서는 어떤 아키텍쳐를 사용할지 고민을 하였는데, mvvm을 사용하면서 단점이라고 느낀, view state가 엉키는 상황을 피하고자   단방향 데이터 구조를 사용하는 아키텍쳐인 mavericks를 사용하였습니다.
 
 ### Dagger 2
-hilt를 사용할까 했지만, 최근에서야 아직도 베타인 상황이기에 Dagger를 사용하였습니다.
+hilt를 사용할까 했지만, 최근에서야 아직도 베타인 상황이기에 Dagger를 사용하였습니다.(현재는 정식 출시한 것을 확인. TODO로 추후 hilt로 변경 예정)
 
 ### Material Design
 현재는 거의 없는 형태이긴하지만… 기본적인 material design의 형태를 따라가면서 style과 theme을 적용 하고 개발해 나가고 있습니다.
