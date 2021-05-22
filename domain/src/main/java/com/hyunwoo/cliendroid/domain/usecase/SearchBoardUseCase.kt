@@ -5,7 +5,7 @@ import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
 import javax.inject.Inject
 
-class SearchUseCase @Inject constructor(
+class SearchBoardUseCase @Inject constructor(
     private val communityRepository: CommunityRepository
 ) {
 
