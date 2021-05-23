@@ -8,7 +8,7 @@ import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.ViewModelContext
 import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.model.search.board.SearchSort
-import com.hyunwoo.cliendroid.domain.usecase.SearchUseCase
+import com.hyunwoo.cliendroid.domain.usecase.SearchBoardUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Job
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class SearchBoardViewModel @AssistedInject constructor(
     @Assisted initialState: State,
-    private val searchUseCase: SearchUseCase
+    private val searchBoardUseCase: SearchBoardUseCase
 ) : AppMvRxViewModel<State>(initialState) {
 
     private var loadMoreJob: Job? = null
@@ -34,7 +34,7 @@ class SearchBoardViewModel @AssistedInject constructor(
         setState { copy(searchLoadMoreAsync = Uninitialized) }
 
         viewModelScope.launch {
-            searchUseCase::invoke.asAsync(state.keyword, 0, state.sort, state.boardId) { async ->
+            searchBoardUseCase::invoke.asAsync(state.keyword, 0, state.sort, state.boardId) { async ->
                 var nextState = this
                 if (async is Success) {
                     val result = async()
@@ -57,7 +57,7 @@ class SearchBoardViewModel @AssistedInject constructor(
 
         val prevEntries = state.searchResultList ?: return@withState
         loadMoreJob = viewModelScope.launch {
-            searchUseCase::invoke.asAsync(state.keyword, state.page + 1, state.sort, state.boardId) { async ->
+            searchBoardUseCase::invoke.asAsync(state.keyword, state.page + 1, state.sort, state.boardId) { async ->
                 var nextState = this
                 if (async is Success) {
                     val result = async()
