@@ -6,11 +6,13 @@ import com.hyunwoo.cliendroid.data.repository.CookieDataSourceImpl
 import com.hyunwoo.cliendroid.data.repository.CookieRepositoryImpl
 import com.hyunwoo.cliendroid.data.repository.CookieStoreImpl
 import com.hyunwoo.cliendroid.data.repository.LoggedInUserDataSourceImpl
+import com.hyunwoo.cliendroid.data.repository.SearchRepositoryImpl
 import com.hyunwoo.cliendroid.domain.repository.AuthRepository
 import com.hyunwoo.cliendroid.domain.repository.CommunityRepository
 import com.hyunwoo.cliendroid.domain.repository.CookieDataSource
 import com.hyunwoo.cliendroid.domain.repository.CookieRepository
 import com.hyunwoo.cliendroid.domain.repository.LoggedInUserDataSource
+import com.hyunwoo.cliendroid.domain.repository.SearchRepository
 import com.hyunwoo.cliendroid.network.CookieStore
 import dagger.Binds
 import dagger.Module
@@ -42,4 +44,7 @@ interface DataLayerBindingModule {
 
     @Binds
     fun bindCookieRepository(impl: CookieRepositoryImpl): CookieRepository
+
+    @Binds
+    fun bindSearchRepository(impl: SearchRepositoryImpl): SearchRepository
 }
