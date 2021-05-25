@@ -1,13 +1,15 @@
 package com.hyunwoo.cliendroid.presentation.fragment.search.type
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.ImageLoader
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
 import com.hyunwoo.cliendroid.R
@@ -15,7 +17,11 @@ import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentTypeSearchBinding
 import com.hyunwoo.cliendroid.domain.model.search.type.SearchType
+import com.hyunwoo.cliendroid.domain.model.search.type.SearchTypeItem
 import com.hyunwoo.cliendroid.extension.isProgressDialogVisible
+import com.hyunwoo.cliendroid.extension.navigateGraph
+import com.hyunwoo.cliendroid.extension.toFragmentArgsBundle
+import com.hyunwoo.cliendroid.presentation.fragment.forum.detail.ForumDetailArgs
 import javax.inject.Inject
 
 class SearchTypeFragment : AppFragment() {
@@ -27,6 +33,13 @@ class SearchTypeFragment : AppFragment() {
 
     @Inject
     lateinit var viewModelFactory: SearchTypeViewModel.Factory
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
+
+    private val searchListAdapter by lazy {
+        SearchTypeListAdapter(imageLoader, this::onSearchItemClicked)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +61,11 @@ class SearchTypeFragment : AppFragment() {
         }
 
         viewModel.onEach(State::searchResultList) { searchList ->
-            // searchListAdapter.submitList(searchList)
+            searchListAdapter.submitList(searchList)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTypeSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,6 +78,13 @@ class SearchTypeFragment : AppFragment() {
     }
 
     private fun initViews() {
+        binding.recyclerView.adapter = searchListAdapter
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                binding.recyclerView.context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
     }
 
     private fun initListeners() {
@@ -84,7 +104,7 @@ class SearchTypeFragment : AppFragment() {
         binding.typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             val stringArray = resources.getStringArray(R.array.search_type_value)
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-                // viewModel.setType(SearchType.valueOf(stringArray[position]))
+                SearchType.getValueOf(stringArray[position])?.let { viewModel.setType(it) }
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) = Unit
@@ -104,5 +124,13 @@ class SearchTypeFragment : AppFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun onSearchItemClicked(searchItem: SearchTypeItem) {
+        val args = ForumDetailArgs(searchItem.link)
+        navigateGraph(
+            R.id.action_searchFragment_to_forumDetailFragment,
+            args.toFragmentArgsBundle()
+        )
     }
 }

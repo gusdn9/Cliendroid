@@ -36,7 +36,7 @@ class SearchTypeViewModel @AssistedInject constructor(
         viewModelScope.launch {
             searchTypeUseCase::invoke.asAsync(state.searchType, state.keyword, state.page) { async ->
                 var nextState = this
-                if (async is Success) {
+                    if (async is Success) {
                     val result = async()
                     nextState = nextState.copy(
                         page = 0,

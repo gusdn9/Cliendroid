@@ -7,4 +7,8 @@ enum class SearchType(val value: String) {
     COMMENT("search_comment"),
     WRITER("search_writer"),
     COMMENTER("search_commenter");
+
+    companion object {
+        fun getValueOf(type: String): SearchType? = SearchType.values().find { it.value == type }
+    }
 }
