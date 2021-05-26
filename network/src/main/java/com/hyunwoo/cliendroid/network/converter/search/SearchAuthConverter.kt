@@ -38,7 +38,7 @@ class SearchAuthConverter : Converter<ResponseBody, SearchAuthRes> {
                 val replyCount = element.selectFirst(".list_reply")?.text()?.toLong() ?: 0L
                 val likes = element.selectFirst(".list_symph")?.text()?.toLong() ?: 0L
                 val board = element.selectFirst(".shortname").text()
-                val link = element.selectFirst(".list_subject").attr("href")
+                val link = element.selectFirst(".list_subject").attr("href").substringBefore("?")
                 val time = element.selectFirst(".list_time").text()
                 val hits = element.selectFirst(".list_hit").text().parseLargeNumber()
                 val author = element.selectFirst(".list_author")
