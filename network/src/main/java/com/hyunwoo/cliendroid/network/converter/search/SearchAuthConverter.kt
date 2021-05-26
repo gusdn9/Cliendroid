@@ -1,6 +1,7 @@
 package com.hyunwoo.cliendroid.network.converter.search
 
 import com.hyunwoo.cliendroid.network.exception.RequiredLoginException
+import com.hyunwoo.cliendroid.network.extension.parseLargeNumber
 import com.hyunwoo.cliendroid.network.model.search.auth.BaseSearchAuthItemDto
 import com.hyunwoo.cliendroid.network.model.search.auth.BlockedSearchAuthItemDto
 import com.hyunwoo.cliendroid.network.model.search.auth.SearchAuthItemDto
@@ -39,23 +40,25 @@ class SearchAuthConverter : Converter<ResponseBody, SearchAuthRes> {
                 val board = element.selectFirst(".shortname").text()
                 val link = element.selectFirst(".list_subject").attr("href")
                 val time = element.selectFirst(".list_time").text()
-                val hits = element.selectFirst(".list_hit").text().toLong()
+                val hits = element.selectFirst(".list_hit").text().parseLargeNumber()
                 val author = element.selectFirst(".list_author")
                 val userId = element.attr("data-author-id")
                 val userNickname = author.selectFirst(".nickname")?.text()
                 val userImage = author.selectFirst(".nickimg img")?.attr("src")
 
-                list.add(SearchAuthItemDto(
-                    id = id,
-                    title = title,
-                    replyCount = replyCount,
-                    likes = likes,
-                    board = board,
-                    link = link,
-                    time = time,
-                    hits = hits,
-                    user = UserDto(id = userId, nickName = userNickname, image = userImage)
-                ))
+                list.add(
+                    SearchAuthItemDto(
+                        id = id,
+                        title = title,
+                        replyCount = replyCount,
+                        likes = likes,
+                        board = board,
+                        link = link,
+                        time = time,
+                        hits = hits,
+                        user = UserDto(id = userId, nickName = userNickname, image = userImage)
+                    )
+                )
             }
         }
         val endOfPage = document.getElementsByClass("board-nav-next").size <= 0
