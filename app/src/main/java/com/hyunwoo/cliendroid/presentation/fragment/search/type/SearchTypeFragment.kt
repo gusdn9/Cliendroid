@@ -55,7 +55,7 @@ class SearchTypeFragment : AppFragment() {
             isProgressDialogVisible = async is Loading
         }
 
-        viewModel.onEach(State::keyword) { keyword ->
+        viewModel.onEach(State::keyword, State::searchType) { keyword, _ ->
             binding.searchView.setQuery(keyword, false)
             viewModel.refresh()
         }

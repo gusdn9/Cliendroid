@@ -68,16 +68,14 @@
         <item>댓글검색</item>
         <item>작성자검색</item>
         <item>댓글작성자검색</item>
-        <item>통합검색</item>
     </string-array>
 
     <string-array name="search_type_value">
-        <item>search_title</item>
-        <item>search_content</item>
-        <item>search_comment</item>
-        <item>search_writer</item>
-        <item>search_commenter</item>
-        <item>search_board</item>
+        <item>title</item>
+        <item>content</item>
+        <item>comment</item>
+        <item>id</item>
+        <item>commenter</item>
     </string-array>
 
 </resources>
