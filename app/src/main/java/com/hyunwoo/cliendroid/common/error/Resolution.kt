@@ -1,6 +1,7 @@
 package com.hyunwoo.cliendroid.common.error
 
 import java.net.ProtocolException
+import java.net.UnknownServiceException
 
 typealias OnRetry = () -> Unit
 typealias OnResolved = () -> Unit
@@ -16,7 +17,7 @@ interface Resolution<T : ErrorView> {
      */
     fun resolve(errorView: T, throwable: Throwable, onRetry: OnRetry? = null, onResolved: OnResolved? = null) {
         when (throwable) {
-            is ProtocolException -> {
+            is ProtocolException, is UnknownServiceException -> {
                 errorView.onUnauthorized(onRetry)
             }
             else -> errorView.onUndefinedError(throwable.message, onRetry, onResolved)
