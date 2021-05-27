@@ -14,6 +14,7 @@ import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.fragmentViewModel
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
+import com.hyunwoo.cliendroid.common.error.dialog.DialogErrorResolution
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentTypeSearchBinding
 import com.hyunwoo.cliendroid.domain.model.search.type.SearchType
@@ -36,6 +37,9 @@ class SearchTypeFragment : AppFragment() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
+    @Inject
+    lateinit var dialogErrorResolution: DialogErrorResolution
 
     private val searchListAdapter by lazy {
         SearchTypeListAdapter(imageLoader, this::onSearchItemClicked)
@@ -63,6 +67,14 @@ class SearchTypeFragment : AppFragment() {
         viewModel.onEach(State::searchResultList) { searchList ->
             searchListAdapter.submitList(searchList)
         }
+
+        viewModel.onAsync(
+            State::searchRefreshAsync,
+            uniqueOnly("searchRefreshAsync"),
+            onFail = { throwable ->
+                dialogErrorResolution.resolve(this, throwable)
+            }
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

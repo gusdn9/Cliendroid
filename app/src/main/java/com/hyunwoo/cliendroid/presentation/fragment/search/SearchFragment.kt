@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.airbnb.mvrx.args
+import com.airbnb.mvrx.fragmentViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hyunwoo.cliendroid.R
 import com.hyunwoo.cliendroid.architecture.AppFragment
 import com.hyunwoo.cliendroid.common.exception.ViewBindingException
 import com.hyunwoo.cliendroid.databinding.FragmentSearchBinding
-import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
 import javax.inject.Inject
 
 class SearchFragment : AppFragment() {
@@ -20,10 +20,29 @@ class SearchFragment : AppFragment() {
 
     private val args by args<SearchArgs>()
 
+    private val viewModel by fragmentViewModel(SearchViewModel::class)
+
     @Inject
-    lateinit var getLoggedInUserUseCase: GetLoggedInUserUseCase
+    lateinit var viewModelFactory: SearchViewModel.Factory
 
     private lateinit var tabLayoutMediator: TabLayoutMediator
+
+    private lateinit var searchTabAdapter: SearchTabAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeStates()
+    }
+
+    private fun subscribeStates() {
+        viewModel.onEach(State::loggedInUser) { user ->
+            val isLoggedInUser = user != null
+            with(searchTabAdapter) {
+                setIsLoggedIn(isLoggedInUser)
+                notifyDataSetChanged()
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
@@ -37,11 +56,11 @@ class SearchFragment : AppFragment() {
     }
 
     private fun initViewPager() {
-        binding.viewPager.adapter = SearchTabAdapter(this).apply {
+        searchTabAdapter = SearchTabAdapter(this).apply {
             setArgs(args)
-            val isLoggedInUser = getLoggedInUserUseCase() != null
-            setIsLoggedIn(isLoggedInUser)
         }
+
+        binding.viewPager.adapter = searchTabAdapter
 
         tabLayoutMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (Tab.fromValue(position)) {
