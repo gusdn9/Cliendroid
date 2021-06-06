@@ -20,7 +20,7 @@ class ForumDetailConverter : Converter<ResponseBody, ForumDetailRes> {
 
         val title = document.selectFirst(".post_subject span").text()
         val userNickname = document.selectFirst(".post_view .nickname")?.text()
-        val userNickImage = document.selectFirst(".nickimg img")?.attr("src")
+        val userNickImage = document.selectFirst(".post_view .nickimg img")?.attr("src")
         val author = UserDto(null, userNickname, userNickImage)
 
         val timeDiv = document.selectFirst(".post_time span")
