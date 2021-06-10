@@ -2,10 +2,10 @@ package com.hyunwoo.cliendroid.presentation.fragment.drawer
 
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.Loading
+import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.ViewModelContext
-import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.model.LogoutCause
 import com.hyunwoo.cliendroid.domain.usecase.GetMenuBoardListUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
@@ -24,7 +24,7 @@ class DrawerViewModel @AssistedInject constructor(
     private val getLoggedInUserUseCase: GetLoggedInUserUseCase,
     private val getMenuBoardListUseCase: GetMenuBoardListUseCase,
     private val loggedOutSubscribeUseCase: LoggedOutSubscribeUseCase
-) : AppMvRxViewModel<State>(initialState) {
+) : MavericksViewModel<State>(initialState) {
 
     init {
         setState {
@@ -45,14 +45,14 @@ class DrawerViewModel @AssistedInject constructor(
     fun login(id: String, password: String) = withState { state ->
         if (state.loginAsync is Loading) return@withState
 
-        viewModelScope.launch {
-            loginUseCase::invoke.asAsync(id, password) { async ->
-                var nextState = this
-                if (async is Success) {
-                    nextState = copy(loggedInUser = async())
-                }
-                nextState.copy(loginAsync = async)
+        suspend {
+            loginUseCase(id, password)
+        }.execute { async ->
+            var nextState = this
+            if (async is Success) {
+                nextState = copy(loggedInUser = async())
             }
+            nextState.copy(loginAsync = async)
         }
     }
 
@@ -64,15 +64,16 @@ class DrawerViewModel @AssistedInject constructor(
     private fun getMenuList() = withState { state ->
         if (state.menuListAsync is Loading) return@withState
 
-        viewModelScope.launch {
-            getMenuBoardListUseCase::invoke.asAsync { async ->
-                var nextState = this
-                if (async is Success) {
-                    val result = async()
-                    nextState = copy(menuList = result.communities + result.somoimList)
-                }
-                nextState.copy(menuListAsync = async)
+        suspend {
+            getMenuBoardListUseCase()
+        }.execute { async ->
+            var nextState = this
+            if (async is Success) {
+                val result = async()
+                nextState = copy(menuList = result.communities + result.somoimList)
             }
+            nextState.copy(menuListAsync = async)
+
         }
     }
 

@@ -2,21 +2,20 @@ package com.hyunwoo.cliendroid.presentation.fragment.forum.detail
 
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.Loading
+import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.ViewModelContext
-import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.usecase.GetForumDetailUseCase
 import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import kotlinx.coroutines.launch
 
 class ForumDetailViewModel @AssistedInject constructor(
     @Assisted initialState: State,
     private val getForumDetailUseCase: GetForumDetailUseCase,
     private val getLoggedInUserUseCase: GetLoggedInUserUseCase
-) : AppMvRxViewModel<State>(initialState) {
+) : MavericksViewModel<State>(initialState) {
 
     init {
         setState {
@@ -31,14 +30,14 @@ class ForumDetailViewModel @AssistedInject constructor(
             return@withState
         }
 
-        viewModelScope.launch {
-            getForumDetailUseCase::invoke.asAsync(state.url) { async ->
-                var nextState = this
-                if (async is Success) {
-                    nextState = nextState.copy(content = async())
-                }
-                nextState.copy(refreshAsync = async)
+        suspend {
+            getForumDetailUseCase(state.url)
+        }.execute { async ->
+            var nextState = this
+            if (async is Success) {
+                nextState = nextState.copy(content = async())
             }
+            nextState.copy(refreshAsync = async)
         }
     }
 

@@ -2,22 +2,21 @@ package com.hyunwoo.cliendroid.presentation.fragment.search.type
 
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.Loading
+import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.ViewModelContext
-import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.model.search.type.SearchType
 import com.hyunwoo.cliendroid.domain.usecase.SearchTypeUseCase
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class SearchTypeViewModel @AssistedInject constructor(
     @Assisted initialState: State,
     private val searchTypeUseCase: SearchTypeUseCase
-) : AppMvRxViewModel<State>(initialState) {
+) : MavericksViewModel<State>(initialState) {
 
     private var loadMoreJob: Job? = null
 
@@ -33,19 +32,20 @@ class SearchTypeViewModel @AssistedInject constructor(
         loadMoreJob?.cancel()
         setState { copy(searchLoadMoreAsync = Uninitialized) }
 
-        viewModelScope.launch {
-            searchTypeUseCase::invoke.asAsync(state.searchType, state.keyword, state.page) { async ->
-                var nextState = this
-                    if (async is Success) {
-                    val result = async()
-                    nextState = nextState.copy(
-                        page = 0,
-                        searchResultList = result.contents,
-                        endOfPage = result.endOfPage
-                    )
-                }
-                nextState.copy(searchRefreshAsync = async)
+        suspend {
+            searchTypeUseCase(state.searchType, state.keyword, state.page)
+        }.execute { async ->
+            var nextState = this
+            if (async is Success) {
+                val result = async()
+                nextState = nextState.copy(
+                    page = 0,
+                    searchResultList = result.contents,
+                    endOfPage = result.endOfPage
+                )
             }
+            nextState.copy(searchRefreshAsync = async)
+
         }
     }
 
@@ -55,19 +55,21 @@ class SearchTypeViewModel @AssistedInject constructor(
         }
 
         val prevEntries = state.searchResultList ?: return@withState
-        loadMoreJob = viewModelScope.launch {
-            searchTypeUseCase::invoke.asAsync(state.searchType, state.keyword, state.page + 1) { async ->
-                var nextState = this
-                if (async is Success) {
-                    val result = async()
-                    nextState = nextState.copy(
-                        searchResultList = prevEntries + result.contents,
-                        page = state.page + 1,
-                        endOfPage = result.endOfPage
-                    )
-                }
-                nextState.copy(searchLoadMoreAsync = async)
+
+
+        loadMoreJob = suspend {
+            searchTypeUseCase(state.searchType, state.keyword, state.page + 1)
+        }.execute { async ->
+            var nextState = this
+            if (async is Success) {
+                val result = async()
+                nextState = nextState.copy(
+                    searchResultList = prevEntries + result.contents,
+                    page = state.page + 1,
+                    endOfPage = result.endOfPage
+                )
             }
+            nextState.copy(searchLoadMoreAsync = async)
         }
     }
 

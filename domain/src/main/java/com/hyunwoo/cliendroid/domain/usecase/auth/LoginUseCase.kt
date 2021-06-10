@@ -13,7 +13,7 @@ class LoginUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun invoke(id: String, password: String): LoggedInUser {
+    suspend operator fun invoke(id: String, password: String): LoggedInUser {
         cookieRepository.setCookie(null)
         val csrf = authRepository.loginPreparedStatement()
         try {

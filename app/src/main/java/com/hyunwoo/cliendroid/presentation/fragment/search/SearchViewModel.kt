@@ -1,9 +1,9 @@
 package com.hyunwoo.cliendroid.presentation.fragment.search
 
 import com.airbnb.mvrx.FragmentViewModelContext
+import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.hyunwoo.cliendroid.architecture.AppMvRxViewModel
 import com.hyunwoo.cliendroid.domain.usecase.auth.GetLoggedInUserUseCase
 import com.hyunwoo.cliendroid.domain.usecase.event.LoggedOutSubscribeUseCase
 import com.squareup.inject.assisted.Assisted
@@ -15,7 +15,7 @@ class SearchViewModel @AssistedInject constructor(
     @Assisted initialState: State,
     private val getLoggedInUserUseCase: GetLoggedInUserUseCase,
     private val loggedOutSubscribeUseCase: LoggedOutSubscribeUseCase
-) : AppMvRxViewModel<State>(initialState) {
+) : MavericksViewModel<State>(initialState) {
 
     init {
         setState {
