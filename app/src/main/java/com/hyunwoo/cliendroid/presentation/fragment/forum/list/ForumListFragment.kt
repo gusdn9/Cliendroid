@@ -60,7 +60,10 @@ class ForumListFragment : AppFragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         subscribeStates()
-        scrollParcelable = savedInstanceState?.getParcelable(ARGS_SCROLL_STATE)
+        savedInstanceState?.let {
+            scrollParcelable = it.getParcelable(ARGS_SCROLL_STATE)
+            it.clear()
+        }
     }
 
     private fun subscribeStates() {
