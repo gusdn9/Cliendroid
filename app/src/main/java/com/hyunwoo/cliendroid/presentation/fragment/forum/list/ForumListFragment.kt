@@ -3,6 +3,7 @@ package com.hyunwoo.cliendroid.presentation.fragment.forum.list
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -45,6 +46,8 @@ class ForumListFragment : AppFragment() {
     @Inject
     lateinit var snackbarErrorResolution: SnackbarErrorResolution
 
+    private var scrollParcelable: Parcelable? = null
+
     private val snackbarHolder by lazy {
         SnackbarHolder.forFragment(this, R.id.rootFrameLayout)
     }
@@ -57,11 +60,16 @@ class ForumListFragment : AppFragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         subscribeStates()
+        scrollParcelable = savedInstanceState?.getParcelable(ARGS_SCROLL_STATE)
     }
 
     private fun subscribeStates() {
         viewModel.onEach(State::listData) { forumList ->
             adapter.submitList(forumList ?: emptyList())
+            scrollParcelable?.let {
+                binding.recyclerView.layoutManager?.onRestoreInstanceState(it)
+                scrollParcelable = null
+            }
         }
 
         viewModel.onEach(State::listDataRefreshAsync) { async ->
@@ -81,6 +89,14 @@ class ForumListFragment : AppFragment() {
                 }
             }
         )
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (scrollParcelable != null) {
+            outState.putParcelable(ARGS_SCROLL_STATE, scrollParcelable)
+            scrollParcelable = null
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -120,6 +136,11 @@ class ForumListFragment : AppFragment() {
         })
     }
 
+    override fun onPause() {
+        super.onPause()
+        scrollParcelable = binding.recyclerView.layoutManager?.onSaveInstanceState()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_search, menu)
 
@@ -155,5 +176,6 @@ class ForumListFragment : AppFragment() {
 
     companion object {
         const val EXTRA_TITLE = "title"
+        private const val ARGS_SCROLL_STATE = "recyclerState"
     }
 }
