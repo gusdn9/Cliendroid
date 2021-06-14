@@ -10,5 +10,7 @@ data class ForumDetailRes(
     val likes: Long,
     val ipAddress: String,
     val htmlBody: String,
-    val comments: List<BaseCommentDto>
+    val comments: List<BaseCommentDto>,
+    val boardCd: String,
+    val boardSn: String
 )

@@ -71,6 +71,9 @@ class ForumDetailConverter : Converter<ResponseBody, ForumDetailRes> {
             }
         }
 
+        val boardCd = document.getElementById("boardCd").`val`()
+        val boardSn = document.getElementById("boardSn").`val`()
+
         return ForumDetailRes(
             title = title,
             user = author,
@@ -79,7 +82,9 @@ class ForumDetailConverter : Converter<ResponseBody, ForumDetailRes> {
             likes = likes,
             ipAddress = authorIpAddress,
             htmlBody = bodyHtml,
-            comments = comments
+            comments = comments,
+            boardCd = boardCd,
+            boardSn = boardSn
         )
     }
 
