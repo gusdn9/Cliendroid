@@ -171,6 +171,18 @@ internal class NetworkModule {
             .client(okHttpClient)
             .build()
 
+    @Named("ForumAuth")
+    @Provides
+    @Singleton
+    fun provideForumAuthRetrofit(
+        @Named("Prod") hostType: HostType,
+        @Named("Auth") okHttpClient: OkHttpClient
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(hostType.url)
+            .client(okHttpClient)
+            .build()
+
     @Named("Auth")
     @Provides
     @Singleton
