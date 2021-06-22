@@ -8,7 +8,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [28])
-class SearchAuthUnitTest : BaseUnitTest() {
+class CommunityAuthServiceUnitTest : BaseUnitTest() {
     // FIXME 아아디 패스워드 입력 후 테스트
     private val id = ""
     private val pw = ""
@@ -32,12 +32,11 @@ class SearchAuthUnitTest : BaseUnitTest() {
     }
 
     @Test
-    fun search() = runBlocking {
+    fun writeComment() = runBlocking {
         login()
 
-        val searchService = network.provideSearchAuthService()
-        val searchResult = searchService.search(target = "content", keyword = "재택", page = 0)
-        println("${searchResult.contents.size}")
-
+        val service = network.provideCommunityAuthService()
+        // service.commentWrite()
     }
+
 }

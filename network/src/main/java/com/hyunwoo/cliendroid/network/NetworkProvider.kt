@@ -1,6 +1,7 @@
 package com.hyunwoo.cliendroid.network
 
 import com.hyunwoo.cliendroid.network.service.AuthInfraService
+import com.hyunwoo.cliendroid.network.service.CommunityAuthInfraService
 import com.hyunwoo.cliendroid.network.service.CommunityInfraService
 import com.hyunwoo.cliendroid.network.service.SearchInfraService
 import com.hyunwoo.cliendroid.network.service.UserInfraService
@@ -15,6 +16,8 @@ interface NetworkProvider {
     fun provideMobileHostType(): HostType
 
     fun provideCommunityService(): CommunityInfraService
+
+    fun provideCommunityAuthService(): CommunityAuthInfraService
 
     fun provideAuthService(): AuthInfraService
 

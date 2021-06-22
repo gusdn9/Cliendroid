@@ -14,6 +14,7 @@ import com.hyunwoo.cliendroid.network.converter.user.UserPostConverter
 import com.hyunwoo.cliendroid.network.interceptor.AddCookiesInterceptor
 import com.hyunwoo.cliendroid.network.interceptor.ReceivedCookiesInterceptor
 import com.hyunwoo.cliendroid.network.service.AuthInfraService
+import com.hyunwoo.cliendroid.network.service.CommunityAuthInfraService
 import com.hyunwoo.cliendroid.network.service.CommunityInfraService
 import com.hyunwoo.cliendroid.network.service.SearchInfraService
 import com.hyunwoo.cliendroid.network.service.UserInfraService
@@ -244,6 +245,11 @@ internal class NetworkModule {
     @Singleton
     fun provideCommunityService(@Named("Forum") retrofit: Retrofit): CommunityInfraService =
         retrofit.create(CommunityInfraService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCommunityAuthService(@Named("ForumAuth") retrofit: Retrofit): CommunityAuthInfraService =
+        retrofit.create(CommunityAuthInfraService::class.java)
 
     @Provides
     @Singleton
