@@ -1,5 +1,6 @@
 package com.hyunwoo.cliendroid.network
 
+import com.hyunwoo.cliendroid.network.model.forum.CommentWriteReq
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,8 +36,16 @@ class CommunityAuthServiceUnitTest : BaseUnitTest() {
     fun writeComment() = runBlocking {
         login()
 
+        val boardCd = "park"
+        val boardSn = "16262527"
+
+        val comment = "진짜로 없어졌으면 너무 좋을거 같아요."
+        val writer = "myinsik"
+        val param = CommentWriteReq.Param(comment =  comment, images = emptyList(), articleRegister = writer)
+        val req = CommentWriteReq(boardSn, param)
+
         val service = network.provideCommunityAuthService()
-        // service.commentWrite()
+        service.commentWrite(boardCd, boardSn, req)
     }
 
 }

@@ -57,6 +57,7 @@ dependencies {
 
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho"
     implementation "com.squareup.moshi:moshi:$moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi"
     implementation "org.jsoup:jsoup:$jsoup"
 
     kapt "com.google.dagger:dagger-compiler:$dagger2"

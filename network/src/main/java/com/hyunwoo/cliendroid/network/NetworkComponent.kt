@@ -19,6 +19,7 @@ import com.hyunwoo.cliendroid.network.service.CommunityInfraService
 import com.hyunwoo.cliendroid.network.service.SearchInfraService
 import com.hyunwoo.cliendroid.network.service.UserInfraService
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -177,11 +178,13 @@ internal class NetworkModule {
     @Singleton
     fun provideForumAuthRetrofit(
         @Named("Prod") hostType: HostType,
-        @Named("Auth") okHttpClient: OkHttpClient
+        @Named("Auth") okHttpClient: OkHttpClient,
+        moshi: Moshi
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
             .client(okHttpClient)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
     @Named("Auth")
@@ -191,7 +194,7 @@ internal class NetworkModule {
         @Named("Mobile") hostType: HostType,
         @Named("Login") okHttpClient: OkHttpClient,
         @Named("LoginPreparedStatement") loginPreparedStatementConverter: Converter.Factory,
-        @Named("Login") loginConverter: Converter.Factory
+        @Named("Login") loginConverter: Converter.Factory,
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(hostType.url)
@@ -235,7 +238,9 @@ internal class NetworkModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi =
-        Moshi.Builder().build()
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
     /**
      * Provide Services
