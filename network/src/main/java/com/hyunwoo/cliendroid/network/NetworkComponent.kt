@@ -177,7 +177,7 @@ internal class NetworkModule {
     @Provides
     @Singleton
     fun provideForumAuthRetrofit(
-        @Named("Prod") hostType: HostType,
+        @Named("Mobile") hostType: HostType,
         @Named("Auth") okHttpClient: OkHttpClient,
         moshi: Moshi
     ): Retrofit =

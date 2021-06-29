@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface CommunityAuthInfraService {
 
-    @POST("/board/{boardCd}/{boardSn}/comment/regist")
+    @POST("/service/api/board/{boardCd}/{boardSn}/comment/regist")
     suspend fun commentWrite(
         @Path("boardCd") boardCd: String,
         @Path("boardSn") boardSn: String,
